@@ -6,6 +6,6 @@
 	</head>
 	<body>
 		<p>There was an error connecting to the database or server.</p>
-		<p><a href="index.php">Try again</a> or wait a while before attempting to access the website again.</p>
+		<p><a href="login.php">Try again</a> or wait a while before attempting to access the website again.</p>
 	</body>
 </html>

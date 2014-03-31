@@ -5,6 +5,30 @@ body {
 	height:100%;
 }
 
+header {
+	height: 50px;
+	padding: 5px;
+	margin: 0;
+	background-color:#81C99F;
+}
+
+section {
+	height: 500;
+	padding:10px;
+	padding-bottom:100px;
+}
+
+footer {
+	position:absolute;
+	bottom:0;
+	width:100%;
+	height:50px;
+	background-color:#81C99F;
+	padding: 5px;
+	line-height: 1;
+	font-size:10px;
+}
+
 #main {
 	width: 800px;
 	margin: auto;
@@ -12,13 +36,6 @@ body {
 	position:relative;
 	border:1px solid black;
 	overflow: hidden;
-}
-
-#header {
-	height: 50px;
-	padding: 5px;
-	margin: 0;
-	background-color:#81C99F;
 }
 
 #menu {
@@ -40,10 +57,25 @@ body {
 	margin-left: 200px;
 }
 
-#content {
-	height: 500;
-	padding:10px;
-	padding-bottom:100px;
+#address {
+	margin-right: 150px;
+	text-align:center;
+}
+
+#footerlinks {
+	float: left;
+	width: 100px;
+}
+
+/* error and success messages */
+#error {
+	color: red;
+	text-align: center;
+}
+
+#success {
+	color: green;
+	text-align: center;
 }
 
 .container {
@@ -150,25 +182,4 @@ body {
 	bottom: 1px;
 	margin-right: 4px;
 	vertical-align: middle;
-}
-
-#address {
-	margin-right: 150px;
-	text-align:center;
-}
-
-#footer {
-	position:absolute;
-	bottom:0;
-	width:100%;
-	height:50px;
-	background-color:#81C99F;
-	padding: 5px;
-	line-height: 1;
-	font-size:10px;
-}
-
-#footerlinks {
-	float: left;
-	width: 100px;
 }

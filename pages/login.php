@@ -1,11 +1,27 @@
 <?php
+	include '../inc/dbconnect.php';
 	// add "if already logged in" functionality
+	if (isset($_SESSION['user'])) {
+		header("Location: home.php");
+	}
 	$pageTitle = 'Login';
 	include '../inc/header.php';
 ?>
 
-<div  id="content">
+<section>
 	<div class="container">
+		<?php
+			// if incorrect login credentials, show message
+			if (isset($_SESSION['loginerror'])) {
+				echo "<p id='error'>" . $_SESSION['loginerror'] . "</p>";
+				unset($_SESSION['loginerror']);
+			}
+			// when logged out, display message
+			if (isset($_SESSION['logout'])) {
+				echo "<p id='success'>" . $_SESSION['logout'] . "</p>";
+				unset($_SESSION['logout']);
+			}
+		?>
 		<div class="login">
 			
 			<h1>Login</h1>
@@ -25,18 +41,10 @@
 		</div>
 
 		<div class="login-help">
-			<!-- If incorrect username/password, display message -->
-			<?php
-				if(isset($_SESSION['loginerror']))
-				{
-				echo "<p id='error'>" . $_SESSION['loginerror'] . "</p>";
-				unset($_SESSION['loginerror']);
-				}
-			?>
 			<p>Forgot your password? <a href="#">Click here to reset it</a>.</p>
 		</div>
 	</div>
-</div>
+</section>
 
 <?php
 	include '../inc/footer.php';

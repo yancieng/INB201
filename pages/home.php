@@ -1,9 +1,15 @@
 <?php
+	include '../inc/dbconnect.php';
+	// if no user is logged in, redirect to login.php with error message
+	if (!isset($_SESSION['user'])) {
+		$_SESSION['loginerror'] = 'You must be logged in to access this resource.';
+		header ("Location: login.php");
+	}
 	$pageTitle = 'Home';
 	include '../inc/header.php';
 ?>
 
-<div  id="content">
+<section>
 	<div class="container">
 		<div class="login">
 			<h1>Yo, <?php echo $_SESSION['name']; ?>.</h1>
@@ -36,7 +42,7 @@
 			</p>
 		</div>
 	</div>
-</div>
+</section>
 
 <?php
 	include '../inc/footer.php';
