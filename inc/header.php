@@ -17,7 +17,7 @@
 				<img src="../images/crest3.png" alt="Crest of Queensland" height="25" width="143">
 			</div>
 			<div id="menu" >
-				<a href="#.html">Homepage</a>
+				<a href="home.php">Homepage</a>
 				<a href="#.html">About</a>
 				<a href="#.html">Contact Us</a>
 				<?php

@@ -4,7 +4,7 @@
 	if (isset($_SESSION['user'])) {
 		header("Location: home.php");
 	}
-	$pageTitle = 'Login';
+	$pageTitle = "Login";
 	include '../inc/header.php';
 ?>
 
