@@ -5,8 +5,8 @@
 	$staffID = mysql_real_escape_string($_POST['staffID']);
 	$password = mysql_real_escape_string($_POST['password']);
 
-	// hash the password (when implemented)
-	// $password = hash('sha256', $password);	
+	// hash the password
+	$password = hash('sha256', $password);	
 
 	$sql = "SELECT staffID, firstName, password, title
 			FROM staff

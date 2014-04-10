@@ -52,8 +52,8 @@
 					echo "<li><a href='#.html'>Schedules</a></li>";
 					echo "<li><a href='#.html'>Export to PDF</a></li>";
 				} else if ($row['title'] == 5) { // Administrator
-					echo "<li><a href='#.html'>Add a Staff Member</a></li>";
-					echo "<li><a href='#.html'>Update Staff Information</a></li>";
+					echo "<li><a href='staffadd.php'>Add a Staff Member</a></li>";
+					echo "<li><a href='staff.php'>Update Staff Information</a></li>";
 					echo "<li><a href='patients.php'>Update Patient Information</a></li>";
 					echo "<li><a href='#.html'>Schedules</a></li>";
 					echo "<li><a href='#.html'>Search</a></li>";

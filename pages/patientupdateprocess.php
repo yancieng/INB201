@@ -34,7 +34,7 @@
 		|| ($bloodType == ''))
 	) {
 		$_SESSION['patienterror'] = "ALL required fields need to be filled. Don't just delete data like that.";
-		header ("Location: patientview.php");
+		header ("Location: patientview.php?patient={$patientID}");
 	} else {
 		$sql = "UPDATE patients
 				SET firstName = '{$firstName}',
