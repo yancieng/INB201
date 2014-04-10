@@ -294,6 +294,9 @@ a {
 	width: -moz-calc(100% - 280px);
     width: -webkit-calc(100% - 280px);
     width: calc(100% - 280px);
+    height: -moz-calc(100% - 120px);
+    height: -webkit-calc(100% - 120px);
+    height: calc(100% - 120px);
 	top: 50px;
 	left: 220px;
 	padding: 50px 10px 20px 50px;
