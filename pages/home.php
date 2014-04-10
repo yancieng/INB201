@@ -6,8 +6,21 @@
 		header ("Location: login.php");
 	}
 	$pageTitle = "Home";
-	include '../inc/header.php';
+	include '../inc/panel.php';
 ?>
+
+<script type="text/javascript">
+	function active() {
+
+		var no = "m1"; //The coresponding active panal (the menu) of this page
+		// change this number for each different page, or is there a better way?
+
+		document.getElementById(no).className = ' active';
+		document.getElementById(no).href = "#" ;
+		document.getElementById(no).style.cursor = "default";
+	}
+
+</script>
 
 <section>
 	<div class="container">
@@ -66,6 +79,15 @@
 	</div>
 </section>
 
-<?php
-	include '../inc/footer.php';
-?>
+</div>
+
+
+
+
+
+
+
+
+</body>
+
+</html>

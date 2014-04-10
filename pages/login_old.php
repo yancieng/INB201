@@ -5,7 +5,7 @@
 		header("Location: home.php");
 	}
 	$pageTitle = "Login";
-	include '../inc/header.php';
+	include '../inc/panel.php';
 ?>
 
 <section>
@@ -46,6 +46,4 @@
 	</div>
 </section>
 
-<?php
-	include '../inc/footer.php';
-?>
+ 

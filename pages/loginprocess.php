@@ -8,7 +8,7 @@
 	// hash the password
 	$password = hash('sha256', $password);	
 
-	$sql = "SELECT staffID, firstName, password, title
+	$sql = "SELECT *
 			FROM staff
 			WHERE staffID = '$staffID'
 			AND password = '$password'";
@@ -22,6 +22,9 @@
 		// set session, redirect to home page
 		$_SESSION['user'] = $staffID;
 		$_SESSION['name'] = $row['firstName'];
+		$_SESSION['lname'] = $row['lastName'];
+		$_SESSION['spec'] = $row['specialties'];
+		$_SESSION['photo'] = $row['photo'];
 		header("Location: home.php");
 	}
 	else

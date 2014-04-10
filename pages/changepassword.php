@@ -7,7 +7,7 @@
 	}
 
 	$pageTitle = "Change Password";
-	include '../inc/header.php';
+	include '../inc/panel.php';
 ?>
 
 <section>
@@ -26,7 +26,7 @@
 		?>
 		<div class="login">
 			<!-- Change Password page -->
-			<h1>Change Password</h1
+			<h1>Change Password</h1>
 			<div id="changepassword">
 				<form action="changepasswordprocess.php" method="post">
 					<div>
@@ -50,6 +50,4 @@
 	</div>
 </section>
 
-<?php
-	include '../inc/footer.php';
-?>
+ 

@@ -68,11 +68,11 @@ function load() {
 	</div>
 	<div class="profile">
 		<div class="pic">
-			<img src="../images/profile.jpg" alt="Profile picture" />
+			<?php echo $_SESSION['photo']; ?>
 		</div>
 		<div class="name">
-			<span class="title"> Dr. John Doe </span> <br />
-			<span class="spec"> Cardiologists </span>
+			<span class="title"> Dr. <?php echo $_SESSION['name']; ?> <?php echo $_SESSION['lname']; ?></span> <br />
+			<span class="spec"> <?php echo $_SESSION['spec']; ?> </span>
 		</div>
 		<div class="triangle1"></div>
 	</div>
@@ -81,7 +81,14 @@ function load() {
 		<ul>
 			<li> <a href="#">Profile</a> </li>
 			<li class="set"> <a href="#"> Settings</a> </li>
-			<li class="logout"> <a href="#">Logout</a> </li>
+			<li class="logout"> 
+				<?php
+					if (isset($_SESSION['user']))
+					{
+						echo "<a href='logout.php'>Logout</a>";
+					}
+				?>
+			</li>
 		</ul>
 	</div>
 </div>
@@ -140,41 +147,4 @@ function load() {
 
 <div class="content">
 
-<p>
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-</p>
-
-</div>
-
-
-
-
-
-
-
-
-</body>
-
-
-<script type="text/javascript">
-	function active() {
-
-		var no = "m1"; //The coresponding active panal (the menu) of this page
-		// change this number for each different page, or is there a better way?
-
-		document.getElementById(no).className = ' active';
-		document.getElementById(no).href = "#" ;
-		document.getElementById(no).style.cursor = "default";
-	}
-
-</script>
-
-</html>
-
-
-
+	<img src="../images/con.png" />

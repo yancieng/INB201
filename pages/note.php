@@ -20,7 +20,7 @@
 	}
 
 	$pageTitle = "Note {$_GET['note']}";
-	include '../inc/header.php';
+	include '../inc/panel.php';
 ?>
 
 <section>
@@ -32,6 +32,4 @@
 	</div>
 </section>
 
-<?php
-	include '../inc/footer.php';
-?>
+ 
