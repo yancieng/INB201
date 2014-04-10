@@ -23,6 +23,7 @@
 				<?php
 					if (isset($_SESSION['user']))
 					{
+						echo "<a href='changepassword.php'>Change Password</a> ";
 						echo "<a href='logout.php'>Logout</a>";
 					}
 				?>
