@@ -10,59 +10,6 @@
 	include '../inc/panel.php';
 ?>
 
-<style type="text/css">
-        html{
-            background:#222;
-            font-size:12px;
-            font-family:Arial;
-        }
-
-        ul#breadcrumbs{         
-            list-style:none;
-            /* optional */
-            margin:100px;
-            padding:10px 2px 10px 10px;
-            background:#000;
-            width:295px;
-            height:30px;
-            border-radius:5px;
-            border:1px solid #222;
-            -moz-box-shadow:0 0 3px 0 #000;
-        }
-        ul#breadcrumbs li{
-            float:left;
-            background:#93ce68 url(bg.png)no-repeat right;
-            height:30px;
-            padding:0 23px 0 10px;
-            text-align:center;
-            text-decoration:none;
-            color:#000;
-            line-height:32px;
-        }
-        ul#breadcrumbs li.active{
-            background:url(bg.png)no-repeat right;
-            color:#000;
-        }
-        ul#breadcrumbs li a{
-            display:block;
-            text-decoration:none;
-            color:#fff;
-            line-height:32px;
-            text-shadow:0 0 2px #222;
-        }
-        ul#breadcrumbs li a:hover{
-            color:#a2ff00;
-        }
-
-    </style>
-	
-	<ul id="breadcrumbs">
-        <li><a href="">Home</a></li>
-        <li><a href="">Page1</a></li>
-        <li><a href="">Page2</a></li>
-        <li class="active">About Us</li>
-    </ul>
-
 <section>
 	<div class="container">
 		<?php
