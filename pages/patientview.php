@@ -11,7 +11,6 @@
 ?>
 
 <section>
-	<div class="container">
 	<style type="text/css">
         html{
             background:#222;
@@ -64,6 +63,8 @@
         <li><a href="">Page2</a></li>
         <li class="active">About Us</li>
     </ul>
+	
+	<div class="container">
 		<?php
 			// if patient has just been added, show message
 			if (isset($_SESSION['patientsuccess'])) {
