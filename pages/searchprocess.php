@@ -6,6 +6,11 @@
 	$name = mysql_escape_string($_GET['name']);
 	$phone = mysql_escape_string($_GET['phone']);
 
+	// check to see if any fields are filled, if not return to patientsfinder.php
+	if (($patientID == "") && ($name == "") && ($phone == "")) {
+		header ("Location: patientsfinder.php");
+	}
+
 	// separate sql queries for each field?
 	if ($patientID != "") {
 		// sql to see if it a) exists b) there is only one
@@ -18,7 +23,7 @@
 		// if there is a result (shouldn't be more than one), redirect to that page
 		if ($count == 1) {
 			$row = mysql_fetch_assoc($result);
-			header ("Location: patientview.php?patient={$patientID}"); // temporary link
+			header ("Location: patientview.php?patient={$row['patientID']}"); // temporary link
 		} else {
 			// redirect to search.php with error
 			$_SESSION['searcherror'] = "There were no results for that patient ID.";
