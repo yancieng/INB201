@@ -1,0 +1,32 @@
+/* This DIV keeps the search fields and 'Top 10 patients' side by side */
+#box0 {
+	width: 600px;
+}
+
+/* This DIV is the search criteria */
+#box1 {
+	float: left;
+	padding: 20px;
+	width: 300px;
+	border: 1px solid;
+	border-radius: 25px;
+}
+
+/* Tried making the 'search' button float right. Doesn't work */
+#button {
+	float: right;
+}
+
+/* This DIV is for the 'Top 10 patients' */
+#box2 {
+	float: right;
+	width: 200px;
+}
+
+/* This table is for the 'Top 10 patients' */
+table {
+	border: 1px solid;
+	border-radius: 25px;
+	padding: 5px;
+	border-spacing: 10px;
+}

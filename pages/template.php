@@ -10,12 +10,23 @@
 	include '../inc/panel.php';
 ?>
 
-<section>
-	<div class="container">
-		<div class="login">
-			<!-- stuff goes here -->
-		</div>
-	</div>
-</section>
+<script type="text/javascript">
+	function active() {
 
- 
+		// var no = "m#"; //The coresponding active panal (the menu) of this page
+		// change this number for each different page, or is there a better way?
+
+		document.getElementById(no).className = ' active';
+		document.getElementById(no).href = "#" ;
+		document.getElementById(no).style.cursor = "default";
+	}
+
+</script>
+
+<!-- Content goes below -->
+
+
+
+<?php
+	include '../inc/footer.php';
+?> 

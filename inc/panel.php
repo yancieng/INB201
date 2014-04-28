@@ -6,6 +6,7 @@
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 
 	<link type="text/css" rel="stylesheet" href="../css/panel.css" media="screen" /> 
+	<link type="text/css" rel="stylesheet" href="../css/patientsfinder.css" media="screen" /> 
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
 
@@ -71,7 +72,29 @@ function load() {
 			<?php echo $_SESSION['photo']; ?>
 		</div>
 		<div class="name">
-			<span class="title"> Dr. <?php echo $_SESSION['name']; ?> <?php echo $_SESSION['lname']; ?></span> <br />
+			<!-- PHP needed for each role here -->
+			<?php
+				$staffID = $_SESSION['user'];
+				$sql = "SELECT staffID, title
+						FROM staff
+						WHERE staffID = '$staffID'";
+				$result = mysql_query($sql);
+				$row = mysql_fetch_assoc($result);
+
+				echo "<span class='title'>";
+				if ($row['title'] == 1) { // Doctor
+					echo "Dr. ";
+				} else if ($row['title'] == 2) { // Nurse
+					echo "Nurse ";
+				} else if ($row['title'] == 3) { // Medical Technician
+					echo "Med Tech. ";// uhh
+				} else if ($row['title'] == 4) { // Receptionist
+					echo "Rec. ";// uhh
+				} else if ($row['title'] == 5) { // Administrator
+					echo "Admin ";
+				}
+				echo $_SESSION['name'] . " " . $_SESSION['lname'] . "</span> <br />";
+			?>
 			<span class="spec"> <?php echo $_SESSION['spec']; ?> </span>
 		</div>
 		<div class="triangle1"></div>
@@ -80,7 +103,9 @@ function load() {
 		<div class="triangle2"></div>
 		<ul>
 			<li> <a href="#">Profile</a> </li>
-			<li class="set"> <a href="#"> Settings</a> </li>
+			<!-- Temporary place for "change password" -->
+			<li><a href="changepassword.php">Change Password</a></li>
+			<li class="set"> <a href="#">Settings</a> </li>
 			<li class="logout"> 
 				<?php
 					if (isset($_SESSION['user']))
@@ -108,7 +133,7 @@ function load() {
  	</div>
  </div></a>
 
-  <a href="#" id="m2">
+  <a href="patientsfinder.php" id="m2">
   <div class="layer effect">
  	<div class="mask"></div>
  	<div class="icon">
@@ -146,5 +171,3 @@ function load() {
 </div>
 
 <div class="content">
-
-	<img src="../images/con.png" />

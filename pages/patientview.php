@@ -10,6 +10,19 @@
 	include '../inc/panel.php';
 ?>
 
+<script type="text/javascript">
+	function active() {
+
+		var no = "m2"; //The coresponding active panal (the menu) of this page
+		// change this number for each different page, or is there a better way?
+
+		document.getElementById(no).className = ' active';
+		document.getElementById(no).href = "patientsfinder.php" ;
+		document.getElementById(no).style.cursor = "pointer";
+	}
+
+</script>
+
 <section>
 	<div class="container">
 		<?php

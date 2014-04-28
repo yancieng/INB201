@@ -20,8 +20,8 @@
 		// hash the password
 		$password = hash('sha256', $password);	
 
-		$sql = "INSERT INTO staff (firstName, lastName, title, password)
-				VALUES ('{$firstName}',	'{$lastName}', '{$title}', '{$password}')";
+		$sql = "INSERT INTO staff (firstName, lastName, title, password, photo)
+				VALUES ('{$firstName}',	'{$lastName}', '{$title}', '{$password}', \"<img src='../images/none.png' alt='Profile picture' />')\";"
 
 		if (mysql_query($sql)) {		
 			$sql = "SELECT *
