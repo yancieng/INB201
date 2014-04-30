@@ -30,27 +30,30 @@
 	<!-- This DIV is the search criteria -->
 	<div id="box1">
 		<form action="searchprocess.php" method="get">
-		Patient ID: <input type="text" name="patientID"><br>
-		<center>or</center>
-		Name: <input type="text" name="name"><br>
-		<center>or</center>
-		Phone: <input type="text" name="phone">
-		<br>
-		<hr>
-		<br>
-		<i>Advanced Search:</i><br>
-		<select>
-			<option value="p1">parameter 1</option>
-			<option value="p2">parameter 2</option>
-			<option value="p3">parameter 3</option>
-			<option value="p4">parameter 4</option>
-		</select>
-		: <input type="text" name="parameter"><br>
-		
-		<!-- Tried making the 'search' button float right. Doesn't work -->
-		<div id:"button">
-		<button type="submit">Search</button>
-		</div>
+			<label for="patientID">Patient ID: </label>
+			<input type="text" name="patientID"><br>
+			<center>or</center>
+			<label for="name">Name: </label>
+			<input type="text" name="name"><br>
+			<center>or</center>
+			<label for="phone">Phone: </label>
+			<input type="text" name="phone">
+			<br>
+			<hr>
+			<br>
+			<i>Advanced Search:</i><br>
+			<select>
+				<option value="p1">parameter 1</option>
+				<option value="p2">parameter 2</option>
+				<option value="p3">parameter 3</option>
+				<option value="p4">parameter 4</option>
+			</select>
+			: <input type="text" name="parameter"><br>
+			
+			<!-- Tried making the 'search' button float right. Doesn't work -->
+			<div id:"button">
+			<button type="submit">Search</button>
+			</div>
 		</form>
 		
 	</div>

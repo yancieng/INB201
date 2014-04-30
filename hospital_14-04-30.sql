@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 28, 2014 at 05:22 AM
+-- Generation Time: Apr 30, 2014 at 05:40 AM
 -- Server version: 5.6.16
 -- PHP Version: 5.5.9
 
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `hospital`
 --
+CREATE DATABASE IF NOT EXISTS `hospital` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `hospital`;
 
 -- --------------------------------------------------------
 
@@ -27,7 +29,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE IF NOT EXISTS `beds` (
-  `bedNumber` varchar(5) NOT NULL,
+  `bedNumber` varchar(7) NOT NULL,
   `patientID` int(7) unsigned zerofill DEFAULT NULL,
   PRIMARY KEY (`bedNumber`),
   UNIQUE KEY `patientID` (`patientID`)
@@ -38,14 +40,70 @@ CREATE TABLE IF NOT EXISTS `beds` (
 --
 
 INSERT INTO `beds` (`bedNumber`, `patientID`) VALUES
-('1A03', NULL),
-('1A04', NULL),
-('1B01b', NULL),
-('1B02a', NULL),
-('1B02b', NULL),
-('1B01a', 0000001),
-('1A01', 0000002),
-('1A02', 0000007);
+('A103-01', NULL),
+('A104-01', NULL),
+('B101-02', NULL),
+('B102-01', NULL),
+('B102-02', NULL),
+('B101-01', 0000001),
+('A101-01', 0000002),
+('A102-01', 0000007),
+('R302-02', 0000011);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `checkups`
+--
+
+CREATE TABLE IF NOT EXISTS `checkups` (
+  `checkupID` int(7) unsigned zerofill NOT NULL AUTO_INCREMENT,
+  `checkupTime` datetime NOT NULL,
+  `height` float DEFAULT NULL,
+  `weight` float DEFAULT NULL,
+  `temperature` float DEFAULT NULL,
+  `eyesightLeft` float DEFAULT NULL,
+  `eyesightRight` float DEFAULT NULL,
+  `bloodPressure` varchar(7) DEFAULT NULL,
+  `bloodSugar` float DEFAULT NULL,
+  `conditionAllergy` varchar(40) DEFAULT NULL,
+  `medication` varchar(40) DEFAULT NULL,
+  `patientID` int(7) unsigned zerofill NOT NULL,
+  PRIMARY KEY (`checkupID`),
+  KEY `patientID` (`patientID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `checkups`
+--
+
+INSERT INTO `checkups` (`checkupID`, `checkupTime`, `height`, `weight`, `temperature`, `eyesightLeft`, `eyesightRight`, `bloodPressure`, `bloodSugar`, `conditionAllergy`, `medication`, `patientID`) VALUES
+(0000001, '2014-04-28 12:56:00', 114, 26, 38.5, 1, 1.5, '120/81', 75, NULL, NULL, 0000011);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `guardians`
+--
+
+CREATE TABLE IF NOT EXISTS `guardians` (
+  `guardianID` int(7) unsigned zerofill NOT NULL AUTO_INCREMENT,
+  `firstName` varchar(40) NOT NULL,
+  `lastName` varchar(40) NOT NULL,
+  `title` enum('Mr.','Mrs.','Miss','Ms.') NOT NULL,
+  `relation` varchar(40) NOT NULL,
+  `contactNumber` varchar(15) NOT NULL,
+  `email` varchar(60) DEFAULT NULL,
+  `address` varchar(255) NOT NULL,
+  PRIMARY KEY (`guardianID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `guardians`
+--
+
+INSERT INTO `guardians` (`guardianID`, `firstName`, `lastName`, `title`, `relation`, `contactNumber`, `email`, `address`) VALUES
+(0000001, 'Benson', 'Usang', 'Mr.', 'Father / Son', '01421234', 'bensonusa@hotmail.com', '1105/82 Vendor St, Brisbane, 4000');
 
 -- --------------------------------------------------------
 
@@ -75,6 +133,31 @@ INSERT INTO `notes` (`noteID`, `datetimeWritten`, `note`, `image`, `patientID`, 
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `observations`
+--
+
+CREATE TABLE IF NOT EXISTS `observations` (
+  `observationID` int(7) unsigned zerofill NOT NULL AUTO_INCREMENT,
+  `observationDate` date NOT NULL,
+  `observationTitle` varchar(40) NOT NULL,
+  `observation` text NOT NULL,
+  `patientID` int(7) unsigned zerofill NOT NULL,
+  `staffID` int(4) unsigned zerofill NOT NULL,
+  PRIMARY KEY (`observationID`),
+  KEY `patientID` (`patientID`),
+  KEY `staffID` (`staffID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `observations`
+--
+
+INSERT INTO `observations` (`observationID`, `observationDate`, `observationTitle`, `observation`, `patientID`, `staffID`) VALUES
+(0000001, '2014-03-13', 'Bad Appetite', 'Patient wouldn''t eat his dinner. Told me to "shove it". How rude!', 0000011, 0003);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `patients`
 --
 
@@ -82,31 +165,30 @@ CREATE TABLE IF NOT EXISTS `patients` (
   `patientID` int(7) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `firstName` varchar(40) NOT NULL,
   `lastName` varchar(40) NOT NULL,
-  `address` varchar(255) NOT NULL,
   `DOB` date NOT NULL,
-  `contactNumber` varchar(15) NOT NULL,
-  `emergencyNumber` varchar(15) DEFAULT NULL,
-  `caregiverNumber` varchar(15) DEFAULT NULL,
-  `bloodType` char(3) NOT NULL,
+  `bloodType` enum('O+','O-','A+','A-','B+','B-','AB+','AB-') NOT NULL,
   `previousNotes` text,
-  PRIMARY KEY (`patientID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
+  `guardianID` int(7) unsigned zerofill DEFAULT NULL,
+  PRIMARY KEY (`patientID`),
+  KEY `guardianID` (`guardianID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
 
 --
 -- Dumping data for table `patients`
 --
 
-INSERT INTO `patients` (`patientID`, `firstName`, `lastName`, `address`, `DOB`, `contactNumber`, `emergencyNumber`, `caregiverNumber`, `bloodType`, `previousNotes`) VALUES
-(0000001, 'Theresa', 'Mitchell', '49 Guildford Road', '2008-05-07', '33478453', NULL, NULL, 'B+', NULL),
-(0000002, 'Randy', 'Smith', '40A Portland Place', '2003-09-25', '33164785', NULL, NULL, 'B-', NULL),
-(0000003, 'Victor', 'Rodriguez', '5 Stoneleigh Avenue', '1997-02-19', '33172191', NULL, NULL, 'O+', NULL),
-(0000004, 'Harold', 'Perez', '7 Trefleur Close', '1997-10-13', '33818687', NULL, NULL, 'O-', NULL),
-(0000005, 'Marilyn', 'Griffin', '2 Edward Jermyn Drive', '2004-03-23', '33474186', NULL, NULL, 'AB+', NULL),
-(0000006, 'Ashley', 'Kelly', '4 Edenside Drive', '2009-09-20', '33154216', NULL, NULL, 'O-', NULL),
-(0000007, 'Michael', 'Adams', '3 Miners Row', '2009-09-17', '33987654', NULL, NULL, 'AB+', NULL),
-(0000008, 'Evelyn', 'Collins', '12 Broomhouse Gardens West', '2005-09-19', '33124578', NULL, NULL, 'A-', NULL),
-(0000009, 'Timothy', 'Cook', '49 Kewstone Road', '2003-04-29', '33618864', NULL, NULL, 'B+', NULL),
-(0000010, 'Christine', 'Howard', '84 Grange Road', '2004-07-06', '33684714', NULL, NULL, 'O+', NULL);
+INSERT INTO `patients` (`patientID`, `firstName`, `lastName`, `DOB`, `bloodType`, `previousNotes`, `guardianID`) VALUES
+(0000001, 'Theresa', 'Mitchell', '2008-05-07', 'B+', NULL, NULL),
+(0000002, 'Randy', 'Smith', '2003-09-25', 'B-', NULL, NULL),
+(0000003, 'Victor', 'Rodriguez', '1997-02-19', 'O+', NULL, NULL),
+(0000004, 'Harold', 'Perez', '1997-10-13', 'O-', NULL, NULL),
+(0000005, 'Marilyn', 'Griffin', '2004-03-23', 'AB+', NULL, NULL),
+(0000006, 'Ashley', 'Kelly', '2009-09-20', 'O-', NULL, NULL),
+(0000007, 'Michael', 'Adams', '2009-09-17', 'AB+', NULL, NULL),
+(0000008, 'Evelyn', 'Collins', '2005-09-19', 'A-', NULL, NULL),
+(0000009, 'Timothy', 'Cook', '2003-04-29', 'B+', NULL, NULL),
+(0000010, 'Christine', 'Howard', '2004-07-06', 'O+', NULL, NULL),
+(0000011, 'Jason', 'Usang', '2006-04-30', 'A-', NULL, 0000001);
 
 -- --------------------------------------------------------
 
@@ -219,11 +301,30 @@ ALTER TABLE `beds`
   ADD CONSTRAINT `bedsPatientID` FOREIGN KEY (`patientID`) REFERENCES `patients` (`patientID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Constraints for table `checkups`
+--
+ALTER TABLE `checkups`
+  ADD CONSTRAINT `checkupPatient` FOREIGN KEY (`patientID`) REFERENCES `patients` (`patientID`) ON DELETE NO ACTION ON UPDATE CASCADE;
+
+--
 -- Constraints for table `notes`
 --
 ALTER TABLE `notes`
   ADD CONSTRAINT `notesStaffID` FOREIGN KEY (`staffID`) REFERENCES `staff` (`staffID`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `notesPatientID` FOREIGN KEY (`patientID`) REFERENCES `patients` (`patientID`) ON DELETE NO ACTION ON UPDATE CASCADE;
+
+--
+-- Constraints for table `observations`
+--
+ALTER TABLE `observations`
+  ADD CONSTRAINT `observationPatient` FOREIGN KEY (`patientID`) REFERENCES `patients` (`patientID`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `observationStaff` FOREIGN KEY (`staffID`) REFERENCES `staff` (`staffID`) ON DELETE NO ACTION ON UPDATE CASCADE;
+
+--
+-- Constraints for table `patients`
+--
+ALTER TABLE `patients`
+  ADD CONSTRAINT `patientsGuardian` FOREIGN KEY (`guardianID`) REFERENCES `guardians` (`guardianID`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
 -- Constraints for table `payments`

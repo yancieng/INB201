@@ -27,15 +27,15 @@
 				<form action="staffaddprocess.php" method="post">
 					<div>
 						<label for="firstName">*First Name: </label>
-						<input type="text" name="firstName" id="firstName" required />
+						<input type="text" name="firstName" required />
 					</div>
 					<div>
 						<label for="lastName">*Last Name: </label>
-						<input type="text" name="lastName" id="lastName" required />
+						<input type="text" name="lastName" required />
 					</div>
 					<div>
 						<label for="staffTitle">*Title: </label>
-						<select name="staffTitle" id="staffTitle">
+						<select name="staffTitle" >
 							<option value="1">Doctor</option>
 							<option value="2">Nurse</option>
 							<option value="3">Medical Technician</option>
@@ -45,7 +45,15 @@
 					</div>
 					<div>
 						<label for="password">*Password: </label>
-						<input type="password" name="password" id="password" required />
+						<input type="password" name="password" required />
+					</div>
+					<div>
+						<label for="specialties">Specialties: </label>
+						<input type="text" name="specialties" />
+					</div>
+					<div>
+						<label for="photo">Photo: </label>
+						<input type="file" name="photo" accept="image/*" />
 					</div>
 					<div>
 						<button type="submit" class="submit">Add Information to Database</button>

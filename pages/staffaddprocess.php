@@ -1,11 +1,46 @@
 <?php
 	include '../inc/dbconnect.php';
 
-	// get data from previous form: firstName, lastName, title (number), password
+	// get data from previous form: firstName, lastName, title (number), password, specialties, photo
 	$firstName = mysql_real_escape_string($_POST['firstName']);
 	$lastName = mysql_escape_string($_POST['lastName']);
 	$title = $_POST['staffTitle'];
 	$password = mysql_escape_string($_POST['password']);
+	$specialties = mysql_escape_string($_POST['specialties']);
+	$photo = $_FILES['photo']['name'];
+
+	// if optional fields are blank, make them NULL
+	if ($specialties == '') {
+		$specialties = NULL;
+	}
+
+	// if photo field is blank, set default photo path
+	if ($photo == '') {
+		$photo = "<img src='../images/none.png' alt='Profile picture' />')";
+	} else {
+		// photo renaming and location
+		$randomDigit = rand(0000,9999);
+		$newPhotoName = ($randomDigit . "_" . $photo);
+		$target = "../images/" . $newPhotoName;
+		$allowedExts = array('jpg', 'jpeg', 'gif', 'png');
+		$tmp = explode('.', $_FILES['photo']['name']);
+		$extension = end($tmp);
+
+		$photo = $target;
+
+		// if photo is not an allowed extension, kickback with error
+		if (!
+			((($_FILES['photo']['type'] == 'image/gif')
+			|| ($_FILES['photo']['type'] == 'image/jpeg')
+			|| ($_FILES['photo']['type'] == 'image/jpg')
+			|| ($_FILES['photo']['type'] == 'image/png'))
+			&& 
+			in_array($extension, $allowedExts))
+		) {
+			$_SESSION['stafferror'] = "The file you uploaded is not valid. Photos must be in either .gif, .jpg, or .png format.";
+			header ("Location: staffadd.php");
+		}
+	}
 
 	// if required fields are blank, redirect to staffadd.php with error
 	if (
@@ -20,8 +55,8 @@
 		// hash the password
 		$password = hash('sha256', $password);	
 
-		$sql = "INSERT INTO staff (firstName, lastName, title, password, photo)
-				VALUES ('{$firstName}',	'{$lastName}', '{$title}', '{$password}', \"<img src='../images/none.png' alt='Profile picture' />')\";"
+		$sql = "INSERT INTO staff (firstName, lastName, title, password, specialties, photo)
+				VALUES ('{$firstName}',	'{$lastName}', '{$title}', '{$password}', '{$specialties}', '{$photo}';"
 
 		if (mysql_query($sql)) {		
 			$sql = "SELECT *

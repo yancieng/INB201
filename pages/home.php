@@ -32,16 +32,17 @@
 			}
 		?>
 		<div class="login">
-			<h1>Yo, <?php echo $_SESSION['name']; ?>.</h1>
-			<p>Here's an example homepage until we've figured everything out.</p>
-			<p><ul>
 			<?php
 				$staffID = $_SESSION['user'];
-				$sql = "SELECT staffID, title
+				$sql = "SELECT *
 						FROM staff
 						WHERE staffID = '$staffID'";
 				$result = mysql_query($sql);
 				$row = mysql_fetch_assoc($result);
+
+				echo "<h1>Hello, {$row['firstName']}.</h1>";
+				echo "<p>Here's an example homepage until we've figured everything out.</p>";
+				echo "<p><ul>";
 
 				if ($row['title'] == 1) { // Doctor
 					echo "<li><a href='doctorsnotes.php'>Doctor's Notes</a></li>";

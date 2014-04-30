@@ -1,24 +1,14 @@
 <?php
 	include '../inc/dbconnect.php';
 
-	// get data from previous form: firstName, lastName, address (patientAddress), DOB, contactNumber, emergencyNumber, caregiverNumber, bloodType, previousNotes
+	// get data from previous form: firstName, lastName, DOB, bloodType, previousNotes
 	$firstName = mysql_escape_string($_POST['firstName']);
 	$lastName = mysql_escape_string($_POST['lastName']);
-	$address = mysql_escape_string($_POST['patientAddress']);
 	$DOB = mysql_escape_string($_POST['DOB']);
-	$contactNumber = mysql_escape_string($_POST['contactNumber']);
-	$emergencyNumber = mysql_escape_string($_POST['emergencyNumber']);
-	$caregiverNumber = mysql_escape_string($_POST['caregiverNumber']);
-	$bloodType = mysql_escape_string($_POST['bloodType']);
+	$bloodType = $_POST['bloodType'];
 	$previousNotes = mysql_escape_string($_POST['previousNotes']);
 
 	// if optional fields are blank, make them NULL
-	if ($emergencyNumber == '') {
-		$emergencyNumber = NULL;
-	}
-	if ($caregiverNumber == '') {
-		$caregiverNumber = NULL;
-	}
 	if ($previousNotes == '') {
 		$previousNotes = NULL;
 	}
@@ -27,23 +17,17 @@
 	if (
 		(($firstName == '')
 		|| ($lastName == '')
-		|| ($address == '')
 		|| ($DOB == '')
-		|| ($contactNumber == '')
 		|| ($bloodType == ''))
 	) {
 		$_SESSION['patienterror'] = 'You need to fill out ALL required fields.';
 		header ("Location: patientadd.php");
 	} else {
-		$sql = "INSERT INTO patients (firstName, lastName, address, DOB, contactNumber, emergencyNumber, caregiverNumber, bloodType, previousNotes)
+		$sql = "INSERT INTO patients (firstName, lastName, DOB, bloodType, previousNotes)
 				VALUES (
 					'{$firstName}',
 					'{$lastName}',
-					'{$address}',
 					'{$DOB}',
-					'{$contactNumber}',
-					'{$emergencyNumber}',
-					'{$caregiverNumber}',
 					'{$bloodType}',
 					'{$previousNotes}'
 				)";
@@ -53,7 +37,7 @@
 					FROM patients
 					WHERE firstName = '{$firstName}'
 					AND lastName = '{$lastName}'
-					AND contactNumber = '{$contactNumber}'";
+					AND DOB = '{$DOB}'";
 			$result = mysql_query($sql);
 			$row = mysql_num_rows($result);
 

@@ -1,25 +1,15 @@
 <?php
 	include '../inc/dbconnect.php';
 
-	// get data from previous form: patientID, firstName, lastName, address (patientAddress), DOB, contactNumber, emergencyNumber, caregiverNumber, bloodType, previousNotes
+	// get data from previous form: patientID, firstName, lastName, DOB, bloodType, previousNotes
 	$patientID = $_POST['patientID'];
 	$firstName = mysql_escape_string($_POST['firstName']);
 	$lastName = mysql_escape_string($_POST['lastName']);
-	$address = mysql_escape_string($_POST['patientAddress']);
 	$DOB = mysql_escape_string($_POST['DOB']);
-	$contactNumber = mysql_escape_string($_POST['contactNumber']);
-	$emergencyNumber = mysql_escape_string($_POST['emergencyNumber']);
-	$caregiverNumber = mysql_escape_string($_POST['caregiverNumber']);
 	$bloodType = mysql_escape_string($_POST['bloodType']);
 	$previousNotes = mysql_escape_string($_POST['previousNotes']);
 
 	// if optional fields are blank, make them NULL
-	if ($emergencyNumber == '') {
-		$emergencyNumber = NULL;
-	}
-	if ($caregiverNumber == '') {
-		$caregiverNumber = NULL;
-	}
 	if ($previousNotes == '') {
 		$previousNotes = NULL;
 	}
@@ -28,9 +18,7 @@
 	if (
 		(($firstName == '')
 		|| ($lastName == '')
-		|| ($address == '')
 		|| ($DOB == '')
-		|| ($contactNumber == '')
 		|| ($bloodType == ''))
 	) {
 		$_SESSION['patienterror'] = "ALL required fields need to be filled. Don't just delete data like that.";
@@ -39,11 +27,7 @@
 		$sql = "UPDATE patients
 				SET firstName = '{$firstName}',
 					lastName = '{$lastName}',
-					address = '{$address}',
 					DOB = '{$DOB}',
-					contactNumber = '{$contactNumber}',
-					emergencyNumber = '{$emergencyNumber}',
-					caregiverNumber = '{$caregiverNumber}',
 					bloodType = '{$bloodType}',
 					previousNotes = '{$previousNotes}'
 				WHERE patientID = '{$patientID}'";

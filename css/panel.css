@@ -291,12 +291,12 @@ a {
 .content {
 	background-color: #ecf0f1;
 	position: absolute;
-	width: -moz-calc(100% - 280px);
-    width: -webkit-calc(100% - 280px);
-    width: calc(100% - 280px);
-    height: -moz-calc(100% - 120px);
-    height: -webkit-calc(100% - 120px);
-    height: calc(100% - 120px);
+	min-width: -moz-calc(100% - 280px);
+    min-width: -webkit-calc(100% - 280px);
+    min-width: calc(100% - 280px);
+    min-height: -moz-calc(100% - 120px);
+    min-height: -webkit-calc(100% - 120px);
+    min-height: calc(100% - 120px);*/
 	top: 50px;
 	left: 220px;
 	padding: 50px 10px 20px 50px;
@@ -307,4 +307,15 @@ a {
 	width: 500px;
 	margin-left: 100px;
 	padding-bottom: 30px;
+}
+
+
+
+
+/* other css, should probably be in its own file */
+form label {
+	width: 90px;
+	display: inline-block;
+	text-align: right;
+	padding-right: 5px;
 }
