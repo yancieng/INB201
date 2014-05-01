@@ -116,6 +116,9 @@ function load() {
 			</li>
 		</ul>
 	</div>
+	<div id="breadcrumb">
+		<span><?php echo $breadcrumb ?></span>
+	</div>
 </div>
 
 <div class="panal">
@@ -144,7 +147,7 @@ function load() {
  	</div>
  </div></a>
 
-  <a href="#" id="m3">
+  <a href="schedule.php" id="m3">
    <div class="layer effect">
  	<div class="mask"></div>
  	<div class="icon">
@@ -155,7 +158,7 @@ function load() {
  	</div>
  </div></a>
 
-    <a href="#" id="m4">
+    <a href="notes.php" id="m4">
     	<div class="layer effect" id="m4">
  			<div class="mask"></div>
  			<div class="icon">

@@ -7,6 +7,7 @@
 	}
 
 	$pageTitle = "Patient {$_GET['patient']}";
+	$breadcrumb = "<a href='home.php'>Home</a> > <a href='patientsfinder.php'>Patients Finder</a> >" . $pageTitle;
 	include '../inc/panel.php';
 ?>
 
@@ -65,7 +66,17 @@
 							echo "</div>";
 							echo "<div>";
 								echo "<label for='bloodType'>*Blood Type: </label>";
-								echo "<input type='text' name='bloodType' id='bloodType' value='{$row['bloodType']}' required />";
+								echo "<select name='bloodType'>
+										<option value='{$row['bloodType']}'>Default: {$row['bloodType']}</option>
+										<option>O+</option>
+										<option>O-</option>
+										<option>A+</option>
+										<option>A-</option>
+										<option>B+</option>
+										<option>B-</option>
+										<option>AB+</option>
+										<option>AB-</option>
+									</select>";
 							echo "</div>";
 							echo "<div>";
 								echo "<label for='previousNotes'>Previous Notes: </label>";

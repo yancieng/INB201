@@ -6,7 +6,7 @@
 	$firstName = mysql_escape_string($_POST['firstName']);
 	$lastName = mysql_escape_string($_POST['lastName']);
 	$DOB = mysql_escape_string($_POST['DOB']);
-	$bloodType = mysql_escape_string($_POST['bloodType']);
+	$bloodType = $_POST['bloodType'];
 	$previousNotes = mysql_escape_string($_POST['previousNotes']);
 
 	// if optional fields are blank, make them NULL

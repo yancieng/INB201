@@ -291,15 +291,15 @@ a {
 .content {
 	background-color: #ecf0f1;
 	position: absolute;
-	min-width: -moz-calc(100% - 280px);
-    min-width: -webkit-calc(100% - 280px);
-    min-width: calc(100% - 280px);
-    min-height: -moz-calc(100% - 120px);
-    min-height: -webkit-calc(100% - 120px);
-    min-height: calc(100% - 120px);*/
-	top: 50px;
+	min-width: -moz-calc(100% - 220px);
+    min-width: -webkit-calc(100% - 220px);
+    min-width: calc(100% - 220px);
+    min-height: -moz-calc(100% - 100px);
+    min-height: -webkit-calc(100% - 100px);
+    min-height: calc(100% - 100px);*/
+	top: 77px;
 	left: 220px;
-	padding: 50px 10px 20px 50px;
+	padding: 50px 10px 10px 50px;
 	z-index: 1;
 }
 
@@ -318,4 +318,44 @@ form label {
 	display: inline-block;
 	text-align: right;
 	padding-right: 5px;
+}
+
+#dashboard{
+	list-style-type: none;
+	padding: 0px;
+}
+
+#dashboard li {
+	font-size: 150%;
+	font-weight: bold;
+	border: 1px solid #000;
+	border-radius: 2px;
+	display: inline-block;
+	text-align: center;
+	vertical-align: middle;
+	width: 200px;
+	height: 100px;
+	margin: 5px;
+	padding: 5px 2px;
+}
+
+#dashboard a {
+	vertical-align: middle;
+	min-height: 100px;
+	display: block;
+} /* what is this */
+
+#breadcrumb {
+	position: absolute;
+	left: 220px;
+	top: 50px;
+	height: 27px;
+	min-width: 100%;
+	border-bottom: 1px solid #000;
+}
+
+#breadcrumb span {
+	position: relative;
+	bottom: -4px;
+	margin: 0px 8px;
 }

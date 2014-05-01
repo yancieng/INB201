@@ -7,6 +7,7 @@
 	}
 
 	$pageTitle = "Patients Finder";
+	$breadcrumb = "<a href='home.php'>Home</a> > " . $pageTitle;
 	include '../inc/panel.php';
 ?>
 
@@ -24,6 +25,7 @@
 </script>
 
 <!-- Content goes here -->
+
 <!-- This DIV keeps the search fields and 'Top 10 patients' side by side -->
 <div id="box0">
 
@@ -64,37 +66,25 @@
 		<br>
 		
 		<!-- This table is for the 'Top 10 patients' -->
-		<table>
-		<tr>
-			<td>1. Yancie Ng</td>
-		</tr>
-		<tr>
-			<td>2.</td>
-		</tr>
-		<tr>
-			<td>3.</td>
-		</tr>
-		<tr>
-			<td>4.</td>
-		</tr>
-		<tr>
-			<td>5.</td>
-		</tr>
-		<tr>
-			<td>6.</td>
-		</tr>
-		<tr>
-			<td>7.</td>
-		</tr>
-		<tr>
-			<td>8.</td>
-		</tr>
-		<tr>
-			<td>9.</td>
-		</tr>
-		<tr>
-			<td>10.</td>
-		</tr>
+		<table id="topTen">
+			<?php
+			// Top 10 Patients
+
+			// Normally, this would be the last 10 patients that have had a checkup?
+			// But for now, it'll just be the last 10 patients registered in the system
+
+			$sql = "SELECT patientID, firstName, lastName
+					FROM patients
+					ORDER BY patientID DESC";
+			$result = mysql_query($sql);
+
+			for ($i = 1; $i <= 10; $i++) {
+				$row = mysql_fetch_assoc($result);
+				echo "<tr>";
+					echo "<td>" . $i . ". <a href='patientview.php?patient={$row['patientID']}'>{$row['lastName']}, {$row['firstName']}</a></td>";
+				echo "</tr>";
+			}
+			?>
 		</table>
 	</div>
 </div>

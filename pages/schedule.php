@@ -6,15 +6,15 @@
 		header ("Location: login.php");
 	}
 
-	// $pageTitle = "Untitled Page";
-	// $breadcrumb = "<a href='home.php'>Home</a> > " . $pageTitle;
+	$pageTitle = "Schedule";
+	$breadcrumb = "<a href='home.php'>Home</a> > " . $pageTitle;
 	include '../inc/panel.php';
 ?>
 
 <script type="text/javascript">
 	function active() {
 
-		// var no = "m#"; //The coresponding active panal (the menu) of this page
+		var no = "m3"; //The coresponding active panal (the menu) of this page
 		// change this number for each different page, or is there a better way?
 
 		document.getElementById(no).className = ' active';
@@ -25,6 +25,7 @@
 </script>
 
 <!-- Content goes below -->
+<h1>Under Construction</h1>
 
 
 

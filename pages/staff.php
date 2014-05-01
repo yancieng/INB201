@@ -5,7 +5,9 @@
 		$_SESSION['loginerror'] = "You must be logged in to access this resource.";
 		header ("Location: login.php");
 	}
+	
 	$pageTitle = "Staff";
+	$breadcrumb = "<a href='home.php'>Home</a> > " . $pageTitle;
 	include '../inc/panel.php';
 ?>
 

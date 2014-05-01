@@ -7,6 +7,7 @@
 	}
 
 	$pageTitle = "Change Password";
+	$breadcrumb = "<a href='home.php'>Home</a> > Change Password";
 	include '../inc/panel.php';
 ?>
 

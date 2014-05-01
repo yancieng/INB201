@@ -7,6 +7,7 @@
 	}
 
 	$pageTitle = "Staff {$_GET['staff']}";
+	$breadcrumb = "<a href='home.php'>Home</a> > <a href='staff.php'>Staff</a> > " . $pageTitle;
 	include '../inc/panel.php';
 ?>
 

@@ -7,6 +7,7 @@
 	}
 
 	$pageTitle = "Search Results";
+	$breadcrumb = "<a href='home.php'>Home</a> > <a href='patientsfinder.php'>Patients Finder</a> >" . $pageTitle;
 	include '../inc/panel.php';
 ?>
 
