@@ -26,18 +26,18 @@
 	{
 		// set an error message
 		$_SESSION['passworderror'] = 'All fields need to be filled.';
-		// redirect back to changepassword.php
-		header ("Location: changepassword.php");
+		// redirect back to profile.php
+		header ("Location: profile.php");
 	} else if ($currentpassword != $row['password']) {// check if old password matches
 		// set an error message
 		$_SESSION['passworderror'] = 'Your old password does not match.';
-		// redirect back to changepassword.php
-		header ("Location: changepassword.php");
+		// redirect back to profile.php
+		header ("Location: profile.php");
 	} else if ($newpassword != $newpasswordconfirm) {// check if new passwords match
 		// set an error message
 		$_SESSION['passworderror'] = 'Your passwords do not match.';
-		// redirect back to changepassword.php
-		header ("Location: changepassword.php");
+		// redirect back to profile.php
+		header ("Location: profile.php");
 	} else {
 		// change password in database
 		// hash password
@@ -50,13 +50,13 @@
 		if (mysql_query($sql)) {
 			// set a success message
 			$_SESSION['passwordsuccess'] = 'Your password has been changed.';
-			// redirect back to changepassword.php
-			header ("Location: changepassword.php");
+			// redirect back to profile.php
+			header ("Location: profile.php");
 		} else {
 			// set an error message
 			$_SESSION['passworderror'] = 'Your password could not be updated.';
-			// redirect back to changepassword.php
-			header ("Location: changepassword.php");
+			// redirect back to profile.php
+			header ("Location: profile.php");
 		}
 	}
 ?>

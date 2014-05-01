@@ -303,11 +303,11 @@ a {
 	z-index: 1;
 }
 
-.content img {
+/*.content img {
 	width: 500px;
 	margin-left: 100px;
 	padding-bottom: 30px;
-}
+}*/
 
 
 
@@ -358,4 +358,23 @@ form label {
 	position: relative;
 	bottom: -4px;
 	margin: 0px 8px;
+}
+
+#staffInfo img {
+	width: 100px;
+	height: 100px;
+}
+
+#staffInfo div {
+	float: left;
+	margin: 10px;
+}
+
+#staffInfo ul {
+	list-style-type: none;
+	padding: 0;
+}
+
+#staffEdit {
+	clear: both;
 }
