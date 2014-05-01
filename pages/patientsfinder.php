@@ -37,12 +37,13 @@
 			<center>or</center>
 			<label for="name">Name: </label>
 			<input type="text" name="name"><br>
-			<center>or</center>
+			<!--<center>or</center>
 			<label for="phone">Phone: </label>
-			<input type="text" name="phone">
+			<input type="text" name="phone">-->
 			<br>
 			<hr>
 			<br>
+			<!-- Advanced Search: parameters for uhh, DOB, what else -->
 			<i>Advanced Search:</i><br>
 			<select>
 				<option value="p1">parameter 1</option>

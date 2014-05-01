@@ -7,7 +7,7 @@
 	}
 
 	$pageTitle = "Patient {$_GET['patient']}";
-	$breadcrumb = "<a href='home.php'>Home</a> > <a href='patientsfinder.php'>Patients Finder</a> >" . $pageTitle;
+	$breadcrumb = "<a href='home.php'>Home</a> > <a href='patientsfinder.php'>Patients Finder</a> > " . $pageTitle;
 	include '../inc/panel.php';
 ?>
 

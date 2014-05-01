@@ -49,7 +49,7 @@
 				echo "<li><a href='patients.php'>Patient Histories</a></li>";
 				echo "<li><a href='#.html'>Nurses' Observations</a></li>";
 				echo "<li><a href='#.html'>Upcoming Surgeries</a></li>";
-				echo "<li><a href='shedule.php'>Schedules</a></li>";
+				echo "<li><a href='schedule.php'>Schedules</a></li>";
 				echo "<li><a href='#.html'>Perscriptions</a></li>";
 			} else if ($row['title'] == 2) { // Nurse
 				echo "<li><a href='#.html'>Nurses' Observations</a></li>";
