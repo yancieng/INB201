@@ -103,8 +103,6 @@ function load() {
 		<div class="triangle2"></div>
 		<ul>
 			<li> <a href="profile.php">Profile</a> </li>
-			<!-- Temporary place for "change password" -->
-			<li><a href="changepassword.php">Change Password</a></li>
 			<li class="set"> <a href="#">Settings</a> </li>
 			<li class="logout"> 
 				<?php

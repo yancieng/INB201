@@ -34,13 +34,13 @@
 	} else {
 		// show search results
 		if (isset($_GET['name'])) {
-			$sql = "SELECT patientID, firstName, lastName, contactNumber
+			$sql = "SELECT patientID, firstName, lastName
 					FROM patients
 					WHERE firstName LIKE '%{$_GET['name']}%'
 					OR lastName LIKE '%{$_GET['name']}%'
 					ORDER BY lastName ASC";
 		} else if (isset($_GET['phone'])) {
-			$sql = "SELECT patientID, firstName, lastName, contactNumber
+			$sql = "SELECT patientID, firstName, lastName
 					FROM patients
 					WHERE contactNumber LIKE '%{$_GET['phone']}%'
 					ORDER BY lastName ASC";
@@ -50,7 +50,7 @@
 
 		if ($count != 0) {
 			while ($row = mysql_fetch_assoc($result)) {
-				echo "<li><a href='patientview.php?patient={$row['patientID']}'>{$row['lastName']}, {$row['firstName']} - {$row['contactNumber']}</a></li>";
+				echo "<li><a href='patientview.php?patient={$row['patientID']}'>{$row['lastName']}, {$row['firstName']}</a></li>";
 			}
 		} else {
 			echo "There were no results.";
