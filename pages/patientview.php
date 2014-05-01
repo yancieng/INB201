@@ -53,19 +53,19 @@
 					echo "<div id='patient'>";
 						echo "<form action='patientupdateprocess.php' method='post'>";
 							echo "<div>";
-								echo "<label for='firstName'>*First Name: </label>";
+								echo "<label for='firstName'>First Name: </label>";
 								echo "<input type='text' name='firstName' id='firstName' value='{$row['firstName']}' required />";
 							echo "</div>";
 							echo "<div>";
-								echo "<label for='lastName'>*Last Name: </label>";
+								echo "<label for='lastName'>Last Name: </label>";
 								echo "<input type='text' name='lastName' id='lastName' value='{$row['lastName']}' required />";
 							echo "</div>";
 							echo "<div>";
-								echo "<label for='DOB'>*DOB: </label>";
+								echo "<label for='DOB'>DOB: </label>";
 								echo "<input type='text' name='DOB' id='DOB' value='{$row['DOB']}' required />";
 							echo "</div>";
 							echo "<div>";
-								echo "<label for='bloodType'>*Blood Type: </label>";
+								echo "<label for='bloodType'>Blood Type: </label>";
 								echo "<select name='bloodType'>
 										<option value='{$row['bloodType']}'>Default: {$row['bloodType']}</option>
 										<option>O+</option>
