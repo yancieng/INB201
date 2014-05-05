@@ -7,6 +7,7 @@
 	}
 
 	$pageTitle = "Add Staff";
+	$breadcrumb = "<a href='home.php'>Home</a> > <a href='staffmanager.php'>Staff Manager</a> > " . $pageTitle;
 	include '../inc/panel.php';
 ?>
 

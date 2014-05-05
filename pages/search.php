@@ -49,11 +49,13 @@
 		$count = mysql_num_rows($result);
 
 		if ($count != 0) {
+			echo "<ul>";
 			while ($row = mysql_fetch_assoc($result)) {
 				echo "<li><a href='patientview.php?patient={$row['patientID']}'>{$row['lastName']}, {$row['firstName']}</a></li>";
 			}
+			echo "</ul>";
 		} else {
-			echo "There were no results.";
+			echo "<p>There were no results.</p>";
 		}
 	}
 ?>

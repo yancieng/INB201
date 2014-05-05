@@ -66,6 +66,9 @@
 				echo "<li><a href='schedule.php'>Schedules</a></li>";
 				echo "<li><a href='#.html'>Export to PDF</a></li>";
 			} else if ($row['title'] == 5) { // Administrator
+				// should have a page for search/add staff member
+				// from search result (ID = 1, or name => selection), can edit or delete
+				echo "<li><a href='staffmanager.php'>Find a Staff Member</a></li>";
 				echo "<li><a href='staffadd.php'>Add a Staff Member</a></li>";
 				echo "<li><a href='staff.php'>Update Staff Information</a></li>";
 				echo "<li><a href='patients.php'>Update Patient Information</a></li>";

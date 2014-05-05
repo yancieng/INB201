@@ -68,35 +68,55 @@ function load() {
 		<span id="clock"></span>
 	</div>
 	<div class="profile">
-		<div class="pic">
-			<?php echo $_SESSION['photo']; ?>
-		</div>
-		<div class="name">
-			<!-- PHP needed for each role here -->
-			<?php
-				$staffID = $_SESSION['user'];
-				$sql = "SELECT staffID, title
-						FROM staff
-						WHERE staffID = '$staffID'";
-				$result = mysql_query($sql);
-				$row = mysql_fetch_assoc($result);
+		<!-- PHP needed for updated staff info/photo -->
+		<?php
+			$staffID = $_SESSION['user'];
+			$sql = "SELECT staffID, firstName, lastName, title, specialties, photo
+					FROM staff
+					WHERE staffID = '$staffID'";
+			$result = mysql_query($sql);
+			$row = mysql_fetch_assoc($result);
 
-				echo "<span class='title'>";
-				if ($row['title'] == 1) { // Doctor
-					echo "Dr. ";
-				} else if ($row['title'] == 2) { // Nurse
-					echo "Nurse ";
-				} else if ($row['title'] == 3) { // Medical Technician
-					echo "Med Tech. ";// uhh
-				} else if ($row['title'] == 4) { // Receptionist
-					echo "Rec. ";// uhh
-				} else if ($row['title'] == 5) { // Administrator
-					echo "Admin ";
-				}
-				echo $_SESSION['name'] . " " . $_SESSION['lname'] . "</span> <br />";
-			?>
-			<span class="spec"> <?php echo $_SESSION['spec']; ?> </span>
-		</div>
+		echo "<div class='pic'>";
+			echo $row['photo'];
+		echo "</div>";
+
+		echo "<div class='name'>";
+			echo "<span class='title'>";
+			/*if ($row['title'] == 1) { // Doctor
+				echo "Dr. ";
+			} else if ($row['title'] == 2) { // Nurse
+				echo "Nurse ";
+			} else if ($row['title'] == 3) { // Medical Technician
+				echo "Med Tech. ";// uhh
+			} else if ($row['title'] == 4) { // Receptionist
+				echo "Rec. ";// uhh
+			} else if ($row['title'] == 5) { // Administrator
+				echo "Admin ";
+			}*/
+			switch ($row['title']) {
+				case 1:	echo "Dr. ";
+					break;
+				
+				case 2: echo "Nurse ";
+					break;
+
+				case 3: echo "Med Tech. ";
+					break;
+
+				case 4: echo "Rec. ";
+					break;
+
+				case 5: echo "Admin ";
+					break;
+
+				default:
+					break;
+			}
+			echo $row['firstName'] . " " . $row['lastName'] . "</span> <br />";
+				echo "<span class='spec'>{$row['specialties']}</span>";
+		echo "</div>";
+		?>
 		<div class="triangle1"></div>
 	</div>
 	<div class="dropdown">

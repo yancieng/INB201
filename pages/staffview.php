@@ -7,7 +7,7 @@
 	}
 
 	$pageTitle = "Staff {$_GET['staff']}";
-	$breadcrumb = "<a href='home.php'>Home</a> > <a href='staff.php'>Staff</a> > " . $pageTitle;
+	$breadcrumb = "<a href='home.php'>Home</a> > <a href='staffmanager.php'>Staff Manager</a> > " . $pageTitle;
 	include '../inc/panel.php';
 ?>
 
@@ -29,7 +29,7 @@
 			<!-- Full staff info page. Can edit info if authorised (admin) -->
 			<h1>Staff <?php echo $_GET['staff']; ?></h1>
 			<?php
-				$sql = "SELECT staffID, firstName, lastName, title
+				$sql = "SELECT staffID, firstName, lastName, title, specialties, photo
 						FROM staff
 						WHERE staffID = {$_GET['staff']}";
 				$result = mysql_query($sql);
@@ -40,15 +40,15 @@
 						echo "<form action='staffupdateprocess.php' method='post'>";
 							echo "<div>";
 								echo "<label for='firstName'>*First Name: </label>";
-								echo "<input type='text' name='firstName' id='firstName' value='{$row['firstName']}' required />";
+								echo "<input type='text' name='firstName' value='{$row['firstName']}' required />";
 							echo "</div>";
 							echo "<div>";
 								echo "<label for='lastName'>*Last Name: </label>";
-								echo "<input type='text' name='lastName' id='lastName' value='{$row['lastName']}' required />";
+								echo "<input type='text' name='lastName' value='{$row['lastName']}' required />";
 							echo "</div>";
 							echo "<div>";
 								echo "<label for='staffTitle'>*Title: </label>";
-								echo "<select name='staffTitle' id='staffTitle'>";
+								echo "<select name='staffTitle'>";
 									// if statements for default selection
 									if ($row['title'] == 1) {
 										echo "<option value='1' selected='selected'>Doctor</option>";
@@ -76,6 +76,10 @@
 										echo "<option value='5'>Administrator</option>";
 									}
 								echo "</select>";
+							echo "</div>";
+							echo "<div>";
+								echo "<label for='specialties'>Specialties: </label>";
+								echo "<input type='text' name='specialties' value='{$row['specialties']}' />";
 							echo "</div>";
 							echo "<div>";
 								// hidden field with staffID

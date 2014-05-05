@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 30, 2014 at 05:40 AM
+-- Generation Time: May 05, 2014 at 04:09 AM
 -- Server version: 5.6.16
 -- PHP Version: 5.5.9
 
@@ -96,14 +96,24 @@ CREATE TABLE IF NOT EXISTS `guardians` (
   `email` varchar(60) DEFAULT NULL,
   `address` varchar(255) NOT NULL,
   PRIMARY KEY (`guardianID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
 
 --
 -- Dumping data for table `guardians`
 --
 
 INSERT INTO `guardians` (`guardianID`, `firstName`, `lastName`, `title`, `relation`, `contactNumber`, `email`, `address`) VALUES
-(0000001, 'Benson', 'Usang', 'Mr.', 'Father / Son', '01421234', 'bensonusa@hotmail.com', '1105/82 Vendor St, Brisbane, 4000');
+(0000001, 'Benson', 'Usang', 'Mr.', 'Father', '01421234', 'bensonusa@hotmail.com', '1105/82 Vendor St, Brisbane, 4000'),
+(0000002, 'Sheree', 'Ackbar', 'Mrs.', 'Mother', '48535726', NULL, '5 Brinkley St'),
+(0000003, 'Reanna', 'Adams', 'Mrs.', 'Mother', '45105705', NULL, '12 Ella Ct'),
+(0000004, 'Rona', 'Attinborough', 'Miss', 'Mother', '46128638', NULL, '11 Lokyer Pl'),
+(0000005, 'Cassandra', 'Barnes', 'Ms.', 'Mother', '44572338', NULL, '5 Chapple St'),
+(0000006, 'Staci', 'Brown', 'Miss', 'Mother', '47284802', NULL, '19 Elford Pl'),
+(0000007, 'Archibald', 'Carson', 'Mr.', 'Grandfather', '44783001', NULL, '17 Kiandra Pl'),
+(0000008, 'Nicholas', 'Craig', 'Mr.', 'Father', '48783468', NULL, '16 Timbury Way'),
+(0000009, 'Yolanda', 'Coleman', 'Mrs.', 'Mother', '44641922', NULL, '4 Kallandra St'),
+(0000010, 'Lauraine', 'Davids', 'Mrs.', 'Grandmother', '43403132', NULL, '6 St Albans Rd'),
+(0000011, 'Katherine', 'Erickson', 'Mrs.', 'Mother', '45620853', NULL, '25 Karanya St');
 
 -- --------------------------------------------------------
 
@@ -171,7 +181,7 @@ CREATE TABLE IF NOT EXISTS `patients` (
   `guardianID` int(7) unsigned zerofill DEFAULT NULL,
   PRIMARY KEY (`patientID`),
   KEY `guardianID` (`guardianID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=98 ;
 
 --
 -- Dumping data for table `patients`
@@ -188,7 +198,93 @@ INSERT INTO `patients` (`patientID`, `firstName`, `lastName`, `DOB`, `bloodType`
 (0000008, 'Evelyn', 'Collins', '2005-09-19', 'A-', NULL, NULL),
 (0000009, 'Timothy', 'Cook', '2003-04-29', 'B+', NULL, NULL),
 (0000010, 'Christine', 'Howard', '2004-07-06', 'O+', NULL, NULL),
-(0000011, 'Jason', 'Usang', '2006-04-30', 'A-', NULL, 0000001);
+(0000011, 'Jason', 'Usang', '2006-04-30', 'A-', NULL, 0000001),
+(0000012, 'Garry', 'Ackbar', '2005-07-15', 'A+', NULL, 0000002),
+(0000013, 'Joanne', 'Adams', '1997-03-06', 'B-', NULL, 0000003),
+(0000014, 'Nicholas', 'Attinborough', '1997-07-01', 'AB+', NULL, 0000004),
+(0000015, 'James', 'Barnes', '1999-05-18', 'O-', NULL, 0000005),
+(0000016, 'Julia', 'Barnes', '1999-05-18', 'O-', NULL, 0000005),
+(0000017, 'Arthur', 'Brown', '1999-07-27', 'O+', NULL, 0000006),
+(0000018, 'Jackie', 'Brown', '1999-12-17', 'O+', NULL, 0000006),
+(0000019, 'Redman', 'Brown', '1999-12-24', 'AB-', NULL, 0000006),
+(0000020, 'Ron', 'Brown', '2000-08-07', 'A+', NULL, 0000006),
+(0000021, 'Steven', 'Brown', '2001-02-21', 'AB+', NULL, 0000006),
+(0000022, 'Leonard', 'Carson', '2001-06-13', 'B+', NULL, 0000007),
+(0000023, 'William', 'Craig', '2001-09-02', 'B+', NULL, 0000008),
+(0000024, 'Richard', 'Coleman', '2001-09-24', 'A-', NULL, 0000009),
+(0000025, 'Grant', 'Davids', '2001-04-06', 'B+', NULL, 0000010),
+(0000026, 'Josephine', 'Erickson', '2001-04-09', 'A+', NULL, 0000011),
+(0000027, 'David', 'Evans', '2005-09-29', 'AB+', NULL, NULL),
+(0000028, 'Hugo', 'Farmsworth', '2006-06-04', 'O-', NULL, NULL),
+(0000029, 'Judy', 'Fennell', '2006-12-20', 'O+', NULL, NULL),
+(0000030, 'Susan', 'Ferrel', '2007-03-15', 'O+', NULL, NULL),
+(0000031, 'Darryl', 'Floyd', '2007-05-03', 'O+', NULL, NULL),
+(0000032, 'Coleen', 'Fox', '2007-10-23', 'O-', NULL, NULL),
+(0000033, 'Hubert', 'Fry', '2008-03-26', 'AB+', NULL, NULL),
+(0000034, 'Jeff', 'Gabriel', '2008-04-11', 'AB-', NULL, NULL),
+(0000035, 'Ebony', 'Gardner', '2099-11-23', 'A+', NULL, NULL),
+(0000036, 'Linda', 'Gerard', '2099-12-17', 'A+', NULL, NULL),
+(0000037, 'Alberto', 'Godfrey', '2012-09-20', 'A-', NULL, NULL),
+(0000038, 'Gladys', 'Hammond', '2012-10-30', 'B-', NULL, NULL),
+(0000039, 'Jody', 'Hawkin', '2013-06-22', 'B+', NULL, NULL),
+(0000040, 'Jenny', 'Hendrix', '1994-10-26', 'AB+', NULL, NULL),
+(0000041, 'Tyrone', 'Hitchcock', '1995-01-05', 'B+', NULL, NULL),
+(0000042, 'Alison', 'Hogan', '1996-09-21', 'O+', NULL, NULL),
+(0000043, 'Curtis', 'Holliday', '1996-10-12', 'A+', NULL, NULL),
+(0000044, 'Lee', 'Hooker', '1997-03-27', 'AB+', NULL, NULL),
+(0000045, 'Elizabeth', 'Howard', '2000-05-23', 'O-', NULL, NULL),
+(0000046, 'Billy', 'Hunt', '2000-11-29', 'B-', NULL, NULL),
+(0000047, 'Nicholas', 'Jackson', '2001-04-11', 'AB+', NULL, NULL),
+(0000048, 'Dominic', 'Jeffries', '2002-05-26', 'B+', NULL, NULL),
+(0000049, 'Mattie', 'Johnson', '2002-12-20', 'B-', NULL, NULL),
+(0000050, 'Connor', 'Kent', '2004-02-17', 'A+', NULL, NULL),
+(0000051, 'Hannah', 'Kirby', '2004-03-06', 'B+', NULL, NULL),
+(0000052, 'Sarah', 'Lance', '2004-07-08', 'A-', NULL, NULL),
+(0000053, 'Tricia', 'Lawrence', '2004-08-01', 'AB-', NULL, NULL),
+(0000054, 'Bryan', 'Lincoln', '2005-08-03', 'O+', NULL, NULL),
+(0000055, 'Alexander', 'Luthor', '2005-08-23', 'O+', NULL, NULL),
+(0000056, 'Cory', 'Macdonald', '2009-03-24', 'A-', NULL, NULL),
+(0000057, 'Leroy', 'Mackay', '2009-12-01', 'A+', NULL, NULL),
+(0000058, 'Nancy', 'Markham', '2010-07-15', 'B+', NULL, NULL),
+(0000059, 'Cornelius', 'Mathews', '2010-08-03', 'B-', NULL, NULL),
+(0000060, 'Beatrice', 'McCallister', '2011-03-13', 'A+', NULL, NULL),
+(0000061, 'Luke', 'Mendez', '2012-03-13', 'O+', NULL, NULL),
+(0000062, 'Allan', 'Mills', '2012-05-03', 'O-', NULL, NULL),
+(0000063, 'Christina', 'Monroe', '2013-02-15', 'AB+', NULL, NULL),
+(0000064, 'Martha', 'Morrison', '2013-12-11', 'AB+', NULL, NULL),
+(0000065, 'Trevor', 'Murphy', '1995-04-21', 'A+', NULL, NULL),
+(0000066, 'Dorothy', 'Nelson', '1995-12-09', 'B+', NULL, NULL),
+(0000067, 'Timothy', 'Nesbit', '1996-01-11', 'AB+', NULL, NULL),
+(0000068, 'Christina', 'Newman', '1997-02-22', 'B+', NULL, NULL),
+(0000069, 'Tabitha', 'Nielson', '1997-09-19', 'B+', NULL, NULL),
+(0000070, 'Sean', 'Nixon', '1998-03-29', 'A+', NULL, NULL),
+(0000071, 'Krystal', 'Nye', '1998-08-20', 'O+', NULL, NULL),
+(0000072, 'Jarred', 'Odonnell', '1999-02-07', 'A-', NULL, NULL),
+(0000073, 'Jasmine', 'Olson', '1999-07-18', 'B+', NULL, NULL),
+(0000074, 'Alan', 'Osbourne', '1999-08-29', 'A+', NULL, NULL),
+(0000075, 'Melvin', 'Osullivan', '2000-06-01', 'B+', NULL, NULL),
+(0000076, 'Lionel', 'Owens', '2001-03-02', 'B+', NULL, NULL),
+(0000077, 'Freddie', 'Page', '2001-08-13', 'A-', NULL, NULL),
+(0000078, 'Ellen', 'Parks', '2003-09-11', 'B+', NULL, NULL),
+(0000079, 'Parker', 'Peterson', '2003-09-27', 'B-', NULL, NULL),
+(0000080, 'Wanda', 'Phillips', '2004-11-24', 'A-', NULL, NULL),
+(0000081, 'Richard', 'Pratt', '2005-11-14', 'O-', NULL, NULL),
+(0000082, 'Marlon', 'Reagan', '2006-04-19', 'AB-', NULL, NULL),
+(0000083, 'Daisy', 'Richardson', '2006-06-05', 'AB+', NULL, NULL),
+(0000084, 'Jacqueline', 'Roberts', '2007-06-05', 'AB-', NULL, NULL),
+(0000085, 'Franklin', 'Sanderson', '2007-11-08', 'AB+', NULL, NULL),
+(0000086, 'Lindsey', 'Shephard', '2009-03-28', 'B+', NULL, NULL),
+(0000087, 'Brandon', 'Smith', '2011-05-26', 'A+', NULL, NULL),
+(0000088, 'Max', 'Smith', '2011-12-22', 'B-', NULL, NULL),
+(0000089, 'Peter', 'Smith', '2012-09-08', 'A-', NULL, NULL),
+(0000090, 'Robert', 'Stark', '1995-12-12', 'O-', NULL, NULL),
+(0000091, 'Jeffrey', 'Stephenson', '1997-06-30', 'O+', NULL, NULL),
+(0000092, 'Isabel', 'Thompson', '1997-10-31', 'O+', NULL, NULL),
+(0000093, 'Annie', 'Turner', '1999-06-04', 'O+', NULL, NULL),
+(0000094, 'Adam', 'Wayne', '1999-09-03', 'O+', NULL, NULL),
+(0000095, 'Burce', 'West', '1999-09-03', 'O+', NULL, NULL),
+(0000096, 'Helen', 'Worthington', '1999-11-07', 'A-', NULL, NULL),
+(0000097, 'Charles', 'Xavier', '1999-12-17', 'B-', NULL, NULL);
 
 -- --------------------------------------------------------
 
