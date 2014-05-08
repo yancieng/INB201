@@ -18,7 +18,9 @@ a:hover {
 	color: #878787;
 }
 
-
+ul {
+	list-style: none;
+}
 
 
 

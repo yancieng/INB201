@@ -5,15 +5,15 @@
 	$patientID = mysql_escape_string($_GET['patientID']);
 	$firstName = mysql_escape_string($_GET['firstName']);
 	$lastName = mysql_escape_string($_GET['lastName']);
-	$phone = mysql_escape_string($_GET['phone']);
+	// $phone = mysql_escape_string($_GET['phone']);
 
 	// check to see if any fields are filled, if not return to patientsfinder.php
-	if (($patientID == "") && ($firstName == "") && ($lastName == "") && ($phone == "")) {
-		header ("Location: patientsfinder.php");
-	}
+	// if (($patientID == "") && ($firstName == "") && ($lastName == "") && ($phone == "")) {
+	// 	header ("Location: patientsfinder.php");
+	// }
 
 	// separate sql queries for each field?
-	if ($patientID != "") {
+	if ($patientID != "Patient ID") {
 		// sql to see if it a) exists b) there is only one
 		$sql = "SELECT patientID
 				FROM patients
@@ -30,7 +30,7 @@
 			$_SESSION['searcherror'] = "There were no results for that patient ID.";
 			header ("Location: search.php");
 		}
-	} else if ($firstName != "" && $lastName != "") {
+	} else if ($firstName != "First Name" && $lastName != "Last Name") {
 		$sql = "SELECT patientID, firstName, lastName
 				FROM patients
 				WHERE firstName LIKE '%{$firstName}%'
@@ -47,7 +47,7 @@
 			$_SESSION['searcherror'] = "There were no results for that name.";
 			header ("Location: search.php");
 		}
-	} else if ($firstName != "") {
+	} else if ($firstName != "First Name") {
 		$sql = "SELECT patientID, firstName, lastName
 				FROM patients
 				WHERE firstName LIKE '%{$firstName}%'";
@@ -62,7 +62,7 @@
 			// go to search.php with results (somehow)
 			header ("Location: search.php?firstName={$firstName}");
 		}
-	} else if ($lastName != "") {
+	} else if ($lastName != "Last Name") {
 		$sql = "SELECT patientID, firstName, lastName
 				FROM patients
 				WHERE lastName LIKE '%{$lastName}%'";

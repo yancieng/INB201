@@ -1,0 +1,84 @@
+/* 
+	Patient Details
+						*/
+.patientDetails {
+	margin-bottom: 30px;
+}
+.patientDetails .boxContent{
+	height: 150px;
+}
+.patientDetails .textDetails {
+	width: 45%;
+	float: left;
+}
+.patientDetails .textDetails img, .parentsDetails .parentPicture img  {
+	width: 140px;
+	height: 140px;
+	-webkit-box-shadow: 0 0 1px 0 rgba(50, 50, 50, 0.45);
+	-moz-box-shadow:    0 0 1px 0 rgba(50, 50, 50, 0.45);
+	box-shadow:         0 0 1px 0 rgba(50, 50, 50, 0.45);
+	float: left;
+	margin-top: 10px;
+}
+.patientDetails .textDetails p {
+	text-align: right;
+	margin: 0 0 0 30px;
+	line-height: 2.0;
+	font-size: 14px;
+}
+.patientDetails .textDetails .PatientName {
+	line-height: 2.8;
+	font-size: 19px;
+	font-weight: 700;
+	color: #5E5E5E;
+}
+.patientDetails .picDetails{
+	width: 55%;
+	float: right;
+	text-align: right;
+	margin-top: 45px;
+}
+.patientDetails .picDetails ul{
+	margin-right: 0;
+}
+.patientDetails .picDetails li {
+	display: inline;
+	margin-right: 15px;
+	position: relative;
+	text-align: center;
+}
+.patientDetails .picDetails li img{
+	width: 80px;
+	height: 80px;
+	opacity: 0.7;
+	padding: 10px;
+	border: 1px solid #c9c9c9;
+}
+.patientDetails .picDetails .info {
+	font-family: "proxima-nova-1","proxima-nova-2",arial,helvetica,sans-serif;
+	position: absolute;
+	top: -36px;
+	width: 70px;
+	background-color: white;
+	opacity: 0.7;
+	width: 100px;
+	border: 1px solid #c9c9c9;
+	border-top: none;
+}
+.patientDetails .picDetails .info .infoLine1 {
+	font-size: 18px;
+	font-weight: 700;
+}
+
+.parentDetail {
+	line-height: 2;
+	font-size: 14px;
+}
+
+.parentDetailLeft {
+	margin-top: -15px;
+	margin-right: 60px;
+	text-align: right;
+	float: left;
+	width: 30%
+}

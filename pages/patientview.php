@@ -12,76 +12,86 @@
 	 change this number for each different page -->
 <script>activePanel("m2");</script>
 
-<section>
-	<div class="container">
+<link type="text/css" rel="stylesheet" href="../css/patientview.css" media="screen" /> 
 
-		<?php
-			// if patient has just been added, show message
-			if (isset($_SESSION['patientsuccess'])) {
-				echo "<p id='success'>" . $_SESSION['patientsuccess'] . "</p>";
-				unset($_SESSION['patientsuccess']);
-			}
-			// if editing fails, show message
-			if (isset($_SESSION['patienterror'])) {
-				echo "<p id='error'>" . $_SESSION['patienterror'] . "</p>";
-				unset($_SESSION['patienterror']);
-			}
-		?>
-		<div class="login">
-			<!-- Full patient info page. Can edit info if authorised (receptionist, etc.) ?? how -->
-			<h1>Patient <?php echo $_GET['patient']; ?></h1>
-			<!-- Form layout? if authorised, else just show info -->
-			<?php
-				$sql = "SELECT *
-						FROM patients
-						WHERE patientID = {$_GET['patient']}";
-				$result = mysql_query($sql);
-				$row = mysql_num_rows($result);
+<?php
+	$sql = "SELECT *
+			FROM patients
+			WHERE patientID = {$_GET['patient']}";
+	$result = mysql_query($sql);
+	$row = mysql_num_rows($result);
 
-				while ($row = mysql_fetch_assoc($result)) {
-					echo "<div id='patient'>";
-						echo "<form action='patientupdateprocess.php' method='post'>";
-							echo "<div>";
-								echo "<label for='firstName'>First Name: </label>";
-								echo "<input type='text' name='firstName' id='firstName' value='{$row['firstName']}' required />";
-							echo "</div>";
-							echo "<div>";
-								echo "<label for='lastName'>Last Name: </label>";
-								echo "<input type='text' name='lastName' id='lastName' value='{$row['lastName']}' required />";
-							echo "</div>";
-							echo "<div>";
-								echo "<label for='DOB'>DOB: </label>";
-								echo "<input type='text' name='DOB' id='DOB' value='{$row['DOB']}' required />";
-							echo "</div>";
-							echo "<div>";
-								echo "<label for='bloodType'>Blood Type: </label>";
-								echo "<select name='bloodType'>
-										<option value='{$row['bloodType']}'>Default: {$row['bloodType']}</option>
-										<option>O+</option>
-										<option>O-</option>
-										<option>A+</option>
-										<option>A-</option>
-										<option>B+</option>
-										<option>B-</option>
-										<option>AB+</option>
-										<option>AB-</option>
-									</select>";
-							echo "</div>";
-							echo "<div>";
-								echo "<label for='previousNotes'>Previous Notes: </label>";
-								echo "<textarea name='previousNotes' id='previousNotes' cols='32' rows='5'>{$row['previousNotes']}</textarea>";
-							echo "</div>";
-							echo "<div>";
-								// hidden field with patientID
-								echo "<input type='hidden' name='patientID' value='{$row['patientID']}' />";
-								echo "<button type='submit' class='submit'>Update Information</button>";
-							echo "</div>";
-						echo "</form>";
-					echo "</div>";
-				}
-			?>
-		</div>
-	</div>
-</section>
+	$row = mysql_fetch_assoc($result); 
+
+	$timestamp = strtotime($row['DOB']);
+	$year = 2014- date("Y",$timestamp)
+?>
+
+<div class="box patientDetails">
+		<section class="boxTitle">
+			<p>Patient Details</p>
+		</section>
+		<section class="boxContent">
+			<div class="textDetails">
+				<img src="../images/none.png" alt="patient Picture">
+				<p><span class="PatientName"><?php echo $row['firstName']." ". $row['lastName']; ?></span>
+				</br><?php echo $year; ?> Years Old</br> (<?php echo $row['patientID']; ?>)</br> Bed: R302-02</p>
+			</div>
+			<div class="picDetails">
+				<ul>
+					<li class="tall"><img src="../images/height.png" alt=""><p class="info"><span class="infoLine1">112cm</span><br/> 2 days ago</p></li>
+					<li class="weight"><img src="../images/weight.png" alt=""><p class="info"><span class="infoLine1">26kg</span><br/> 2 days ago</p></li>
+					<li class="blood"><img src="../images/blood.png" alt=""><p class="info"><span class="infoLine1"><?php echo $row['bloodType']; ?></span><br/> 2 days ago</p></li>
+				</ul>
+			</div>
+		</section>
+</div>
+
+<?php
+	$sql2 = "SELECT *
+			FROM guardians
+			WHERE guardians.patientID={$_GET['patient']}";
+	$result2 = mysql_query($sql2);
+	$row2 = mysql_num_rows($result2);
+
+	$row2 = mysql_fetch_assoc($result2); 
+?>
+
+<div class="box parentsDetails">
+		<section class="boxTitle">
+			<p>Parents or guardians contacts</p>
+		</section>
+		<section class="boxContent">
+			<div class="parentPicture"><img src="../images/none.png" alt="parent Picture"></div>
+			<div class="parentDetail">
+				<div class="parentDetailLeft">
+					<ul>
+						<li>Name :</li>
+						<li>Relation :</li>
+						<li>Contact Number :</li>
+						<li>E - mail :</li>
+						<li>Address :</li>
+					</ul>
+
+				</div>
+				<div class="parentDetailRight">
+					<ul>
+						<li><?php echo $row2['title']; ?> <?php echo $row2['firstName']; ?> <?php echo $row2['lastName']; ?></li>
+						<li><?php echo $row2['relation']; ?></li>
+						<li><?php echo $row2['contactNumber']; ?></li>
+						<li><?php echo $row2['email']; ?></li>
+						<li><?php echo $row2['address']; ?></li>
+					</ul>
+				</div>
+			</div>
+		</section>
+</div>
+<br/>
+<?php
+	$id = $_GET['patient'];
+	$href = "updatePatient.php?patient=". $id;
+	echo "<a href='".$href. "'><button type='submit' class='submit'>Update Information</button></a>"
+?>
+
 
  
