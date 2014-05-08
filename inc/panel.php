@@ -6,9 +6,10 @@
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 
 	<link type="text/css" rel="stylesheet" href="../css/panel.css" media="screen" /> 
-	<link type="text/css" rel="stylesheet" href="../css/patientsfinder.css" media="screen" /> 
+	<link type="text/css" rel="stylesheet" href="../css/style.css" media="screen" /> 
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-
+	<script src="../js/activePanel.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400,300' rel='stylesheet' type='text/css'>
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Javascrpit ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
@@ -35,7 +36,7 @@ function timer(){
 
 $(document).ready(function(){
   $(".profile").click(function(){
-    $(".dropdown").toggle(150);
+    $(".dropdownProfile").toggle(150);
   });
 });
 
@@ -119,7 +120,7 @@ function load() {
 		?>
 		<div class="triangle1"></div>
 	</div>
-	<div class="dropdown">
+	<div class="dropdownProfile">
 		<div class="triangle2"></div>
 		<ul>
 			<li> <a href="profile.php">Profile</a> </li>

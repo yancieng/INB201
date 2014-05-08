@@ -1,32 +1,80 @@
-/* This DIV keeps the search fields and 'Top 10 patients' side by side */
-#box0 {
-	width: 600px;
+
+
+/* search for patients */
+.patientSearch .or {
+	margin: 15px 0 0 100px;
 }
 
-/* This DIV is the search criteria */
-#box1 {
+.patientSearch .pIDinput, .patientSearch .phoneInput {
+	width: 94%;
+}
+.patientSearch .firstNameInput {
+	width: 80%;
+}
+.patientSearch .lastNameInput {
+	width: 40%;
+}
+
+
+
+/* Advenced Search */
+.advancedSearch {
+	margin-top: 20px;
+}
+.advancedSearch .dropdown-menu {
+	width: 218px;
+}
+.advancedSearch .dropdown-toggle{
+	font-size: 14px;
+	width: 220px;
+}
+.advancedSearch .parameters p {
+	margin-top: 0;
+}
+.parameterInput input{
+	width: 40%;
+}
+
+
+/* for boths */
+.patientSearch .boxContent, .advancedSearch .boxContent{
+	padding-bottom: 70px;
+}
+.advancedSearch .submit, .patientSearch .submit{
+	margin-top: 15px;
+}
+.patientSearch .firstName, .advancedSearch .parameters {
 	float: left;
-	padding: 20px;
-	width: 300px;
-	border: 1px solid;
-	border-radius: 25px;
+	margin-right: 10px;
+	width: 53%;
+}
+.patientSearch .lastName, .advancedSearch .parametersInput {
+	width: 50%;
 }
 
-/* Tried making the 'search' button float right. Doesn't work */
-#button {
-	float: right;
+/* Top 10 patients */
+.topTen .boxContent{
+	padding: 0;
 }
-
-/* This DIV is for the 'Top 10 patients' */
-#box2 {
-	float: right;
-	width: 200px;
+.topTen table {
+	width: 100%;
 }
-
-/* This table is for the 'Top 10 patients' */
-table {
-	border: 1px solid;
-	border-radius: 25px;
-	padding: 5px;
-	border-spacing: 10px;
+.topTen table tr {
+	margin: -10px;
+}
+.topTen table td {
+	border-bottom: 1px solid #BDBDBD;
+	height: 30px;
+	padding: 0;
+}
+.topTen table td a {
+	height: 30px;
+	display: block;
+	padding: 10px 0 0 20px;
+}
+.topTen table td a:hover {
+	background-color: #F0F0F0;
+}
+.topTen .last {
+border-bottom: none;
 }

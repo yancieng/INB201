@@ -1,28 +1,17 @@
 <?php
 	include '../inc/dbconnect.php';
 	// if no user is logged in, redirect to login.php with error message
-	if (!isset($_SESSION['user'])) {
-		$_SESSION['loginerror'] = "You must be logged in to access this resource.";
-		header ("Location: login.php");
-	}
+	include '../inc/loginCheck.php';
 
 	$pageTitle = "Search Results";
 	$breadcrumb = "<a href='home.php'>Home</a> > <a href='patientsfinder.php'>Patients Finder</a> > " . $pageTitle;
 	include '../inc/panel.php';
 ?>
 
-<script type="text/javascript">
-	function active() {
+<!-- The coresponding active panal (the menu) of this page
+	 change this number for each different page -->
+<script>activePanel("m2");</script>
 
-		var no = "m2"; //The coresponding active panal (the menu) of this page
-		// change this number for each different page, or is there a better way?
-
-		document.getElementById(no).className = ' active';
-		document.getElementById(no).href = "patientsfinder.php" ;
-		document.getElementById(no).style.cursor = "pointer";
-	}
-
-</script>
 
 <!-- Content goes below -->
 <h1>Search Results</h1>
@@ -33,11 +22,15 @@
 		unset($_SESSION['searcherror']);
 	} else {
 		// show search results
-		if (isset($_GET['name'])) {
+		if (isset($_GET['firstName'])) {
 			$sql = "SELECT patientID, firstName, lastName
 					FROM patients
-					WHERE firstName LIKE '%{$_GET['name']}%'
-					OR lastName LIKE '%{$_GET['name']}%'
+					WHERE firstName LIKE '%{$_GET['firstName']}%'
+					ORDER BY lastName ASC";
+		} else if (isset($_GET['lastName'])) {
+			$sql = "SELECT patientID, firstName, lastName
+					FROM patients
+					WHERE firstName LIKE '%{$_GET['lastName']}%'
 					ORDER BY lastName ASC";
 		} else if (isset($_GET['phone'])) {
 			$sql = "SELECT patientID, firstName, lastName

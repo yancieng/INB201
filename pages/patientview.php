@@ -1,31 +1,20 @@
 <?php
 	include '../inc/dbconnect.php';
 	// if no user is logged in, redirect to login.php with error message
-	if (!isset($_SESSION['user'])) {
-		$_SESSION['loginerror'] = "You must be logged in to access this resource.";
-		header ("Location: login.php");
-	}
+	include '../inc/loginCheck.php';
 
 	$pageTitle = "Patient {$_GET['patient']}";
 	$breadcrumb = "<a href='home.php'>Home</a> > <a href='patientsfinder.php'>Patients Finder</a> > " . $pageTitle;
 	include '../inc/panel.php';
 ?>
 
-<script type="text/javascript">
-	function active() {
-
-		var no = "m2"; //The coresponding active panal (the menu) of this page
-		// change this number for each different page, or is there a better way?
-
-		document.getElementById(no).className = ' active';
-		document.getElementById(no).href = "patientsfinder.php" ;
-		document.getElementById(no).style.cursor = "pointer";
-	}
-
-</script>
+<!-- The coresponding active panal (the menu) of this page
+	 change this number for each different page -->
+<script>activePanel("m2");</script>
 
 <section>
 	<div class="container">
+
 		<?php
 			// if patient has just been added, show message
 			if (isset($_SESSION['patientsuccess'])) {
