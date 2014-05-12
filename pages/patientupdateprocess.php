@@ -6,40 +6,29 @@
 	$firstName = mysql_escape_string($_POST['firstName']);
 	$lastName = mysql_escape_string($_POST['lastName']);
 	$DOB = mysql_escape_string($_POST['DOB']);
-	$bloodType = $_POST['bloodType'];
-	$previousNotes = mysql_escape_string($_POST['previousNotes']);
-
-	// if optional fields are blank, make them NULL
-	if ($previousNotes == '') {
-		$previousNotes = NULL;
-	}
 
 	// if required fields are blank, redirect to patientview.php with error
 	if (
 		(($firstName == '')
-		|| ($lastName == '')
-		|| ($DOB == '')
-		|| ($bloodType == ''))
+		|| ($lastName == ''))
 	) {
 		$_SESSION['patienterror'] = "ALL required fields need to be filled. Don't just delete data like that.";
-		header ("Location: patientview.php?patient={$patientID}");
+		header ("Location: patientupdate.php?patient={$patientID}");
 	} else {
 		$sql = "UPDATE patients
 				SET firstName = '{$firstName}',
 					lastName = '{$lastName}',
-					DOB = '{$DOB}',
-					bloodType = '{$bloodType}',
-					previousNotes = '{$previousNotes}'
+					DOB = '{$DOB}'
 				WHERE patientID = '{$patientID}'";
 
 		if (mysql_query($sql)) {		
-			// redirect to the patientview.php page with success message
+			// redirect to the patientupdate.php page with success message
 			$_SESSION['patientsuccess'] = "Patient {$lastName}, {$firstName} was updated successfully.";
-			header ("Location: patientview.php?patient={$patientID}");
+			header ("Location: patientupdate.php?patient={$patientID}");
 		} else {
 			// kick back with error message: sql
 			$_SESSION['patienterror'] = "There was an error in updating the data.";
-			header ("Location: patientview.php?patient={$patientID}");
+			header ("Location: patientupdate.php?patient={$patientID}");
 		}
 	}
 ?>

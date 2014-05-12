@@ -56,7 +56,7 @@
 		$password = hash('sha256', $password);	
 
 		$sql = "INSERT INTO staff (firstName, lastName, title, password, specialties, photo)
-				VALUES ('{$firstName}',	'{$lastName}', '{$title}', '{$password}', '{$specialties}', '{$photo}';"
+				VALUES ('{$firstName}',	'{$lastName}', '{$title}', '{$password}', '{$specialties}', '{$photo}')";
 
 		if (mysql_query($sql)) {		
 			$sql = "SELECT *
