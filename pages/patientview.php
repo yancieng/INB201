@@ -27,7 +27,8 @@
 	$year = 2014- date("Y",$timestamp)
 ?>
 
-<div class="box patientDetails">
+<div id="details">
+	<div class="box patientDetails">
 		<section class="boxTitle">
 			<p>Patient Details</p>
 		</section>
@@ -85,9 +86,9 @@
 				</ul>
 			</div>
 		</section>
-</div>
+	</div>
 
-<div class="box parentsDetails">
+	<div class="box parentsDetails">
 		<section class="boxTitle">
 			<p>Parents or guardians contacts</p>
 		</section>
@@ -130,6 +131,7 @@
 				}
 			?>
 		</section>
+	</div>
 </div>
 <br/>
 <?php
@@ -137,6 +139,8 @@
 	$href = "patientupdate.php?patient=". $id;
 	echo "<a href='".$href. "'><button type='submit' class='submit'>Update Information</button></a>"
 ?>
-
+<div id="pdf">
+	<button type="button" onclick="documentFromHTML()">Export information to PDF</button>
+</div>
 
  

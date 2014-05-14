@@ -32,12 +32,17 @@
 					FROM patients
 					WHERE firstName LIKE '%{$_GET['lastName']}%'
 					ORDER BY lastName ASC";
-		} else if (isset($_GET['phone'])) {
+		} else {
+			$sql = "SELECT patientID
+					FROM patients
+					WHERE patientID = 0";
+		}
+		/*else if (isset($_GET['phone'])) {
 			$sql = "SELECT patientID, firstName, lastName
 					FROM patients
 					WHERE contactNumber LIKE '%{$_GET['phone']}%'
 					ORDER BY lastName ASC";
-		}
+		}*/
 		$result = mysql_query($sql);
 		$count = mysql_num_rows($result);
 

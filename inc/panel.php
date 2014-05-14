@@ -11,7 +11,40 @@
 	<script src="../js/activePanel.js"></script>
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400,300' rel='stylesheet' type='text/css'>
 
+	<!-- Stuff for PDF conversion -->
+	<!--<script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script>-->
+	<script type="text/javascript" src="../js/jspdf.js"></script>
+	<script type="text/javascript" src="../js/jspdf.plugin.standard_fonts_metrics.js"></script> 
+	<script type="text/javascript" src="../js/jspdf.plugin.split_text_to_size.js"></script>               
+	<script type="text/javascript" src="../js/jspdf.plugin.from_html.js"></script>
+
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Javascrpit ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<!-- Script for PDF conversion -->
+<script>
+     function documentFromHTML() {
+         var doc = new jsPDF('p', 'in', 'letter');
+         var source = document.getElementById('details');
+         var specialElementHandlers = {
+             '#bypassme': function(element, renderer) {
+                 return true;
+             }
+         };
+
+         doc.fromHTML(
+             source, // HTML string or DOM elem ref.
+             0.5,    // x coord
+             0.5,    // y coord
+             {
+                 'width': 7.5, // max width of content on PDF
+                 'elementHandlers': specialElementHandlers
+             });
+
+        doc.output('dataurl');
+        console.log(doc);
+    }
+</script>
+
 
 <script type="text/javascript">
 

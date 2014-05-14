@@ -77,7 +77,12 @@
 			// go to search.php with results (somehow)
 			header ("Location: search.php?lastName={$lastName}");
 		}
-	} else if ($phone != "") {
+	} else {
+		// No results
+		header ("Location: search.php");
+	}
+
+	/*else if ($phone != "") {
 		$sql = "SELECT patientID, contactNumber
 				FROM patients
 				WHERE contactNumber LIKE '%{$phone}%'";
@@ -92,5 +97,5 @@
 			// go to search.php with results (somehow)
 			header ("Location: search.php?phone={$phone}");
 		}
-	}
+	}*/
 ?>
