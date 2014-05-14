@@ -30,7 +30,7 @@
 		} else if (isset($_GET['lastName'])) {
 			$sql = "SELECT patientID, firstName, lastName
 					FROM patients
-					WHERE firstName LIKE '%{$_GET['lastName']}%'
+					WHERE lastName LIKE '%{$_GET['lastName']}%'
 					ORDER BY lastName ASC";
 		} else {
 			$sql = "SELECT patientID
