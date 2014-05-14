@@ -74,16 +74,6 @@ function select(p){
 				<!-- Advanced Search: parameters for uhh, DOB, what else -->
 				<div class="parameters">
 					<p> Parameters: </p>
-					<!--<button type="button" class="dropdown-toggle">
-						<span id="dropdown-label">Please select</span>
-						<span class="caret"></span>
-					</button>
-					<ul class="dropdown-menu">
-						<li><a href="#" onclick="select(this)"><input type="checkbox" name="parameter" value="DOB">DOB</input></a></li>
-						<li><a href="#" onclick="select(this)"><input type="checkbox" name="parameter" value="Height">Height</input></a></li>
-						<li><a href="#" onclick="select(this)"><input type="checkbox" name="parameter" value="Weight">Weight</input></a></li>
-						<li><a href="#" onclick="select(this)"><input type="checkbox" name="parameter" value="Blood Type">Blood Type</input></a></li>
-					</ul>-->
 					<!-- Using a select for the moment -->
 					<select name="parameter">
 						<option>Please Select</option>
@@ -97,7 +87,6 @@ function select(p){
 					<p> Value: </p>
 					<input type="text" name="value" class="textInput"><br>
 				</div>
-				<!-- Tried making the 'search' button float right. Doesn't work -->
 				<button type="submit" class="submit">Search</button>
 			</form>
 		</section>	

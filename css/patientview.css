@@ -1,9 +1,20 @@
 /* 
-	Patient Details
+	General
 						*/
-.patientDetails {
+
+.box, button {
 	margin-bottom: 30px;
 }
+.fullContent {
+    width: -webkit-calc(100% - 270px);
+    width: calc(100% - 270px);
+	min-width: 800px;
+}
+
+/* 
+	Patient Details
+						*/
+
 .patientDetails .boxContent{
 	height: 150px;
 }
@@ -14,8 +25,6 @@
 .patientDetails .textDetails img, .parentsDetails .parentPicture img  {
 	width: 140px;
 	height: 140px;
-	-webkit-box-shadow: 0 0 1px 0 rgba(50, 50, 50, 0.45);
-	-moz-box-shadow:    0 0 1px 0 rgba(50, 50, 50, 0.45);
 	box-shadow:         0 0 1px 0 rgba(50, 50, 50, 0.45);
 	float: left;
 	margin-top: 10px;
@@ -37,6 +46,7 @@
 	float: right;
 	text-align: right;
 	margin-top: 45px;
+	position: relative;
 }
 .patientDetails .picDetails ul{
 	margin-right: 0;
@@ -52,13 +62,14 @@
 	height: 80px;
 	opacity: 0.7;
 	padding: 10px;
+	position: relative;
 	border: 1px solid #c9c9c9;
 }
 .patientDetails .picDetails .info {
 	font-family: "proxima-nova-1","proxima-nova-2",arial,helvetica,sans-serif;
 	position: absolute;
 	top: -36px;
-	width: 70px;
+	left:0;
 	background-color: white;
 	opacity: 0.7;
 	width: 100px;
@@ -70,6 +81,10 @@
 	font-weight: 700;
 }
 
+
+/* 
+	Parent Details
+						*/
 .parentDetail {
 	line-height: 2;
 	font-size: 14px;
@@ -81,4 +96,32 @@
 	text-align: right;
 	float: left;
 	width: 30%
+}
+
+
+/* 
+	Condition,Allergy
+						*/
+.box table {
+	border-collapse:collapse;
+	text-align: center;
+	width: 100%
+}
+.box table td, .box table th{
+	border: 1px solid #c9c9c9;
+	padding: 12px 0 12px 0;
+}
+.box table th{
+	padding: 8px 0 8px 0;
+	background-color: #f78272;
+	color: white;
+}
+.box table .first {
+	width: 275px;
+}
+.box table .second {
+	width: 150px;
+}
+.box table .third {
+	width: 325px;
 }

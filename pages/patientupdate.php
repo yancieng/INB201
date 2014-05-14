@@ -11,6 +11,7 @@
 <!-- The coresponding active panal (the menu) of this page
 	 change this number for each different page -->
 <script>activePanel("m2");</script>
+<link type="text/css" rel="stylesheet" href="../css/patientupdate.css" media="screen" /> 
 
 <?php
 	// if patient has just been added, show message
@@ -28,6 +29,7 @@
 <!-- Page used to update patient info and guardian -->
 
 <!-- Patient Info -->
+<div class = "leftContent">
 <div class="box">
 	<section class="boxTitle">
 		<p>Patient <?php echo $_GET['patient']; ?></p>
@@ -45,15 +47,15 @@
 					echo "<form action='patientupdateprocess.php' method='post'>";
 						echo "<div>";
 							echo "<label for='firstName'>First Name: </label>";
-							echo "<input type='text' name='firstName' value='{$row['firstName']}' required />";
+							echo "<input type='text' class='textInput' name='firstName' value='{$row['firstName']}' required />";
 						echo "</div>";
 						echo "<div>";
 							echo "<label for='lastName'>Last Name: </label>";
-							echo "<input type='text' name='lastName' value='{$row['lastName']}' required />";
+							echo "<input type='text' class='textInput' name='lastName' value='{$row['lastName']}' required />";
 						echo "</div>";
 						echo "<div>";
 							echo "<label for='DOB'>DOB: </label>";
-							echo "<input type='text' name='DOB' value='{$row['DOB']}' required />";
+							echo "<input type='text' class='textInput' name='DOB' value='{$row['DOB']}' required />";
 						echo "</div>";
 						echo "<div>";
 							// hidden field with patientID
@@ -89,11 +91,11 @@
 				<form action='guardianupdateprocess.php' method='post'>
 					<div>
 						<label for='firstName'>First Name: </label>
-						<input type='text' name='firstName' value='{$row['firstName']}' required />
+						<input type='text' class='textInput' name='firstName' value='{$row['firstName']}' required />
 					</div>
 					<div>
 						<label for='lastName'>Last Name: </label>
-						<input type='text' name='lastName' value='{$row['lastName']}' required />
+						<input type='text' class='textInput' name='lastName' value='{$row['lastName']}' required />
 					</div>
 					<div>
 						<label for='title'>Title: </label>
@@ -107,19 +109,19 @@
 					</div>
 					<div>
 						<label for='relation'>Relation: </label>
-						<input type='text' name='relation' value='{$row['relation']}' required />
+						<input type='text' class='textInput' name='relation' value='{$row['relation']}' required />
 					</div>
 					<div>
 						<label for='contactNumber'>Contact Number: </label>
-						<input type='text' name='contactNumber' value='{$row['contactNumber']}' required />
+						<input type='text' class='textInput' name='contactNumber' value='{$row['contactNumber']}' required />
 					</div>
 					<div>
 						<label for='email'>Email: </label>
-						<input type='text' name='email' value='{$row['email']}' required />
+						<input type='text' class='textInput' name='email' value='{$row['email']}' required />
 					</div>
 					<div>
 						<label for='address'>Address: </label>
-						<input type='text' name='address' value='{$row['address']}' required />
+						<input type='text' class='textInput' name='address' value='{$row['address']}' required />
 					</div>
 					<div>
 						<label for='photo'>Photo: </label>
@@ -138,11 +140,11 @@
 				<form action='guardianaddprocess.php' method='post'>
 					<div>
 						<label for='firstName'>First Name: </label>
-						<input type='text' name='firstName' required />
+						<input type='text' class='textInput' name='firstName' required />
 					</div>
 					<div>
 						<label for='lastName'>Last Name: </label>
-						<input type='text' name='lastName' required />
+						<input type='text' class='textInput' name='lastName' required />
 					</div>
 					<div>
 						<label for='title'>Title: </label>
@@ -155,19 +157,19 @@
 					</div>
 					<div>
 						<label for='relation'>Relation: </label>
-						<input type='text' name='relation' required />
+						<input type='text' class='textInput' name='relation' required />
 					</div>
 					<div>
 						<label for='contactNumber'>Contact Number: </label>
-						<input type='text' name='contactNumber' required />
+						<input type='text' class='textInput' name='contactNumber' required />
 					</div>
 					<div>
 						<label for='email'>Email: </label>
-						<input type='text' name='email' required />
+						<input type='text' class='textInput' name='email' required />
 					</div>
 					<div>
 						<label for='address'>Address: </label>
-						<input type='text' name='address' required />
+						<input type='text' class='textInput' name='address' required />
 					</div>
 					<div>
 						<label for='photo'>Photo: </label>
@@ -182,6 +184,7 @@
 			}
 		?>
 	</section>
+</div>
 </div>
 
 <?php

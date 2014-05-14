@@ -34,6 +34,10 @@
 .parameterInput input{
 	width: 40%;
 }
+.advancedSearch select{
+	width: 80%;
+	height: 35px;
+}
 
 
 /* for boths */

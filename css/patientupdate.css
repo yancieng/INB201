@@ -1,0 +1,20 @@
+.box {
+	margin-bottom: 80px;
+}
+.submit {
+	margin-top: 40px;
+}
+
+label {
+	display: inline-block;
+	width: 30%;
+}
+
+.textInput {
+	width: 50%;
+	margin-bottom: 20px;
+}
+select {
+	width: 168px;
+	margin-bottom: 20px;
+}
