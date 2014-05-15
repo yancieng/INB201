@@ -135,16 +135,40 @@
 				</form>
 				";
 			} else {
-				// display blank form to add a guardian?
+				// Ask if they want to "Use Existing"
+				$sql = "SELECT guardianID, firstName, lastName
+						FROM guardians
+						ORDER BY guardianID DESC";
+				$result = mysql_query($sql);
+
 				echo "
 				<form action='guardianaddprocess.php' method='post'>
+					<h2>Use existing</h2>
+					<div>
+						<label for='existing'>Guardian: </label>
+						<select name='existing'>
+							<option>Select</option>";
+						while ($row = mysql_fetch_array($result)) {
+							echo "<option value='{$row['guardianID']}'>{$row['guardianID']} - {$row['lastName']}, {$row['firstName']}</option>";
+						}
+						echo "</select>
+					</div>
+					<div>
+						<label for='existingRelation'>Relation: </label>
+						<input type='text' class='textInput' name='existingRelation' />
+					</div>
+				";
+
+				// Or, display blank form to add a guardian
+				echo "
+					<h2>OR, add a new guardian</h2>
 					<div>
 						<label for='firstName'>First Name: </label>
-						<input type='text' class='textInput' name='firstName' required />
+						<input type='text' class='textInput' name='firstName' />
 					</div>
 					<div>
 						<label for='lastName'>Last Name: </label>
-						<input type='text' class='textInput' name='lastName' required />
+						<input type='text' class='textInput' name='lastName' />
 					</div>
 					<div>
 						<label for='title'>Title: </label>
@@ -157,19 +181,19 @@
 					</div>
 					<div>
 						<label for='relation'>Relation: </label>
-						<input type='text' class='textInput' name='relation' required />
+						<input type='text' class='textInput' name='relation' />
 					</div>
 					<div>
 						<label for='contactNumber'>Contact Number: </label>
-						<input type='text' class='textInput' name='contactNumber' required />
+						<input type='text' class='textInput' name='contactNumber' />
 					</div>
 					<div>
 						<label for='email'>Email: </label>
-						<input type='text' class='textInput' name='email' required />
+						<input type='text' class='textInput' name='email' />
 					</div>
 					<div>
 						<label for='address'>Address: </label>
-						<input type='text' class='textInput' name='address' required />
+						<input type='text' class='textInput' name='address' />
 					</div>
 					<div>
 						<label for='photo'>Photo: </label>

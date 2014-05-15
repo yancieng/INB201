@@ -3,7 +3,10 @@
 	// if no user is logged in, redirect to login.php with error message
 	include '../inc/loginCheck.php';
 
-	$pageTitle = "Patient {$_GET['patient']}";
+	// GET patient
+	$patient = mysql_escape_string($_GET['patient']);
+
+	$pageTitle = "Patient {$patient}";
 	$breadcrumb = "<a href='home.php'>Home</a> > <a href='patientsfinder.php'>Patients Finder</a> > " . $pageTitle;
 	include '../inc/panel.php';
 ?>
@@ -17,14 +20,19 @@
 <?php
 	$sql = "SELECT *
 			FROM patients
-			WHERE patientID = {$_GET['patient']}";
+			LEFT OUTER JOIN beds USING (patientID)
+			WHERE patientID = {$patient}";
 	$result = mysql_query($sql);
-	$row = mysql_num_rows($result);
-
-	$row = mysql_fetch_assoc($result); 
+	$row = mysql_fetch_assoc($result);
 
 	$timestamp = strtotime($row['DOB']);
-	$year = 2014- date("Y",$timestamp)
+	$year = 2014- date("Y",$timestamp);
+
+	if ($row['bedNumber'] != NULL) {
+		$bed = $row['bedNumber'];
+	} else {
+		$bed = "Not currently assigned";
+	}
 ?>
 <div class="fullContent">
 	<div id="details">
@@ -38,7 +46,7 @@
 					<p><span class="PatientName"><?php echo $row['firstName']." ". $row['lastName']; ?></span></br>
 						<?php echo $year; ?> Years Old</br>
 						(p<?php echo $row['patientID']; ?>)</br>
-						Bed: R302-02</p>
+						Bed: <?php echo $bed ?></p>
 				</div>
 				<?php
 					// looking up last height, weight and bloodtype. separate queries because all won't be updated each checkup?
@@ -47,7 +55,7 @@
 
 					$sql = "SELECT height, timestamp
 							FROM checkups
-							WHERE patientID = {$_GET['patient']}
+							WHERE patientID = {$patient}
 							AND height IS NOT NULL";
 					$result = mysql_query($sql);
 					$row = mysql_fetch_assoc($result);
@@ -58,7 +66,7 @@
 
 					$sql = "SELECT weight, timestamp
 							FROM checkups
-							WHERE patientID = {$_GET['patient']}
+							WHERE patientID = {$patient}
 							AND weight IS NOT NULL";
 					$result = mysql_query($sql);
 					$row = mysql_fetch_assoc($result);
@@ -69,7 +77,7 @@
 
 					$sql = "SELECT bloodType, timestamp
 							FROM checkups
-							WHERE patientID = {$_GET['patient']}
+							WHERE patientID = {$patient}
 							AND bloodType IS NOT NULL";
 					$result = mysql_query($sql);
 					$row = mysql_fetch_assoc($result);
@@ -96,7 +104,7 @@
 				<?php
 					$sql = "SELECT *
 							FROM guardians INNER JOIN patients_guardians USING (guardianID)
-							WHERE patientID = {$_GET['patient']}";
+							WHERE patientID = {$patient}";
 					$result = mysql_query($sql);
 					$count = mysql_num_rows($result);
 
@@ -143,11 +151,39 @@
 						<th class="third">Medications</th>
 					</tr>
 					<!-- while ($row = mysql_fetch_assoc($result)) { -->
-					<!-- echo " --><tr>
-						<td>Something<!-- $row['condition'] --></td>
-						<td>14/02/2014<!-- the timestamp thing --></td>
-						<td>Something, Something, Something <!-- $row['medications'] --></td>
-					</tr>
+					<!-- echo " <tr>
+						<td>Something $row['condition'] </td>
+						<td>14/02/2014 the timestamp thing </td>
+						<td>Something, Something, Something  $row['medications'] </td>
+					</tr>-->
+					<?php
+						// get patient's current condition listings, else blank table?
+						$sql = "SELECT `condition`, conditionDate, medication
+								FROM conditions
+								WHERE patientID = {$patient}";
+						$result = mysql_query($sql);
+						$count = mysql_num_rows($result);
+
+						if ($count > 0) {
+							while ($row = mysql_fetch_array($result)) {
+								echo "
+								<tr>
+									<td>{$row['condition']}</td>
+									<td>{$row['conditionDate']}</td>
+									<td>{$row['medication']}</td>
+								</tr>
+								";
+							}
+						} else {
+							echo "
+							<tr>
+								<td>None</td>
+								<td>None</td>
+								<td>None</td>
+							</tr>
+							";
+						}
+					?>
 				</table>
 			</section>
 		</div>
@@ -161,12 +197,40 @@
 						<th class="second">Date</th>
 						<th class="third">Severity</th>
 					</tr>
-					<!-- while ($row = mysql_fetch_assoc($result)) { -->
-					<!-- echo " --><tr>
-						<td>Something<!-- $row['allergy'] --></td>
-						<td>14/02/2014<!-- the timestamp thing --></td>
-						<td>Very serious <!-- $row['midcations'] --></td>
-					</tr>
+					<!-- while ($row = mysql_fetch_array($result)) { -->
+					<!-- echo " <tr>
+						<td>Something $row['allergy'] </td>
+						<td>14/02/2014 the timestamp thing </td>
+						<td>Very serious  $row['midcations'] </td>
+					</tr> -->
+					<?php
+						// get patient's current condition listings, else blank table?
+						$sql = "SELECT allergy, allergyDate, allergySeverity
+								FROM conditions
+								WHERE patientID = {$patient}";
+						$result = mysql_query($sql);
+						$count = mysql_num_rows($result);
+
+						if ($count > 0) {
+							while ($row = mysql_fetch_array($result)) {
+								echo "
+								<tr>
+									<td>{$row['allergy']}</td>
+									<td>{$row['allergyDate']}</td>
+									<td>{$row['allergySeverity']}</td>
+								</tr>
+								";
+							}
+						} else {
+							echo "
+							<tr>
+								<td>None</td>
+								<td>None</td>
+								<td>None</td>
+							</tr>
+							";
+						}
+					?>
 				</table>
 			</section>
 		</div>
@@ -176,7 +240,7 @@
 	<br/>
 	
 	<?php
-		$id = $_GET['patient'];
+		$id = $patient;
 		$href = "patientupdate.php?patient=". $id;
 		echo "<a href='".$href. "'><button type='submit' class='submit'>Update Information</button></a>"
 	?>
