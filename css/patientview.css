@@ -5,12 +5,28 @@
 .box, button {
 	margin-bottom: 30px;
 }
-.fullContent {
+.almostfullContent {	/* for the details of patients and parents, condition and allery */
     width: -webkit-calc(100% - 270px);
     width: calc(100% - 270px);
 	min-width: 800px;
 }
-
+.rightContent {		/* for check up history */
+    width: -webkit-calc(100% - 520px);
+    width: calc(100% - 520px);
+    min-width: 500px;
+}
+.leftContent {
+    width: 500px;	/* for check up  */
+    min-width: 500px;						
+}
+.fullContent {	/* for nurse observation */
+	margin-top: 430px;
+	width: 100%;
+	min-width: 900px;
+}
+.clear {
+	clear: both;
+}
 /* 
 	Patient Details
 						*/
@@ -102,26 +118,183 @@
 /* 
 	Condition,Allergy
 						*/
-.box table {
-	border-collapse:collapse;
+.condiAllergy table {
 	text-align: center;
 	width: 100%
 }
-.box table td, .box table th{
-	border: 1px solid #c9c9c9;
+.condiAllergy table td, .condiAllergy table th{
 	padding: 12px 0 12px 0;
 }
-.box table th{
+.condiAllergy table th{
 	padding: 8px 0 8px 0;
-	background-color: #f78272;
-	color: white;
 }
-.box table .first {
+.condiAllergy table .first {
 	width: 275px;
 }
-.box table .second {
+.condiAllergy table .second {
 	width: 150px;
 }
-.box table .third {
+.condiAllergy table .third {
 	width: 325px;
+}
+
+
+
+
+/* 
+		Check Up
+						*/	
+.checkup .boxContent{
+	padding: 0;
+}
+.checkup table {
+	width: 100%;
+}
+.checkup table td  {
+	padding-left: 15px; 
+	width: 50%;
+	border: none;
+}
+
+.checkup table .leftSide {
+	border-right: 1px solid #c9c9c9;
+}
+.checkup table .topSide {
+	border-bottom: 1px solid #c9c9c9;
+}
+.checkup .title {
+	font-size: 14px;
+}
+.checkup .value,  .checkup .value2line{
+	margin: 0 0 0  40px;
+	color: green;
+}
+.checkup .value {
+	font-size: 39px;
+}
+.checkup .value2line {
+	font-size: 30px;
+}
+.checkup .time {
+	float: right;
+	color: #c9c9c9;
+	font-size: 12px;
+	margin-right: 20px;
+}
+
+
+
+
+/* 
+	Check Up History
+						*/	
+
+.checkupHistory table td{
+	text-align: center;
+	border: 1px solid #c9c9c9;
+	height: 40px;
+}
+.checkupHistory table th{
+	padding: 10px 0 10px 0;
+}
+.checkupHistory .date {
+	width: 18%;
+}
+.checkupHistory .temp {
+	width: 12%;
+}
+.checkupHistory .bp {
+	width: 29%;
+}
+.checkupHistory .es {
+	width: 29%;
+}
+.checkupHistory .bs {
+	width: 12%;
+}
+
+
+
+/* 
+	Nurse Observation
+						*/	
+.observationNavbar {
+	margin-top: 7px;
+	position: absolute;
+	border: none;
+	left: 40px;
+	width: 200px;
+	list-style: none;
+}
+.observationNavbar ul {
+	list-style-type: none;
+	padding: 0;
+}
+.observationNavbar li {
+	color: #333;
+	height: 50px;
+	width: 180px;
+	border-right: none;
+	border-bottom: 1px solid white;
+	padding-top: 10px;
+	padding-left: 20px;
+	font-size: 14px;
+	font-weight: 700;
+	background-color: #FFE4E1;
+}
+.observationNavbar li:hover {
+	background-color: #EED5D2;
+	color: #717171;
+	cursor: pointer;
+}
+.observationNavbar .active {
+	background-color: #f78272;
+}
+.observationNavbar .active:hover {
+	background-color: #f78272;
+	color: #333;
+	cursor: default;
+}
+.observationTimeStamp {
+	font-size: 11px;
+	font-weight: 300;
+	float: right;
+	margin-top: 20px;
+	margin-right: 5px;
+}
+.NurseObservation .boxContent{
+	height: 800px;
+}
+.observation {
+	margin-top: 20px;
+	margin-left: 200px;
+	border: 1px solid #c9c9c9;
+	width: -webkit-calc(100% - 320px);
+    width: calc(100% - 320px);
+	border-top-right-radius: 10px;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	height: 700px;
+	padding: 25px;
+	position: absolute;
+	display: none;
+}
+#o1 {
+	display: block;
+}
+.observationTitle {
+	font-size: 20px;
+	font-weight: 700;
+}
+.observation .observationTimeStamp {
+	margin-top: 30px;
+	font-size: 14px;
+}
+.observationContent {
+	margin-top: 40px;
+	font-size: 15px;
+	font-weight: 400;
+	line-height: 2.2;
+	height: 630px;
+	overflow: scroll;
 }

@@ -68,6 +68,9 @@
 }
 .topTen table td {
 	border-bottom: 1px solid #BDBDBD;
+	border-left: none;
+	border-right: none;
+	border-top: none;
 	height: 30px;
 	padding: 0;
 }

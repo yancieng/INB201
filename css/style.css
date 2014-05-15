@@ -5,7 +5,6 @@
 html, body{
 	margin : 0;
 	padding : 0;
-/*	height: 100%;*/
 	background-color: #ecf0f1;
 	background-image: url('../images/panelbg.jpg');
 	background-repeat: repeat-y;
@@ -209,4 +208,16 @@ select:focus{
 	outline:0;
 	color: #555;
 	font-weight: normal;
+}
+
+
+table {
+	border-collapse:collapse;
+}
+table td {
+	border: 1px solid #c9c9c9;
+}
+table th{
+	background-color: #f78272;
+	color: white;
 }

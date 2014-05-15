@@ -100,7 +100,7 @@ function select(p){
 	<!-- This DIV is for the 'Top 10 patients' -->
 	<div class="box topTen">
 		<section class="boxTitle">
-			<p>Top 10 patients</p>
+			<p>10 most recent patients</p>
 		</section>
 		<section class="boxContent">
 		
