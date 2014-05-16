@@ -69,6 +69,7 @@ function observation(numb){
 					// current date used for "# days ago" calculations
 					$current = new DateTime(date('Y-m-d H:i:s'));
 
+					// Height
 					$sql = "SELECT height, timestamp
 							FROM checkups
 							WHERE patientID = {$patient}
@@ -80,6 +81,7 @@ function observation(numb){
 					$heightTime = $timestamp->diff($current);
 					$heightTime = $heightTime->days;
 
+					// Weight
 					$sql = "SELECT weight, timestamp
 							FROM checkups
 							WHERE patientID = {$patient}
@@ -91,6 +93,7 @@ function observation(numb){
 					$weightTime = $timestamp->diff($current);
 					$weightTime = $weightTime->days;
 
+					// Blood Type
 					$sql = "SELECT bloodType, timestamp
 							FROM checkups
 							WHERE patientID = {$patient}
@@ -272,13 +275,111 @@ function observation(numb){
 				<p>Check up</p>
 			</section>
 			<section class="boxContent">
+				<?php
+					// sql for getting the last checkup details (similar to the one above for height, weight, etc.)
+					// temperature, bloodPressure, pulse, eyeSightLeft, eyeSightRight, bloodSugar
+					// $current should still work?
+					// need to check for no checkup data too
+
+					// Temperature
+					$sql = "SELECT temperature, timestamp
+							FROM checkups
+							WHERE patientID = {$patient}
+							AND temperature IS NOT NULL";
+					$result = mysql_query($sql);
+					$row = mysql_fetch_assoc($result);
+					$temperature = $row['temperature'];
+					$timestamp = new DateTime($row['timestamp']);
+					$temperatureTime = $timestamp->diff($current);
+					$temperatureTime = $temperatureTime->days;
+
+					// Blood Pressure
+					$sql = "SELECT bloodPressure, timestamp
+							FROM checkups
+							WHERE patientID = {$patient}
+							AND bloodPressure IS NOT NULL";
+					$result = mysql_query($sql);
+					$row = mysql_fetch_assoc($result);
+					$bloodPressure = $row['bloodPressure'];
+					$timestamp = new DateTime($row['timestamp']);
+					$bloodPressureTime = $timestamp->diff($current);
+					$bloodPressureTime = $bloodPressureTime->days;
+
+					// Pulse
+					$sql = "SELECT pulse, timestamp
+							FROM checkups
+							WHERE patientID = {$patient}
+							AND pulse IS NOT NULL";
+					$result = mysql_query($sql);
+					$row = mysql_fetch_assoc($result);
+					$pulse = $row['pulse'];
+					$timestamp = new DateTime($row['timestamp']);
+					//$pulseTime = $timestamp->diff($current);
+					//$pulseTime = $pulseTime->days;
+
+					// Eye Sight, Left
+					$sql = "SELECT eyeSightLeft, timestamp
+							FROM checkups
+							WHERE patientID = {$patient}
+							AND eyeSightLeft IS NOT NULL";
+					$result = mysql_query($sql);
+					$row = mysql_fetch_assoc($result);
+					$eyeSightLeft = $row['eyeSightLeft'];
+					$timestamp = new DateTime($row['timestamp']);
+					$eyeSightLeftTime = $timestamp->diff($current);
+					$eyeSightLeftTime = $eyeSightLeftTime->days;
+
+					// Eye Sight, right
+					$sql = "SELECT eyeSightRight, timestamp
+							FROM checkups
+							WHERE patientID = {$patient}
+							AND eyeSightRight IS NOT NULL";
+					$result = mysql_query($sql);
+					$row = mysql_fetch_assoc($result);
+					$eyeSightRight = $row['eyeSightRight'];
+					$timestamp = new DateTime($row['timestamp']);
+					//$eyeSightRightTime = $timestamp->diff($current);
+					//$eyeSightRightTime = $eyeSightRightTime->days;
+
+					// Blood Sugar
+					$sql = "SELECT bloodSugar, timestamp
+							FROM checkups
+							WHERE patientID = {$patient}
+							AND bloodSugar IS NOT NULL";
+					$result = mysql_query($sql);
+					$row = mysql_fetch_assoc($result);
+					$bloodSugar = $row['bloodSugar'];
+					$timestamp = new DateTime($row['timestamp']);
+					$bloodSugarTime = $timestamp->diff($current);
+					$bloodSugarTime = $bloodSugarTime->days;
+
+					// Defensive code for no checkup data
+					if ($temperature == '') {
+						$temperature = '?';
+					}
+					if ($bloodPressure == '') {
+						$bloodPressure = '?/?';
+					}
+					if ($pulse == '') {
+						$pulse = '?';
+					}
+					if ($eyeSightLeft == '') {
+						$eyeSightLeft = '?';
+					}
+					if ($eyeSightRight == '') {
+						$eyeSightRight = '?';
+					}
+					if ($bloodSugar == '') {
+						$bloodSugar = '?';
+					}
+				?>
 				<table>
 					<tr>
 						<td class="leftSide topSide">
 							<div class="checkupBox">
 								<p class="title">Temperature:
-									<p class="value">38.5°C
-										<p class="time">2 days ago</p>
+									<p class="value"><?php echo $temperature; ?>°C
+										<p class="time"><?php echo $temperatureTime; ?> days ago</p>
 									</p>
 								</p>
 							</div>
@@ -286,8 +387,8 @@ function observation(numb){
 						<td class="topSide">
 							<div class="checkupBox">
 								<p class="title">Blood Pressure: 
-									<p class="value2line">120/81 <br/> pluse 71
-										<p class="time">2 days ago</p>
+									<p class="value2line"><?php echo $bloodPressure; ?><br/> pulse <?php echo $pulse; ?>
+										<p class="time"><?php echo $bloodPressureTime; ?> days ago</p>
 									</p>
 								</p>
 							</div>
@@ -297,8 +398,8 @@ function observation(numb){
 						<td class="leftSide">
 							<div class="checkupBox">
 								<p class="title">Eye sight:
-									<p class="value2line"> Left: -1 <br/> Right: -1.5
-										<p class="time">2 days ago</p>
+									<p class="value2line"> Left: <?php echo $eyeSightLeft; ?><br/> Right: <?php echo $eyeSightRight; ?>
+										<p class="time"><?php echo $eyeSightLeftTime; ?> days ago</p>
 									</p>
 								</p>
 							</div>
@@ -306,8 +407,8 @@ function observation(numb){
 						<td>
 							<div class="checkupBox">
 								<p class="title">Blood Sugar:
-									<p class="value">75
-										<p class="time">2 days ago</p>
+									<p class="value"><?php echo $bloodSugar; ?>
+										<p class="time"><?php echo $bloodSugarTime; ?> days ago</p>
 									</p>
 								</p>
 							</div>
@@ -338,7 +439,64 @@ function observation(numb){
 						<th class="es">Eye sight</th>
 						<th class="bs">Blood Sugar</th>
 					</tr>
-					<tr>
+					<?php
+						// sql for getting last 6 checkups data
+						$sql = "SELECT timestamp, temperature, bloodPressure, pulse, eyeSightLeft, eyeSightRight, bloodSugar
+								FROM checkups
+								WHERE patientID = {$patient}
+								ORDER BY timestamp DESC";
+						$result = mysql_query($sql);
+
+
+						// .. how am I gonna code filling in the rest with blank rows?
+						for ($i = 0; $i <= 5; $i++) {
+							if ($row = mysql_fetch_assoc($result)) {
+								// format timestamp
+								$timestamp = date("d/m/Y", strtotime($row['timestamp']));
+
+								echo "
+								<tr>
+									<td>{$timestamp}</td>
+								";
+
+								// include detection for blank fields
+								if ($row['temperature'] != '') {
+									echo "<td>{$row['temperature']}°C</td>";
+								} else {
+									echo "<td></td>";
+								}
+								if ($row['bloodPressure'] != '') {
+									echo "<td>{$row['bloodPressure']}, pulse {$row['pulse']}</td>";
+								} else {
+									echo "<td></td>";
+								}
+								if ($row['eyeSightLeft'] != '') {
+									echo "<td>left: {$row['eyeSightLeft']}, right: {$row['eyeSightRight']}</td>";
+								} else {
+									echo "<td></td>";
+								}
+								if ($row['bloodSugar'] != '') {
+									echo "<td>{$row['bloodSugar']}</td>";
+								} else {
+									echo "<td></td>";
+								}
+								echo "
+								</tr>
+								";
+							} else {
+								echo "
+								<tr>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+								";
+							}
+						}
+					?>
+					<!--<tr>
 						<td>18/2/2014</td>
 						<td>37°C</td>
 						<td>120/80, pluse 70</td>
@@ -379,7 +537,7 @@ function observation(numb){
 						<td></td>
 						<td></td>
 						<td></td>
-					</tr>
+					</tr>-->
 				</table>
 			</div>
 		</div>
@@ -395,7 +553,99 @@ function observation(numb){
 				<p>Nurse Observation</p>
 			</div>
 			<div class="boxContent">
-				<div class="observationNavbar">
+				<?php
+					// sql to get all? nurse observations for the patient
+					$sql = "SELECT timestamp, observationTitle, observation, firstName, lastName
+							FROM observations INNER JOIN staff USING (staffID)
+							WHERE patientID = {$patient}
+							ORDER BY timestamp DESC";
+					$result = mysql_query($sql);
+					$count = mysql_num_rows($result);
+
+					// if no observations, have one saying so
+					if ($count > 0) {
+
+						// Observation Navbar
+
+						// first observation
+						$i = 1;
+						$row = mysql_fetch_assoc($result);
+						$timestamp = date("d/m/Y", strtotime($row['timestamp']));
+
+						echo "
+						<div class='observationNavbar'>
+							<ul>
+								<li class='active' id='n{$i}' onclick='observation(\"{$i}\")'>
+										{$row['observationTitle']}
+										<span class='observationTimeStamp'>{$timestamp}</span>
+								</li>
+						";
+
+						// following observations
+						while ($row = mysql_fetch_assoc($result)) {
+							$i++;
+							$timestamp = date("d/m/Y", strtotime($row['timestamp']));
+							echo "
+								<li id='n{$i}' onclick='observation(\"{$i}\")'>
+										{$row['observationTitle']}
+										<span class='observationTimeStamp'>{$timestamp}</span>
+								</li>
+							";
+						}
+
+						echo "
+							</ul>
+						</div>
+						";
+
+						// Observation Details
+
+						// re-do sql? otherwise fetch_assoc is all messed up
+						$sql = "SELECT timestamp, observationTitle, observation, firstName, lastName
+								FROM observations INNER JOIN staff USING (staffID)
+								WHERE patientID = {$patient}
+								ORDER BY timestamp DESC";
+						$result = mysql_query($sql);
+						$i = 0;
+
+						while ($row = mysql_fetch_array($result)) {
+							$i++;
+							$timestamp = date("d/m/Y", strtotime($row['timestamp']));
+							echo "
+							<div class='observation' id='o{$i}'>
+								<p class='observationTitle'>
+									{$row['observationTitle']}
+									<span class='observationTimeStamp'>Recorded by: Nurse {$row['firstName']} {$row['lastName']}, {$timestamp}</span>
+								</p>
+								<p class='observationContent'>
+									{$row['observation']}
+								</p>
+							</div>
+							";
+						}
+
+					} else {
+						echo "
+						<div class='observationNavbar'>
+							<ul>
+								<li class='active' id='n1' onclick='observation('1')'>						
+										No Observations
+										<span class='observationTimeStamp'></span>				
+								</li>
+							</ul>			
+						</div>
+						<div class='observation' id='o1'>
+							<p class='observationTitle'>
+								No Observations
+								<span class='observationTimeStamp'></span>
+							</p>
+							<p class='observationContent'>
+							</p>
+						</div>
+						";
+					}
+				?>
+				<!--<div class="observationNavbar">
 					<ul>
 						<li class="active" id="n1" onclick='observation("1")'>						
 								Bad Appetite
@@ -459,7 +709,7 @@ function observation(numb){
 					<p class="observationContent">
 						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum consequuntur exercitationem expedita. Suscipit ducimus voluptatem consequuntur accusamus odio? Ex, animi, dolor nemo reprehenderit voluptatum odit explicabo sunt illum obcaecati molestias quos at nisi laborum similique atque. Facilis, autem, amet, iste, porro sapiente quae omnis minus aliquid qui quam laborum harum velit consectetur libero culpa quia doloremque fugit. Voluptatum, voluptates, consectetur, illum recusandae beatae aspernatur voluptatibus accusamus repellat laborum nam nobis perspiciatis dolor eum cupiditate optio odio illo culpa iusto doloribus ipsum ut accusantium ullam nesciunt facere sit! Consectetur, maiores beatae magnam eum doloremque praesentium officia illo doloribus incidunt unde repellendus quis quas consequatur amet totam natus tempore perferendis officiis quod reprehenderit dolorum repudiandae iure impedit nulla sunt fuga magni! Placeat, explicabo, eum facilis atque natus neque odio sed quisquam. Fugiat, suscipit, aut totam voluptatum esse necessitatibus nemo ratione voluptates nobis debitis consequuntur perspiciatis eius explicabo non animi! Aliquid, ipsa, dolorem, eum nemo consequatur expedita ratione nostrum enim laudantium dolore temporibus soluta quaerat omnis est nulla praesentium assumenda distinctio. Voluptas, assumenda, eligendi, quae totam temporibus doloremque porro minus autem illum accusantium perspiciatis eos aliquam iusto similique voluptates impedit atque sequi illo quod itaque molestias vero quisquam voluptatibus sint consequuntur! Cum, fuga, vitae, illum soluta earum est a quam ratione nemo nobis molestias laboriosam tempora ducimus ullam cumque animi modi sint. Odio id molestias aliquid esse praesentium dignissimos maxime officiis ad et soluta! Dolorum, qui, pariatur deserunt eaque eligendi temporibus debitis consequuntur dignissimos accusamus ea saepe beatae animi non aspernatur porro maiores illo quis laborum harum similique omnis ipsum tempora voluptates ut nisi obcaecati cumque nostrum dolore minus ullam dicta modi voluptatibus in quidem accusantium vitae a ipsa. Vel, velit, aperiam delectus ducimus sunt repellat autem soluta quos unde molestiae. Quaerat, maiores doloribus ratione velit assumenda est architecto necessitatibus error dignissimos libero.
 					</p>
-				</div>
+				</div>-->
 			</div>
 		</div>
 	</div> <!-- End of full content -->
@@ -473,7 +723,7 @@ function observation(numb){
 		$href = "patientupdate.php?patient=". $id;
 
 		switch ($_SESSION['title']) {
-			case 1: $update = 'Update Checkup';
+			case 1: $update = 'Update Checkup / Conditions / Allergies';
 				break;
 			case 2: $update = 'Update Observations';
 				break;
@@ -486,6 +736,9 @@ function observation(numb){
 				break;
 		}
 
-		echo "<a href='".$href. "'><button type='submit' class='submit'>$update</button></a>"
+		echo "<a href='".$href. "'><button type='submit' class='submit'>{$update}</button></a>"
 	?>
 	
+<?php
+	include '../inc/footer.php';
+?>
