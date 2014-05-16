@@ -20,7 +20,7 @@
 	if ($count == 1)
 	{
 		// set session, redirect to home page
-		$_SESSION['user'] = $staffID;
+		$_SESSION['user'] = $row['staffID'];
 		$_SESSION['name'] = $row['firstName'];
 		$_SESSION['lname'] = $row['lastName'];
 		$_SESSION['title'] = $row['title'];

@@ -110,8 +110,8 @@ function observation(numb){
 
 				<div class="picDetails">
 					<ul>
-						<li class="tall"><img src="../images/height.png" alt=""><p class="info"><span class="infoLine1"><?php echo $height; ?></span><br/> <?php echo $heightTime; ?> days ago</p></li>
-						<li class="weight"><img src="../images/weight.png" alt=""><p class="info"><span class="infoLine1"><?php echo $weight; ?></span><br/> <?php echo $weightTime; ?> days ago</p></li>
+						<li class="tall"><img src="../images/height.png" alt=""><p class="info"><span class="infoLine1"><?php echo $height; ?> cm</span><br/> <?php echo $heightTime; ?> days ago</p></li>
+						<li class="weight"><img src="../images/weight.png" alt=""><p class="info"><span class="infoLine1"><?php echo $weight; ?> kg</span><br/> <?php echo $weightTime; ?> days ago</p></li>
 						<li class="blood"><img src="../images/blood.png" alt=""><p class="info"><span class="infoLine1"><?php echo $bloodType; ?></span><br/> <?php echo $bloodTypeTime; ?> days ago</p></li>
 					</ul>
 				</div>
@@ -187,7 +187,8 @@ function observation(numb){
 						// get patient's current condition listings, else blank table?
 						$sql = "SELECT `condition`, conditionDate, medication
 								FROM conditions
-								WHERE patientID = {$patient}";
+								WHERE patientID = {$patient}
+								AND `condition` IS NOT NULL";
 						$result = mysql_query($sql);
 						$count = mysql_num_rows($result);
 
@@ -236,7 +237,8 @@ function observation(numb){
 						// get patient's current condition listings, else blank table?
 						$sql = "SELECT allergy, allergyDate, allergySeverity
 								FROM conditions
-								WHERE patientID = {$patient}";
+								WHERE patientID = {$patient}
+								AND allergy IS NOT NULL";
 						$result = mysql_query($sql);
 						$count = mysql_num_rows($result);
 
@@ -611,6 +613,8 @@ function observation(numb){
 						while ($row = mysql_fetch_array($result)) {
 							$i++;
 							$timestamp = date("d/m/Y", strtotime($row['timestamp']));
+							// to display newline characters when pulling text from database
+							$observation = nl2br($row['observation']);
 							echo "
 							<div class='observation' id='o{$i}'>
 								<p class='observationTitle'>
@@ -618,7 +622,7 @@ function observation(numb){
 									<span class='observationTimeStamp'>Recorded by: Nurse {$row['firstName']} {$row['lastName']}, {$timestamp}</span>
 								</p>
 								<p class='observationContent'>
-									{$row['observation']}
+									{$observation}
 								</p>
 							</div>
 							";

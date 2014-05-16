@@ -76,11 +76,11 @@
 						</div>
 						<div>
 							<label for='height'>Height: </label>
-							<input type='text' class='textInput' name='height' />
+							<input type='text' class='textInput' name='height' /> cm
 						</div>
 						<div>
 							<label for='weight'>Weight: </label>
-							<input type='text' class='textInput' name='weight' />
+							<input type='text' class='textInput' name='weight' /> kg
 						</div>
 						<div>
 							<label for='bloodType'>Blood Type: </label>
@@ -105,23 +105,149 @@
 			</div>
 			";
 
-			// Add / edit(?) conditions
+			// Add Condition
 			echo "
 			<div class='box'>
 				<section class='boxTitle'>
+					<p>Add Condition</p>
+				</section>
+				<section class='boxContent'>
+					<form action='conditionaddprocess.php' method='post'>
+						<div>
+							<label for='condition'>Condition: </label>
+							<input type='text' class='textInput' name='condition' required />
+						</div>
+						<div>
+							<label for='medication'>Medication: </label>
+							<input type='text' class='textInput' name='medication' required />
+						</div>
+						<div>
+							<input type='hidden' name='patientID' value='{$patient}' />
+							<button type='submit' class='submit'>Add Information</button>
+						</div>
+					</form>
+				</section>
 			</div>
 			";
 
-			// Add / edit(?) allergies
+			// Add Allergy
 			echo "
+			<div class='box'>
+				<section class='boxTitle'>
+					<p>Add Allergy</p>
+				</section>
+				<section class='boxContent'>
+					<form action='allergyaddprocess.php' method='post'>
+						<div>
+							<label for='allergy'>Allergy: </label>
+							<input type='text' class='textInput' name='allergy' required />
+						</div>
+						<div>
+							<label for='severity'>Severity: </label>
+							<input type='text' class='textInput' name='severity' required />
+						</div>
+						<div>
+							<input type='hidden' name='patientID' value='{$patient}' />
+							<button type='submit' class='submit'>Add Information</button>
+						</div>
+					</form>
+				</section>
+			</div>
+			";
 
+			// Edit conditions: maybe an editable table?
+			echo "
+			<div class='box'>
+				<section class='boxTitle'>
+					<p>Edit Conditions</p>
+				</section>
+				<section class='boxContent'>
+					<form action='conditioneditprocess.php' method='post'>
+
+					</form>
+				</section>
+			</div>
+			";
+
+			// Edit allergies: similar to conditions?
+			echo "
+			<div class='box'>
+				<section class='boxTitle'>
+					<p>Edit Allergies</p>
+				</section>
+				<section class='boxContent'>
+					<form action='allergyeditprocess.php' method='post'>
+
+					</form>
+				</section>
+			</div>
 			";
 			break;
 		case 2: // Nurse
 
 			// Add new observation
 			echo "
+			<div class='box'>
+				<section class='boxTitle'>
+					<p>Add Observation</p>
+				</section>
+				<section class='boxContent'>
+					<form action='observationaddprocess.php' method='post'>
+						<div>
+							<label for='observationTitle'>Title: </label>
+							<input type='text' class='textInput' name='observationTitle' required />
+						</div>
+						<div>
+							<label for='observation'>Observation: </label>
+							<input type='text' class='textInput' name='observation' required />
+						</div>
+						<div>
+							<input type='hidden' name='patientID' value='{$patient}' />
+							<input type='hidden' name='staffID' value='{$_SESSION['user']}' />
+							<button type='submit' class='submit'>Add Observation</button>
+						</div>
+					</form>
+				</section>
+			</div>
+			";
 
+			// Edit observations (how?)
+			echo "
+			";
+			// sql for getting all observations (by user), have an edit form for each? woah
+			$sql = "SELECT observationID, observationTitle, observation
+					FROM observations
+					WHERE patientID = {$patient}
+					AND staffID = {$_SESSION['user']}";
+			$result = mysql_query($sql);
+
+			while ($row = mysql_fetch_array($result)) {
+				echo "
+				<div class='box'>
+					<section class='boxTitle'>
+						<p>Edit Observations</p>
+					</section>
+					<section class='boxContent'>
+						<form action='observationeditprocess.php' method='post'>
+							<div>
+								<label for='observationTitle'>Title: </label>
+								<input type='text' class='textInput' name='observationTitle' value='{$row['observationTitle']}' required />
+							</div>
+							<div>
+								<label for='observation'>Observation: </label>
+								<textarea name='observation' required>{$row['observation']}</textarea>
+							</div>
+							<div>
+								<input type='hidden' name='observationID' value='{$row['observationID']}' />
+								<input type='hidden' name='patientID' value='{$patient}' />
+								<button type='submit' class='submit'>Edit Observation</button>
+							</div>
+						</form>
+					</section>
+				</div>
+				";
+			}
+			echo "
 			";
 			break;
 		case 3: // Medical Technician

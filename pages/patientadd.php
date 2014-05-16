@@ -37,23 +37,6 @@
 						<label for="DOB">*DOB: </label>
 						<input type="text" name="DOB" id="DOB" placeholder="YYYY-MM-DD" required />
 					</div>
-					<div>
-						<label for="bloodType">*Blood Type: </label>
-						<select name="bloodType">
-							<option>O+</option>
-							<option>O-</option>
-							<option>A+</option>
-							<option>A-</option>
-							<option>B+</option>
-							<option>B-</option>
-							<option>AB+</option>
-							<option>AB-</option>
-						</select>
-					</div>
-					<div>
-						<label for="previousNotes">Previous Notes: </label>
-						<textarea name="previousNotes" id="previousNotes" cols="32" rows="5" placeholder="Any previous notes from other hospitals or doctors go here."></textarea>
-					</div>
 
 					<!-- needs to be an area for guardian information or "use guardian already in database" or w/e -->
 					<!-- Would have

@@ -23,13 +23,11 @@
 		$_SESSION['patienterror'] = 'You need to fill out ALL required fields.';
 		header ("Location: patientadd.php");
 	} else {
-		$sql = "INSERT INTO patients (firstName, lastName, DOB, bloodType, previousNotes)
+		$sql = "INSERT INTO patients (firstName, lastName, DOB)
 				VALUES (
 					'{$firstName}',
 					'{$lastName}',
-					'{$DOB}',
-					'{$bloodType}',
-					'{$previousNotes}'
+					'{$DOB}'
 				)";
 
 		if (mysql_query($sql)) {		
