@@ -23,6 +23,7 @@
 		$_SESSION['user'] = $staffID;
 		$_SESSION['name'] = $row['firstName'];
 		$_SESSION['lname'] = $row['lastName'];
+		$_SESSION['title'] = $row['title'];
 		$_SESSION['spec'] = $row['specialties'];
 		$_SESSION['photo'] = $row['photo'];
 		header("Location: home.php");

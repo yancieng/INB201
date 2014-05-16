@@ -471,8 +471,21 @@ function observation(numb){
 	<?php
 		$id = $patient;
 		$href = "patientupdate.php?patient=". $id;
-		echo "<a href='".$href. "'><button type='submit' class='submit'>Update Information</button></a>"
+
+		switch ($_SESSION['title']) {
+			case 1: $update = 'Update Checkup';
+				break;
+			case 2: $update = 'Update Observations';
+				break;
+			case 3: $update = 'Upload X-ray';
+				break;
+			default: $update = 'Update Information';
+				echo "<div id='pdf'>
+					<button type='button' class='submit' onclick='documentFromHTML()'>Export information to PDF</button>
+			 	</div>";
+				break;
+		}
+
+		echo "<a href='".$href. "'><button type='submit' class='submit'>$update</button></a>"
 	?>
-	<div id="pdf">
-		<button type="button" class='submit' onclick="documentFromHTML()">Export information to PDF</button>
- 	</div>
+	

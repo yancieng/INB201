@@ -26,7 +26,17 @@
 	}
 ?>
 
-<!-- Page used to update patient info and guardian -->
+<!-- Page used to update patient info, showing only what each role can edit
+	Doctor: checkup update and conditions / allergies
+	Nurse: edit, add new observation
+	Receptionist: edit patient info, edit / add / assign guardian to patient
+	Admin: ??
+-->
+
+<?php
+	// check for user's role
+	// switch ($_SESSION['title']) {}
+?>
 
 <!-- Patient Info -->
 <div class = "leftContent">
