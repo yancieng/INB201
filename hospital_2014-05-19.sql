@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.1.12
+-- version 4.1.6
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 15, 2014 at 12:21 PM
--- Server version: 5.5.36
--- PHP Version: 5.4.27
+-- Generation Time: May 19, 2014 at 05:44 AM
+-- Server version: 5.6.16
+-- PHP Version: 5.5.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 --
 -- Database: `hospital`
 --
-CREATE DATABASE IF NOT EXISTS `hospital` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+CREATE DATABASE IF NOT EXISTS `hospital` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `hospital`;
 
 -- --------------------------------------------------------
@@ -43,12 +43,12 @@ INSERT INTO `beds` (`bedNumber`, `patientID`) VALUES
 ('A103-01', NULL),
 ('A104-01', NULL),
 ('B101-02', NULL),
-('B102-01', NULL),
-('B102-02', NULL),
 ('B101-01', 0000001),
 ('A101-01', 0000002),
 ('A102-01', 0000007),
-('R302-02', 0000011);
+('B102-02', 0000010),
+('R302-02', 0000011),
+('B102-01', 0000025);
 
 -- --------------------------------------------------------
 
@@ -60,7 +60,9 @@ CREATE TABLE IF NOT EXISTS `checkups` (
   `checkupID` int(7) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `temperature` varchar(10) DEFAULT NULL,
   `bloodPressure` varchar(10) DEFAULT NULL,
-  `eyeSight` varchar(10) DEFAULT NULL,
+  `pulse` varchar(10) DEFAULT NULL,
+  `eyeSightLeft` varchar(10) DEFAULT NULL,
+  `eyeSightRight` varchar(10) DEFAULT NULL,
   `bloodSugar` varchar(10) DEFAULT NULL,
   `height` varchar(10) DEFAULT NULL,
   `weight` varchar(10) DEFAULT NULL,
@@ -69,17 +71,19 @@ CREATE TABLE IF NOT EXISTS `checkups` (
   `patientID` int(7) unsigned zerofill NOT NULL,
   PRIMARY KEY (`checkupID`),
   KEY `patientID` (`patientID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `checkups`
 --
 
-INSERT INTO `checkups` (`checkupID`, `temperature`, `bloodPressure`, `eyeSight`, `bloodSugar`, `height`, `weight`, `bloodType`, `timestamp`, `patientID`) VALUES
-(0000001, NULL, NULL, NULL, NULL, '114 cm', '26 kg', 'A-', '2014-05-12 02:31:25', 0000011),
-(0000002, NULL, NULL, NULL, NULL, '120 cm', NULL, NULL, '2014-05-07 14:00:00', 0000001),
-(0000003, NULL, NULL, NULL, NULL, NULL, '39 kg', NULL, '2014-05-08 14:00:00', 0000001),
-(0000004, NULL, NULL, NULL, NULL, NULL, NULL, 'O+', '2014-05-09 14:00:00', 0000001);
+INSERT INTO `checkups` (`checkupID`, `temperature`, `bloodPressure`, `pulse`, `eyeSightLeft`, `eyeSightRight`, `bloodSugar`, `height`, `weight`, `bloodType`, `timestamp`, `patientID`) VALUES
+(0000001, NULL, NULL, NULL, NULL, NULL, NULL, '114', '26', 'A-', '2014-05-16 02:56:33', 0000011),
+(0000002, NULL, NULL, NULL, NULL, NULL, NULL, '120', NULL, NULL, '2014-05-16 02:56:33', 0000001),
+(0000003, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '39', NULL, '2014-05-16 02:56:33', 0000001),
+(0000004, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'O+', '2014-05-09 14:00:00', 0000001),
+(0000005, '38.5', '120/81', '71', '-1', '-1.5', '75', NULL, NULL, NULL, '2014-05-16 01:05:53', 0000011),
+(0000006, '39', '120/80', '65', '+1', '-1', '80', '140', '50', 'A-', '2014-05-16 02:56:33', 0000002);
 
 -- --------------------------------------------------------
 
@@ -99,14 +103,16 @@ CREATE TABLE IF NOT EXISTS `conditions` (
   `patientID` int(7) unsigned zerofill NOT NULL,
   PRIMARY KEY (`conditionID`),
   KEY `patientID` (`patientID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `conditions`
 --
 
 INSERT INTO `conditions` (`conditionID`, `condition`, `conditionDate`, `medication`, `allergy`, `allergyDate`, `allergySeverity`, `timestamp`, `patientID`) VALUES
-(0000001, 'Bad rash', '2014-05-15', 'Ointment', 'Pollen', '2014-05-15', 'Not too bad', '2014-05-15 09:36:13', 0000011);
+(0000001, 'Bad rash', '2014-05-15', 'Ointment', 'Pollen', '2014-05-15', 'Not Serious', '2014-05-15 09:36:13', 0000011),
+(0000003, 'Inflamed Nostrils', '2014-05-16', 'None', NULL, NULL, NULL, '2014-05-16 03:10:02', 0000002),
+(0000004, NULL, NULL, NULL, 'Pollen', '2014-05-16', 'Really bad', '2014-05-16 03:12:57', 0000002);
 
 -- --------------------------------------------------------
 
@@ -119,31 +125,114 @@ CREATE TABLE IF NOT EXISTS `guardians` (
   `firstName` varchar(40) NOT NULL,
   `lastName` varchar(40) NOT NULL,
   `title` enum('Mr.','Mrs.','Miss','Ms.') NOT NULL,
-  `relation` varchar(40) NOT NULL,
   `contactNumber` varchar(15) NOT NULL,
   `email` varchar(60) DEFAULT NULL,
   `address` varchar(255) NOT NULL,
   `photo` varchar(200) NOT NULL DEFAULT '<img src="../images/none.png" alt="Guardian Picture">',
   PRIMARY KEY (`guardianID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=97 ;
 
 --
 -- Dumping data for table `guardians`
 --
 
-INSERT INTO `guardians` (`guardianID`, `firstName`, `lastName`, `title`, `relation`, `contactNumber`, `email`, `address`, `photo`) VALUES
-(0000001, 'Benson', 'Usang', 'Mr.', 'Father', '01421234', 'bensonusa@hotmail.com', '1105/82 Vendor St, Brisbane, 4000', '<img src="../images/none.png" alt="Guardian Picture">'),
-(0000002, 'Sheree', 'Ackbar', 'Mrs.', 'Mother', '48535726', 'ackbars@gmail.com', '5 Brinkley St', '<img src="../images/none.png" alt="Guardian Picture">'),
-(0000003, 'Reanna', 'Adams', 'Mrs.', 'Mother', '45105705', 'adamsR@hotmail.com', '12 Ella Ct', '<img src="../images/none.png" alt="Guardian Picture">'),
-(0000004, 'Rona', 'Attinborough', 'Miss', 'Mother', '46128638', 'rattinborough@gmail.com', '11 Lokyer Pl', '<img src="../images/none.png" alt="Guardian Picture">'),
-(0000005, 'Cassandra', 'Barnes', 'Ms.', 'Mother', '44572338', 'barnseyc@gmail.com', '5 Chapple St', '<img src="../images/none.png" alt="Guardian Picture">'),
-(0000006, 'Staci', 'Brown', 'Miss', 'Mother', '47284802', 'missbrown@hotmail.com', '19 Elford Pl', '<img src="../images/none.png" alt="Guardian Picture">'),
-(0000007, 'Archibald', 'Carson', 'Mr.', 'Grandfather', '44783001', 'carsona@gmail.com', '17 Kiandra Pl', '<img src="../images/none.png" alt="Guardian Picture">'),
-(0000008, 'Nicholas', 'Craig', 'Mr.', 'Father', '48783468', 'NCraig@hotmail.com', '16 Timbury Way', '<img src="../images/none.png" alt="Guardian Picture">'),
-(0000009, 'Yolanda', 'Coleman', 'Mrs.', 'Mother', '44641922', 'ycolemany@hotmail.com', '4 Kallandra St', '<img src="../images/none.png" alt="Guardian Picture">'),
-(0000010, 'Lauraine', 'Davids', 'Mrs.', 'Grandmother', '43403132', 'Lavids@hotmail.com', '6 St Albans Rd', '<img src="../images/none.png" alt="Guardian Picture">'),
-(0000011, 'Katherine', 'Erickson', 'Mrs.', 'Mother', '45620853', 'ericksonk@gmail.com', '25 Karanya St', '<img src="../images/none.png" alt="Guardian Picture">'),
-(0000012, 'William', 'Mitchell', 'Mr.', '', '44315415', 'witchell@hotmail.com', '12 Oldland St', '<img src="../images/none.png" alt="Guardian Picture">');
+INSERT INTO `guardians` (`guardianID`, `firstName`, `lastName`, `title`, `contactNumber`, `email`, `address`, `photo`) VALUES
+(0000001, 'Benson', 'Usang', 'Mr.', '01421234', 'bensonusa@hotmail.com', '1105/82 Vendor St, Brisbane, 4000', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000002, 'Sheree', 'Ackbar', 'Mrs.', '48535726', 'ackbars@gmail.com', '5 Brinkley St', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000003, 'Reanna', 'Adams', 'Mrs.', '45105705', 'adamsR@hotmail.com', '12 Ella Ct', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000004, 'Rona', 'Attinborough', 'Miss', '46128638', 'rattinborough@gmail.com', '11 Lokyer Pl', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000005, 'Cassandra', 'Barnes', 'Ms.', '44572338', 'barnseyc@gmail.com', '5 Chapple St', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000006, 'Staci', 'Brown', 'Miss', '47284802', 'missbrown@hotmail.com', '19 Elford Pl', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000007, 'Archibald', 'Carson', 'Mr.', '44783001', 'carsona@gmail.com', '17 Kiandra Pl', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000008, 'Nicholas', 'Craig', 'Mr.', '48783468', 'NCraig@hotmail.com', '16 Timbury Way', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000009, 'Yolanda', 'Coleman', 'Mrs.', '44641922', 'ycolemany@hotmail.com', '4 Kallandra St', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000010, 'Lauraine', 'Davids', 'Mrs.', '43403132', 'Lavids@hotmail.com', '6 St Albans Rd', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000011, 'Katherine', 'Erickson', 'Mrs.', '45620853', 'ericksonk@gmail.com', '25 Karanya St', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000012, 'William', 'Mitchell', 'Mr.', '44315415', 'witchell@hotmail.com', '12 Oldland St', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000013, 'Robert', 'Smith', 'Mr.', '45223754', 'Robsmith@hotmail.com', '13 Vuji Ct', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000014, 'John', 'Rodriguez', 'Mr.', '46824491', 'JRodriguez@hotmail.com', '17 St Albans Rd', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000015, 'Lisa', 'Perez', 'Mrs.', '47313845', 'LPerez@hotmail.com', '22 Karanya St', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000016, 'Louise', 'Griffin', 'Mrs.', '47224855', 'LGriffin@hotmail.com', '1 Hastings St', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000017, 'Phillip', 'Kelly', 'Mr.', '43403430', 'Kellyp@hotmail.com', '3 Pankina St', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000018, 'Nigel', 'Adams', 'Mr.', '47911137', 'Nadams@hotmail.com', '5 Tilanus St', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000019, 'Sandy', 'Collins', 'Mrs.', '45244652', 'SCollins@gmail.com', '7 McBride St', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000020, 'James', 'Cook', 'Mr.', '47223485', 'CJames@hotmail.com', '3 Perisher Ct', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000021, 'Lucy', 'Howard', 'Mrs.', '48100132', 'HowardL@gmail.com', '24 Ella Ct', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000022, 'Robert', 'Brown', 'Mr.', '43954794', 'BrownR@hotmail.com', '2 Cromwell Ct', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000023, 'John', 'Brown', 'Mr.', '48792280', 'JBrown@hotmail.com', '7 Minaret Way', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000024, 'Bruce', 'Brown', 'Mr.', '47312711', 'BBrown@hotmail.com', '11 Vuji Ct', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000025, 'Kaitlyn', 'Brown', 'Mrs.', '48851773', 'KBrown@Gmail.com', '19 Perisher Ct', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000026, 'Christian', 'Evans', 'Mr.', '46582281', 'CEvans@hotmail.com', '29 Buchan St', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000027, 'Hubert', 'Farmsworth', 'Mr.', '48929804', 'Goodnewseveryone@hotmail.com', '13 Hastings St', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000028, 'Abigail', 'Fennell', 'Mrs.', '43973893', 'AbbyFennel@hotmail.com', '17 Panika St', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000029, 'William', 'Ferrel', 'Mr.', '47359063', 'wferrel@hotmail.com', '12 Boyes Ct', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000030, 'Robert', 'Floyd', 'Mr.', '4449868', 'RFloyd@hotmail.com', '14 Adams St', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000031, 'Michael', 'Fox', 'Mr.', '44649204', 'MikeFox@gmail.com', '4 Marsh St', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000032, 'Phillip', 'Fry', 'Mr.', '43235030', 'TheFuturamaGuy@hotmail.com', '8 Mott St', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000033, 'Peter', 'Gabriel', 'Mr.', '46919959', 'GPeter@hotmail.com', '9 Thorley St', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000034, 'Guy', 'Gardner', 'Mr.', '48240616', 'GGardner@hotmail.com', '2 Tilanus St', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000035, 'Natasha', 'Gerard', 'Miss', '43010762', 'NGerard@hotmail.com', '23 McBride St', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000036, 'Tina', 'Godfrey', 'Mrs.', '47669116', 'TGodfrey@hotmail.com', '24 Camara St', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000037, 'Isabel', 'Hammond', 'Mrs.', '47006331', 'IHammond@hotmail.com', '17 Elmiatta Ave', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000038, 'Rachel', 'Hawkin', 'Miss', '48793432', 'RHawkin@hotmail.com', '13 Baralga St', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000039, 'Stephen', 'Hendrix', 'Mr.', '44865180', 'SHendrix@hotmail.com', '14 Finlay Ct', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000040, 'Charlotte', 'Hitchcock', 'Mrs.', '46153996', 'CHitchcock@hotmail.com', '5 Cavill Ave', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000041, 'Oliver', 'Hogan', 'Mr.', '46353427', 'OHogan@hotmail.com', '2 Wheeler Ct', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000042, 'William', 'Holliday', 'Mr.', '46867202', 'WHolliday@hotmail.com', '6 Milgate Cres', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000043, 'Peter', 'Hooker', 'Mr.', '46268782', 'PHooker@hotmail.com', '11 Sheldon Pl', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000044, 'Caleb', 'Howard', 'Mr.', '44299052', 'CHoward@hotmail.com', '7 Sullivan Pl', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000045, 'Jessica', 'Hunt', 'Mrs.', '45962890', 'JHunt@hotmail.com', '4 Shepard Ct', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000046, 'Peter', 'Jackson', 'Mr.', '46845374', 'PJackson@hotmail.com', '9 Courtney St', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000047, 'Bridget', 'Jeffries', 'Mrs.', '43807793', 'BJeffries@hotmail.com', '5 Fenner St', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000048, 'John', 'Johnson', 'Mr.', '45000592', 'JJohnson@hotmail.com', '7 Durack St', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000049, 'Martha', 'Kent', 'Mrs.', '48066864', 'MarthaK@hotmail.com', '2 Brent St', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000050, 'Mario', 'Kirby', 'Mr.', '46749892', 'MKirby@hotmail.com', '1 Keesing Rd', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000051, 'Quentin', 'Lance', 'Mr.', '45309881', 'QLance@hotmail.com', '3 Klewarra Boulevard', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000052, 'Jacob', 'Lawrence', 'Mr.', '46208804', 'JLawrence@hotmail.com', '23 Coorabin Ave', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000053, 'Victoria', 'Lincoln', 'Mrs.', '47930042', 'VLincoln@hotmail.com', '7 Smith Rd', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000054, 'Riley', 'Luthor', 'Mr.', '48973145', 'RLuthor@hotmail.com', '5 Edinburgh Ave', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000055, 'James', 'Macdonald', 'Mr.', '44489363', 'JMacdonald@hotmail.com', '16 Music Ct', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000056, 'Zelda', 'Mackay', 'Mrs.', '43454321', 'ZMackay@hotmail.com', '6 Gibbard St', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000057, 'Nicholas', 'Markham', 'Mr.', '47615602', 'NMarkham@hotmail.com', '8 Smith Rd', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000058, 'Harold', 'Mathews', 'Mr.', '45272648', 'HaroldM@hotmail.com', '6 Brinkley Ct', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000059, 'Kaitlyn', 'McCallister', 'Mrs.', '46373624', 'KMcCallister@hotmail.com', '13 Ella Ct', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000060, 'Robert', 'Mendez', 'Mr.', '46157441', 'RMendez@hotmail.com', '12 Lokyer Pl', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000061, 'Archibald', 'Mills', 'Mr.', '45917386', 'Amills@hotmail.com', '20 Elford Pl', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000062, 'Michelle', 'Monroe', 'Miss', '46602942', 'MMonroe@hotmail.com', '3 Cromwell Ct', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000063, 'Christopher', 'Morrison', 'Mr.', '46115473', 'CMorrison@hotmail.com', '8 Minaret Way', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000064, 'Nolan', 'Murphy', 'Mr.', '46925187', 'NMurphy@hotmail.com', '12 Vuji Ct', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000065, 'Morgan', 'Nelson', 'Mr.', '45116161', 'NMorgan@hotmail.com', '20 Perisher Ct', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000066, 'Allen', 'Nesbit', 'Mr.', '48735123', 'AllanN@hotmail.com', '18 Kiandra Pl', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000067, 'John', 'Newman', 'Mr.', '43780992', 'JNewman@hotmail.com', '17 Timburry Way', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000068, 'Jill', 'Nielson', 'Mrs.', '45887442', 'JNielson@hotmail.com', '5 Kallanda St', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000069, 'Stacey', 'Nixon', 'Miss', '47526407', 'SNixon@hotmail.com', '7 St Albans Rd', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000070, 'Gertrude', 'Nye', 'Mr.', '45330810', 'GertrudeN@hotmail.com', '26 Karanya St', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000071, 'Nolan', 'Odonnell', 'Mr.', '46612313', 'NOdonnel@hotmail.com', '30 Buchan St', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000072, 'Phillip', 'Olson', 'Mr.', '43573926', 'POlson@hotmail.com', '14 Hastings St', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000073, 'Norman', 'Osborne', 'Mr.', '48593855', 'NOsborne@hotmail.com', '18 Pankina St', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000074, 'Sharron', 'Osullivan', 'Mrs.', '46121372', 'SOsullivan@hotmail.com', '13 Boyes Ct', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000075, 'Luke', 'Owens', 'Mr.', '43075133', 'LukeOwens@hotmail.com', '15 Adams St', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000076, 'Bruce', 'Page', 'Mr.', '48945635', 'BruceP@hotmail.com', '5 Marsh St', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000077, 'Caleb', 'Parks', 'Mr.', '48748298', 'CalebP@hotmail.com', '9 Mott St', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000078, 'May', 'Peterson', 'Mrs.', '48050073', 'MPeterson@hotmail.com', '10 Thorley St', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000079, 'Percy', 'Phillips', 'Mr.', '47701935', 'PPhillips@hotmail.com', '3 Tilanus St', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000080, 'Natasha', 'Pratt', 'Mrs.', '47259369', 'NPratt@hotmail.com', '24 McBride St', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000081, 'Lucas', 'Reagan', 'Mr.', '46540880', 'LReagan@hotmail.com', '25 Camara St', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000082, 'Olivia', 'Richardson', 'Mrs.', '45030629', 'ORichardson@hotmail.com', '18 Elmiatta Ave', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000083, 'Nathan', 'Roberts', 'Mr.', '46697543', 'NRoberts@hotmail.com', '14 Baralga St', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000084, 'Laurel', 'Sanderson', 'Miss', '44797018', 'LSanderson@hotmail.com', '15 Finlay Ct', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000085, 'John', 'Shepherd', 'Mr.', '46189590', 'JShepard@hotmail.com', '6 Cavill Ave', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000086, 'Bruce', 'Smith', 'Mr.', '48687548', 'BSmith@hotmail.com', '3 Wheeler Circuit', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000087, 'Bridget', 'Smith', 'Mrs.', '48710022', 'BridgetSmith@hotmail.com', '7 Milgate Cres', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000088, 'Christina', 'Smith', 'Mrs.', '48695032', 'CSmith@hotmail.com', '12 Sheldon Pl', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000089, 'Robert', 'Stark', 'Mr.', '48262965', 'Iron_Mans_Dad@hotmail.com', '8 Sullivan Pl', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000090, 'Margaret', 'Stephenson', 'Mrs.', '48436694', 'MStephenson@hotmail.com', '5 Sheperd Circuit', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000091, 'Peter', 'Thompson', 'Mr.', '46166419', 'PThomson@hotmail.com', '10 Courtney St', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000092, 'Timothy', 'Turner', 'Mr.', '46132145', 'TimmyTurner@hotmail.com', '6 Fenner St', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000093, 'Alfred', 'Wayne', 'Mr.', '43854349', 'AlfredWayne@hotmail.com', '8 Durack St', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000094, 'Christian', 'West', 'Mr.', '48110289', 'ChristianWest@hotmail.com', '3 Brent St', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000095, 'Samantha', 'Worthington', 'Miss', '45918126', 'SamWorthington@hotmail.com', '2 Keesing Rd', '<img src="../images/none.png" alt="Guardian Picture">'),
+(0000096, 'Margaret', 'Xavier', 'Mrs.', '46891036', 'MargeX@gmail.com', '4 Klewarra Boulevard', '<img src="../images/none.png" alt="Guardian Picture">');
 
 -- --------------------------------------------------------
 
@@ -156,10 +245,8 @@ CREATE TABLE IF NOT EXISTS `notes` (
   `datetimeWritten` datetime NOT NULL,
   `note` text NOT NULL,
   `image` varchar(255) DEFAULT NULL,
-  `patientID` int(7) unsigned zerofill NOT NULL,
   `staffID` int(4) unsigned zerofill NOT NULL,
   PRIMARY KEY (`noteID`),
-  KEY `patientID_idx` (`patientID`),
   KEY `staffID_idx` (`staffID`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
@@ -167,8 +254,8 @@ CREATE TABLE IF NOT EXISTS `notes` (
 -- Dumping data for table `notes`
 --
 
-INSERT INTO `notes` (`noteID`, `datetimeWritten`, `note`, `image`, `patientID`, `staffID`) VALUES
-(0000001, '2014-03-18 15:52:00', 'This is just a test.', NULL, 0000001, 0001);
+INSERT INTO `notes` (`noteID`, `datetimeWritten`, `note`, `image`, `staffID`) VALUES
+(0000001, '2014-03-18 15:52:00', 'This is just a test. Test. Test.', '', 0001);
 
 -- --------------------------------------------------------
 
@@ -186,14 +273,15 @@ CREATE TABLE IF NOT EXISTS `observations` (
   PRIMARY KEY (`observationID`),
   KEY `patientID` (`patientID`),
   KEY `staffID` (`staffID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `observations`
 --
 
 INSERT INTO `observations` (`observationID`, `timestamp`, `observationTitle`, `observation`, `patientID`, `staffID`) VALUES
-(0000001, '2014-03-12 14:00:00', 'Bad Appetite', 'Patient wouldn''t eat his dinner. Told me to "shove it". How rude!', 0000011, 0003);
+(0000001, '2014-03-12 14:00:00', 'Bad Appetite', 'Patient wouldn''t eat his dinner. Told me to "shove it". How rude!', 0000011, 0003),
+(0000002, '2014-05-16 03:49:13', 'Box is too large', 'It''s huge! How long are nurse''s observations supposed to be?\r\n\r\nEDIT: [REDACTED]\r\n\r\nEDIT EDIT: I got it to work! Huzzah.', 0000002, 0003);
 
 -- --------------------------------------------------------
 
@@ -311,7 +399,7 @@ INSERT INTO `patients` (`patientID`, `firstName`, `lastName`, `DOB`, `photo`) VA
 (0000094, 'Adam', 'Wayne', '1999-09-03', '<img src="../images/none.png" alt="Patient Picture">'),
 (0000095, 'Burce', 'West', '1999-09-03', '<img src="../images/none.png" alt="Patient Picture">'),
 (0000096, 'Helen', 'Worthington', '1999-11-07', '<img src="../images/none.png" alt="Patient Picture">'),
-(0000097, 'Charles', 'Xavier', '1999-12-17', '<img src="../images/none.png" alt="Patient Picture">');
+(0000097, 'Charles', 'Xavier', '1999-12-16', '<img src="../images/none.png" alt="Patient Picture">');
 
 -- --------------------------------------------------------
 
@@ -333,7 +421,14 @@ CREATE TABLE IF NOT EXISTS `patients_guardians` (
 INSERT INTO `patients_guardians` (`patientID`, `guardianID`, `relation`) VALUES
 (1, 12, 'Father'),
 (2, 10, 'Not related'),
+(3, 14, 'Brother'),
+(4, 15, 'Mother'),
+(5, 15, 'Mother'),
+(6, 16, 'Uncle'),
 (7, 3, 'Mother'),
+(8, 18, 'Mother'),
+(9, 19, 'Father'),
+(10, 20, 'Grandmother'),
 (11, 1, 'Father'),
 (12, 2, 'Mother'),
 (13, 3, 'Mother'),
@@ -342,14 +437,89 @@ INSERT INTO `patients_guardians` (`patientID`, `guardianID`, `relation`) VALUES
 (16, 5, 'Mother'),
 (17, 6, 'Mother'),
 (18, 6, 'Mother'),
+(18, 21, 'Father'),
 (19, 6, 'Mother'),
+(19, 22, 'Grandfather'),
 (20, 6, 'Mother'),
+(20, 23, 'Father'),
 (21, 6, 'Mother'),
+(21, 24, 'Aunt'),
 (22, 7, 'Grandfather'),
 (23, 8, 'Father'),
 (24, 9, 'Mother'),
 (25, 10, 'Grandmother'),
-(26, 11, 'Mother');
+(26, 11, 'Mother'),
+(27, 26, 'Father'),
+(28, 27, 'Uncle'),
+(29, 28, 'Mother'),
+(30, 29, 'Father'),
+(31, 30, 'Brother'),
+(32, 31, 'Father'),
+(33, 32, 'Brother'),
+(34, 33, 'Father'),
+(35, 34, 'Uncle'),
+(36, 35, 'Sister'),
+(37, 36, 'Mother'),
+(38, 37, 'Grandmother'),
+(39, 38, 'Sister'),
+(40, 39, 'Grandfather'),
+(41, 40, 'Aunt'),
+(42, 41, 'Father'),
+(43, 42, 'Father'),
+(44, 43, 'Brother'),
+(45, 44, 'Father'),
+(46, 45, 'Grandmother'),
+(47, 46, 'Father'),
+(48, 47, 'Mother'),
+(49, 48, 'Uncle'),
+(50, 49, 'Grandmother'),
+(51, 50, 'Brother'),
+(52, 51, 'Father'),
+(53, 52, 'Grandfather'),
+(54, 53, 'Aunt'),
+(55, 54, 'Brother'),
+(56, 55, 'Father'),
+(57, 56, 'Grandmother'),
+(58, 57, 'Father'),
+(59, 58, 'Brother'),
+(60, 59, 'Aunt'),
+(61, 60, 'Father'),
+(62, 61, 'Grandfather'),
+(63, 62, 'Sister'),
+(64, 63, 'Grandfather'),
+(65, 64, 'Father'),
+(66, 65, 'Uncle'),
+(67, 66, 'Brother'),
+(68, 67, 'Father'),
+(69, 68, 'Grandmother'),
+(70, 69, 'Sister'),
+(71, 70, 'Grandmother'),
+(72, 71, 'Father'),
+(73, 72, 'Brother'),
+(74, 73, 'Father'),
+(75, 74, 'Aunt'),
+(76, 75, 'Grandfather'),
+(77, 76, 'Father'),
+(78, 77, 'Uncle'),
+(79, 78, 'Aunt'),
+(80, 79, 'Father'),
+(81, 80, 'Grandmother'),
+(82, 81, 'Father'),
+(83, 82, 'Grandmother'),
+(84, 83, 'Father'),
+(85, 84, 'Sister'),
+(86, 85, 'Brother'),
+(87, 86, 'Father'),
+(88, 87, 'Grandmother'),
+(89, 88, 'Aunt'),
+(90, 89, 'Father'),
+(91, 90, 'Mother'),
+(92, 91, 'Grandfather'),
+(93, 92, 'Uncle'),
+(94, 93, 'Grandmother'),
+(95, 94, 'Father'),
+(96, 95, 'Sister'),
+(97, 96, 'Mother');
 
 -- --------------------------------------------------------
 
@@ -374,7 +544,7 @@ CREATE TABLE IF NOT EXISTS `payments` (
 --
 
 INSERT INTO `payments` (`paymentID`, `admissionDate`, `releaseDate`, `cost`, `paymentMethod`, `rebuff`, `patientID`) VALUES
-(0000001, '2014-03-02', '2014-03-18', '$2000.00', 'MasterCard', '$1000.00', 0000010);
+(0000001, '2014-03-02', '2014-03-18', '$2000.00', 'Cash Payment', '$1000.00', 0000010);
 
 -- --------------------------------------------------------
 
@@ -396,7 +566,7 @@ CREATE TABLE IF NOT EXISTS `schedules` (
 --
 
 INSERT INTO `schedules` (`scheduleID`, `scheduledFor`, `scheduledTime`, `patientID`) VALUES
-(0000001, 'MRI. Room 2W04.', '2014-03-10 15:00:00', 0000002);
+(0000001, 'Doctor''s Checkup. Room 2W04.', '2014-03-10 15:00:00', 0000002);
 
 -- --------------------------------------------------------
 
@@ -426,7 +596,7 @@ INSERT INTO `staff` (`staffID`, `firstName`, `lastName`, `title`, `password`, `s
 (0003, 'Lynne', 'Peterson', 2, '781e5116a1e14a34eada50159d589e690c81ec4c5063115ea1f10b99441d5b94', NULL, '<img src="../images/none.png" alt="Profile picture" />'),
 (0004, 'Glenn', 'Cobb', 4, 'c3bca14c650063bb88e5a82f757c11defaf4ea06c18368c9c9b70c5d77933dd3', NULL, '<img src="../images/none.png" alt="Profile picture" />'),
 (0005, 'Ora', 'Elliot', 5, '4194d1706ed1f408d5e02d672777019f4d5385c766a8c6ca8acba3167d36a7b9', NULL, '<img src="../images/none.png" alt="Profile picture" />'),
-(0009, 'Mr', 'Admin', 5, '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', NULL, '<img src="../images/none.png" alt="Profile picture" />');
+(0009, 'Iamthe', 'Law', 5, '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', '', '<img src="../images/none.png" alt="Profile picture" />');
 
 -- --------------------------------------------------------
 
@@ -477,8 +647,7 @@ ALTER TABLE `conditions`
 -- Constraints for table `notes`
 --
 ALTER TABLE `notes`
-  ADD CONSTRAINT `notesStaffID` FOREIGN KEY (`staffID`) REFERENCES `staff` (`staffID`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `notesPatientID` FOREIGN KEY (`patientID`) REFERENCES `patients` (`patientID`) ON DELETE NO ACTION ON UPDATE CASCADE;
+  ADD CONSTRAINT `notesStaffID` FOREIGN KEY (`staffID`) REFERENCES `staff` (`staffID`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
 -- Constraints for table `observations`

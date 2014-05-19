@@ -221,3 +221,12 @@ table th{
 	background-color: #f78272;
 	color: white;
 }
+
+/* other */
+#records th, #records td {
+	padding: 2px;
+}
+#records img {
+	max-width: 50px;
+	max-height: 50px;
+}

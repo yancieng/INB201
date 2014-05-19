@@ -11,58 +11,61 @@
 	include '../inc/panel.php';
 ?>
 
-<section>
-	<div class="container">
-		<?php
-			// if error in staffaddprocess, show message
-			if (isset($_SESSION['stafferror'])) {
-				echo "<p id='error'>" . $_SESSION['stafferror'] . "</p>";
-				unset($_SESSION['stafferror']);
-			}
-		?>
-		<div class="login">
-			<!-- Staff Form -->
-			<h1>Add Staff</h1>
+<script>activePanel("m3");</script>
+<link type="text/css" rel="stylesheet" href="../css/patientupdate.css" media="screen" /> 
+
+<?php
+	// if error in staffaddprocess, show message
+	if (isset($_SESSION['stafferror'])) {
+		echo "<p id='error'>" . $_SESSION['stafferror'] . "</p>";
+		unset($_SESSION['stafferror']);
+	}
+?>
+<div class="leftContent">
+	<div class="box">
+		<!-- Staff Form -->
+		<section class="boxTitle">
+			<p>Add Staff</p>
+		</section>
+		<section class="boxContent">
 			<p>Fields marked with a * are required.</p>
-			<div id="staff">
-				<form action="staffaddprocess.php" method="post">
-					<div>
-						<label for="firstName">*First Name: </label>
-						<input type="text" name="firstName" required />
-					</div>
-					<div>
-						<label for="lastName">*Last Name: </label>
-						<input type="text" name="lastName" required />
-					</div>
-					<div>
-						<label for="staffTitle">*Title: </label>
-						<select name="staffTitle" >
-							<option value="1">Doctor</option>
-							<option value="2">Nurse</option>
-							<option value="3">Medical Technician</option>
-							<option value="4">Receptionist</option>
-							<option value="5">Administrator</option>
-						</select>
-					</div>
-					<div>
-						<label for="password">*Password: </label>
-						<input type="password" name="password" required />
-					</div>
-					<div>
-						<label for="specialties">Specialties: </label>
-						<input type="text" name="specialties" />
-					</div>
-					<div>
-						<label for="photo">Photo: </label>
-						<input type="file" name="photo" accept="image/*" />
-					</div>
-					<div>
-						<button type="submit" class="submit">Add Information to Database</button>
-					</div>
-				</form>
-			</div>
-		</div>
+			<form action="staffaddprocess.php" method="post">
+				<div>
+					<label for="firstName">*First Name: </label>
+					<input type="text" class="textInput" name="firstName" required />
+				</div>
+				<div>
+					<label for="lastName">*Last Name: </label>
+					<input type="text" class="textInput" name="lastName" required />
+				</div>
+				<div>
+					<label for="staffTitle">*Title: </label>
+					<select name="staffTitle" >
+						<option value="1">Doctor</option>
+						<option value="2">Nurse</option>
+						<option value="3">Medical Technician</option>
+						<option value="4">Receptionist</option>
+						<option value="5">Administrator</option>
+					</select>
+				</div>
+				<div>
+					<label for="password">*Password: </label>
+					<input type="password" class="textInput" name="password" required />
+				</div>
+				<div>
+					<label for="specialties">Specialties: </label>
+					<input type="text" class="textInput" name="specialties" />
+				</div>
+				<div>
+					<label for="photo">Photo: </label>
+					<input type="file" name="photo" accept="image/*" />
+				</div>
+				<div>
+					<button type="submit" class="submit">Add Information to Database</button>
+				</div>
+			</form>
+		</section>
 	</div>
-</section>
+</div>
 
  

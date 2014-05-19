@@ -193,6 +193,14 @@
 	background-color: #ffc313;
 }
 
+#m2a .mask {
+	background-color: #ccc313;
+}
+
+#m2b .mask {
+	background-color: #99c313;
+}
+
 #m3 .mask {
 	background-color: #8cc260;
 }

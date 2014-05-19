@@ -177,51 +177,124 @@ function load() {
 
 <div class="extent"> </div>
 
- <a href="home.php" id="m1">
- <div class="layer effect">
- 	<div class="mask"></div>
- 	<div class="icon">
- 		<img src="../images/i1s.png" alt="dashboardICON" />
- 	</div>
- 	<div class="lable">
- 		<span>Dashboard</span>
- 	</div>
- </div></a>
+<?php
+// admin has more functions than the rest of the roles, so
+if ($_SESSION['title'] == 5) {
+	echo "
+	<a href='home.php' id='m1'>
+	<div class='layer effect'>
+		<div class='mask'></div>
+	 	<div class='icon'>
+	 		<img src='../images/i1s.png' alt='dashboardICON' />
+	 	</div>
+	 	<div class='lable'>
+	 		<span>Dashboard</span>
+	 	</div>
+	</div></a>
 
-  <a href="patientsfinder.php" id="m2">
-  <div class="layer effect">
- 	<div class="mask"></div>
- 	<div class="icon">
- 		<img src="../images/i2s.png" alt="patientsICON" />
- 	</div>
- 	<div class="lable">
- 		<span>Patients Finder</span>
- 	</div>
- </div></a>
+	<a href='patientsfinder.php' id='m2'>
+	<div class='layer effect'>
+	 	<div class='mask'></div>
+	 	<div class='icon'>
+	 		<img src='../images/i2s.png' alt='patientsICON' />
+	 	</div>
+	 	<div class='lable'>
+	 		<span>Patients Finder</span>
+	 	</div>
+	</div></a>
 
-  <a href="schedule.php" id="m3">
-   <div class="layer effect">
- 	<div class="mask"></div>
- 	<div class="icon">
- 		<img src="../images/i3s.png" alt="scheduleICON" />
- 	</div>
- 	<div class="lable">
- 		<span>Schedule</span>
- 	</div>
- </div></a>
+	<a href='staffmanager.php' id='m2a'>
+	<div class='layer effect'>
+	 	<div class='mask'></div>
+	 	<div class='icon'>
+	 		<img src='../images/i2s.png' alt='patientsICON' />
+	 	</div>
+	 	<div class='lable'>
+	 		<span>Staff Manager</span>
+	 	</div>
+	</div></a>
 
-    <a href="notes.php" id="m4">
-    	<div class="layer effect" id="m4">
- 			<div class="mask"></div>
- 			<div class="icon">
- 				<img src="../images/i4s.png" alt="noteICON" />
- 			</div>
- 			<div class="lable">
- 				<span>Notes</span>
- 			</div>
- 		</div>
- 	</a>
+	<a href='recordsmenu.php' id='m2b'>
+	<div class='layer effect'>
+	 	<div class='mask'></div>
+	 	<div class='icon'>
+	 		<img src='../images/i2s.png' alt='patientsICON' />
+	 	</div>
+	 	<div class='lable'>
+	 		<span>Records Menu</span>
+	 	</div>
+	</div></a>
 
+	<a href='schedule.php' id='m3'>
+	<div class='layer effect'>
+	 	<div class='mask'></div>
+	 	<div class='icon'>
+	 		<img src='../images/i3s.png' alt='scheduleICON' />
+	 	</div>
+	 	<div class='lable'>
+	 		<span>Schedule</span>
+	 	</div>
+	</div></a>
+
+	<a href='notes.php' id='m4'>
+	<div class='layer effect' id='m4'>
+		<div class='mask'></div>
+		<div class='icon'>
+			<img src='../images/i4s.png' alt='noteICON' />
+		</div>
+		<div class='lable'>
+			<span>Notes</span>
+		</div>
+	</div></a>
+	";
+} else {
+	echo "
+	<a href='home.php' id='m1'>
+	<div class='layer effect'>
+		<div class='mask'></div>
+	 	<div class='icon'>
+	 		<img src='../images/i1s.png' alt='dashboardICON' />
+	 	</div>
+	 	<div class='lable'>
+	 		<span>Dashboard</span>
+	 	</div>
+	</div></a>
+
+	<a href='patientsfinder.php' id='m2'>
+	<div class='layer effect'>
+	 	<div class='mask'></div>
+	 	<div class='icon'>
+	 		<img src='../images/i2s.png' alt='patientsICON' />
+	 	</div>
+	 	<div class='lable'>
+	 		<span>Patients Finder</span>
+	 	</div>
+	</div></a>
+
+	<a href='schedule.php' id='m3'>
+	<div class='layer effect'>
+	 	<div class='mask'></div>
+	 	<div class='icon'>
+	 		<img src='../images/i3s.png' alt='scheduleICON' />
+	 	</div>
+	 	<div class='lable'>
+	 		<span>Schedule</span>
+	 	</div>
+	</div></a>
+
+	<a href='notes.php' id='m4'>
+	<div class='layer effect' id='m4'>
+		<div class='mask'></div>
+		<div class='icon'>
+			<img src='../images/i4s.png' alt='noteICON' />
+		</div>
+		<div class='lable'>
+			<span>Notes</span>
+		</div>
+	</div></a>
+	";
+}
+?>
 
 </div>
 
