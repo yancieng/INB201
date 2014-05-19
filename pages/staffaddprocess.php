@@ -7,7 +7,6 @@
 	$title = $_POST['staffTitle'];
 	$password = mysql_escape_string($_POST['password']);
 	$specialties = mysql_escape_string($_POST['specialties']);
-	$photo = $_FILES['photo']['name'];
 
 	// if optional fields are blank, make them NULL
 	if ($specialties == '') {
@@ -15,9 +14,9 @@
 	}
 
 	// if photo field is blank, set default photo path
-	if ($photo == '') {
-		$photo = "<img src='../images/none.png' alt='Profile picture' />')";
-	} else {
+	if ((isset($_FILES['photo']['name'])) && ($_FILES['photo']['name'] != '')) {
+		$photo = $_FILES['photo']['name'];
+
 		// photo renaming and location
 		$randomDigit = rand(0000,9999);
 		$newPhotoName = ($randomDigit . "_" . $photo);
@@ -26,7 +25,7 @@
 		$tmp = explode('.', $_FILES['photo']['name']);
 		$extension = end($tmp);
 
-		$photo = $target;
+		$photo = '<img src="' . $target . '" alt="Profile picture" />';
 
 		// if photo is not an allowed extension, kickback with error
 		if (!
@@ -40,6 +39,8 @@
 			$_SESSION['stafferror'] = "The file you uploaded is not valid. Photos must be in either .gif, .jpg, or .png format.";
 			header ("Location: staffadd.php");
 		}
+	} else {
+		$photo = '<img src="../images/none.png" alt="Profile picture" />';
 	}
 
 	// if required fields are blank, redirect to staffadd.php with error

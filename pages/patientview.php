@@ -59,8 +59,8 @@ function observation(numb){
 			<section class="boxContent">
 				<div class="textDetails">
 					<?php echo $row['photo']; ?>
-					<p><span class="PatientName"><?php echo $row['firstName']." ". $row['lastName']; ?></span></br>
-						<?php echo $year; ?> Years Old</br>
+					<p><span class="PatientName" id="patientName"><?php echo $row['firstName']." ". $row['lastName']; ?></span></br>
+						<span id="patientAge"><?php echo $year; ?> Years Old</span></br>
 						(p<?php echo $row['patientID']; ?>)</br>
 						Bed: <?php echo $bed ?></p>
 				</div>
@@ -110,9 +110,9 @@ function observation(numb){
 
 				<div class="picDetails">
 					<ul>
-						<li class="tall"><img src="../images/height.png" alt=""><p class="info"><span class="infoLine1"><?php echo $height; ?> cm</span><br/> <?php echo $heightTime; ?> days ago</p></li>
-						<li class="weight"><img src="../images/weight.png" alt=""><p class="info"><span class="infoLine1"><?php echo $weight; ?> kg</span><br/> <?php echo $weightTime; ?> days ago</p></li>
-						<li class="blood"><img src="../images/blood.png" alt=""><p class="info"><span class="infoLine1"><?php echo $bloodType; ?></span><br/> <?php echo $bloodTypeTime; ?> days ago</p></li>
+						<li class="tall"><img src="../images/height.png" alt=""><p class="info"><span class="infoLine1" id="patientHeight"><?php echo $height; ?> cm</span><br/> <?php echo $heightTime; ?> days ago</p></li>
+						<li class="weight"><img src="../images/weight.png" alt=""><p class="info"><span class="infoLine1" id="patientWeight"><?php echo $weight; ?> kg</span><br/> <?php echo $weightTime; ?> days ago</p></li>
+						<li class="blood"><img src="../images/blood.png" alt=""><p class="info"><span class="infoLine1" id="patientBloodType"><?php echo $bloodType; ?></span><br/> <?php echo $bloodTypeTime; ?> days ago</p></li>
 					</ul>
 				</div>
 			</section>

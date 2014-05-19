@@ -22,25 +22,27 @@
 
 <!-- Script for PDF conversion -->
 <script>
-     function documentFromHTML() {
-         var doc = new jsPDF('p', 'in', 'letter');
-         var source = document.getElementById('details');
-         var specialElementHandlers = {
-             '#bypassme': function(element, renderer) {
-                 return true;
-             }
-         };
+    function documentFromHTML() {
+        var doc = new jsPDF('p', 'in', 'letter');
+        var source = document.getElementById('details');
+        var specialElementHandlers = {
+            '#bypassme': function(element, renderer) {
+                return true;
+            }
+        };
 
-         doc.fromHTML(
-             source, // HTML string or DOM elem ref.
-             0.5,    // x coord
-             0.5,    // y coord
-             {
-                 'width': 7.5, // max width of content on PDF
-                 'elementHandlers': specialElementHandlers
-             });
+        doc.fromHTML(
+            source, // HTML string or DOM elem ref.
+            0.5,    // x coord
+            0.5,    // y coord
+            {
+                'width': 7.5, // max width of content on PDF
+                'elementHandlers': specialElementHandlers
+            });
 
-        doc.output('dataurl');
+        // need to manually construct the PDF. put a bunch of id="__" on the fields you need between hospitals?
+
+        doc.output('dataurlnewwindow');
         console.log(doc);
     }
 </script>

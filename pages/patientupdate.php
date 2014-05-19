@@ -33,7 +33,7 @@
 	Doctor: checkup update and conditions / allergies
 	Nurse: edit, add new observation
 	Receptionist: edit patient info, edit / add / assign guardian to patient
-	Admin: ??
+	Admin: display 'record' table for all rows relating to that patient? with edit/delete
 -->
 
 <div class = "leftContent">
@@ -183,6 +183,7 @@
 			</div>
 			";
 			break;
+
 		case 2: // Nurse
 
 			// Add new observation
@@ -250,6 +251,7 @@
 			echo "
 			";
 			break;
+
 		case 3: // Medical Technician
 
 			// Upload X-ray
@@ -257,6 +259,7 @@
 
 			";
 			break;
+
 		case 4: // Receptionist
 
 			// Patient Info
@@ -445,9 +448,53 @@
 			</div>
 			";
 			break;
-		default: // Admin
-			echo "
 
+		case 5: // Administrator
+
+			/* Ignore.
+
+			echo "<div id='record'><table>";
+			// sql to get all database rows that relate to patient
+
+			// beds
+			$sql = "SELECT bedNumber
+					FROM beds
+					WHERE patientID = {$patient}";
+			$result = mysql_query($sql);
+			$count = mysql_num_rows($result);
+
+			if ($count > 0) {
+				$row = mysql_fetch_assoc($result);
+				if ($row['bedNumber'] = '') {
+					$bed = "Not assigned";
+				} else {
+					$bed = $row['bedNumber'];
+				}
+			} else {
+				$bed = "Not assigned";
+			}
+			echo "
+				<tr>
+					<th>bedNumber</th>
+					<th></th>
+					<th></th>
+				</tr>
+				<tr>
+					<td>{$bed}</td>
+					<td>Edit</td>
+					<td>Delete</td>
+				</tr>
+			";
+
+			echo "</table></div>";*/
+			echo "
+			<p>Admins should go to <a href='recordsmenu.php'>Records</a> if they want to edit these records</p>
+			";
+			break;
+
+		default: // Code should not get here
+			echo "
+			<p>An error has occured. Please contact your system administrator.</p>
 			";
 			break;
 	}
