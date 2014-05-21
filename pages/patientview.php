@@ -60,8 +60,8 @@ function observation(numb){
 				<div class="textDetails">
 					<?php echo $row['photo']; ?>
 					<p><span class="PatientName" id="patientName"><?php echo $row['firstName']." ". $row['lastName']; ?></span></br>
-						<span id="patientAge"><?php echo $year; ?> Years Old</span></br>
-						(p<?php echo $row['patientID']; ?>)</br>
+						<span><?php echo $year; ?> Years Old</span><span style="display:none;" id="patientAge"><?php echo $row['DOB']; ?></span></br>
+						(p<span id="patientID"><?php echo $row['patientID']; ?></span>)</br>
 						Bed: <?php echo $bed ?></p>
 				</div>
 				<?php
@@ -76,7 +76,12 @@ function observation(numb){
 							AND height IS NOT NULL";
 					$result = mysql_query($sql);
 					$row = mysql_fetch_assoc($result);
-					$height = $row['height'];
+					$count = mysql_num_rows($result);
+					if ($count == 0) {
+						$height = '?';
+					} else {
+						$height = $row['height'];
+					}
 					$timestamp = new DateTime($row['timestamp']);
 					$heightTime = $timestamp->diff($current);
 					$heightTime = $heightTime->days;
@@ -88,7 +93,12 @@ function observation(numb){
 							AND weight IS NOT NULL";
 					$result = mysql_query($sql);
 					$row = mysql_fetch_assoc($result);
-					$weight = $row['weight'];
+					$count = mysql_num_rows($result);
+					if ($count == 0) {
+						$weight = '?';
+					} else {
+						$weight = $row['weight'];
+					}
 					$timestamp = new DateTime($row['timestamp']);
 					$weightTime = $timestamp->diff($current);
 					$weightTime = $weightTime->days;
@@ -100,7 +110,12 @@ function observation(numb){
 							AND bloodType IS NOT NULL";
 					$result = mysql_query($sql);
 					$row = mysql_fetch_assoc($result);
-					$bloodType = $row['bloodType'];
+					$count = mysql_num_rows($result);
+					if ($count == 0) {
+						$bloodType = '?';
+					} else {
+						$bloodType = $row['bloodType'];
+					}
 					$timestamp = new DateTime($row['timestamp']);
 					$bloodTypeTime = $timestamp->diff($current);
 					$bloodTypeTime = $bloodTypeTime->days;
@@ -148,13 +163,13 @@ function observation(numb){
 								</ul>
 
 							</div>
-							<div class='parentDetailRight'>
+							<div class='parentDetailRight' id='guardianInfo'>
 								<ul>
-									<li>{$row['title']} {$row['firstName']} {$row['lastName']}</li>
-									<li>{$row['relation']}</li>
-									<li>{$row['contactNumber']}</li>
-									<li>{$row['email']}</li>
-									<li>{$row['address']}</li>
+									<li id='guardianName'>{$row['title']} {$row['firstName']} {$row['lastName']}</li>
+									<li id='guardianRelation'>{$row['relation']}</li>
+									<li id='guardianContact'>{$row['contactNumber']}</li>
+									<li id='guardianEmail'>{$row['email']}</li>
+									<li id='guardianAddress'>{$row['address']}</li>
 								</ul>
 							</div>
 						</div>";
@@ -170,13 +185,16 @@ function observation(numb){
 
 		<div class="box condiAllergy">
 			<section class="boxTitle"><p>Condition</p></section>
-			<section class="boxContent">
+			<section class="boxContent" id="patientConditions">
 				<table>
-					<tr>
-						<th class="first">Condition</th>
-						<th class="second">Date</th>
-						<th class="third">Medications</th>
-					</tr>
+					<thead>
+						<tr>
+							<th class="first">Condition</th>
+							<th class="second">Date</th>
+							<th class="third">Medications</th>
+						</tr>
+					</thead>
+					<tbody>
 					<!-- while ($row = mysql_fetch_assoc($result)) { -->
 					<!-- echo " <tr>
 						<td>Something $row['condition'] </td>
@@ -220,13 +238,16 @@ function observation(numb){
 
 		<div class="box condiAllergy">
 			<section class="boxTitle"><p>Allergy</p></section>
-			<section class="boxContent">
+			<section class="boxContent" id="patientAllergies">
 				<table>
-					<tr>
-						<th class="first">Allergy</th>
-						<th class="second">Date</th>
-						<th class="third">Severity</th>
-					</tr>
+					<thead>
+						<tr>
+							<th class="first">Allergy</th>
+							<th class="second">Date</th>
+							<th class="third">Severity</th>
+						</tr>
+					</thead>
+					<tbody>
 					<!-- while ($row = mysql_fetch_array($result)) { -->
 					<!-- echo " <tr>
 						<td>Something $row['allergy'] </td>
@@ -262,6 +283,7 @@ function observation(numb){
 							";
 						}
 					?>
+					</tbody>
 				</table>
 			</section>
 		</div>
@@ -380,7 +402,7 @@ function observation(numb){
 						<td class="leftSide topSide">
 							<div class="checkupBox">
 								<p class="title">Temperature:
-									<p class="value"><?php echo $temperature; ?>°C
+									<p class="value" id="patientTemperature"><?php echo $temperature; ?>°C
 										<p class="time"><?php echo $temperatureTime; ?> days ago</p>
 									</p>
 								</p>
@@ -389,7 +411,7 @@ function observation(numb){
 						<td class="topSide">
 							<div class="checkupBox">
 								<p class="title">Blood Pressure: 
-									<p class="value2line"><?php echo $bloodPressure; ?><br/> pulse <?php echo $pulse; ?>
+									<p class="value2line"><span id="patientBloodPressure"><?php echo $bloodPressure; ?></span><br/> <span id="patientPulse">pulse <?php echo $pulse; ?></span>
 										<p class="time"><?php echo $bloodPressureTime; ?> days ago</p>
 									</p>
 								</p>
@@ -400,7 +422,7 @@ function observation(numb){
 						<td class="leftSide">
 							<div class="checkupBox">
 								<p class="title">Eye sight:
-									<p class="value2line"> Left: <?php echo $eyeSightLeft; ?><br/> Right: <?php echo $eyeSightRight; ?>
+									<p class="value2line"> <span id="patientEyeSightLeft">Left: <?php echo $eyeSightLeft; ?></span><br/> <span id="patientEyeSightRight">Right: <?php echo $eyeSightRight; ?></span>
 										<p class="time"><?php echo $eyeSightLeftTime; ?> days ago</p>
 									</p>
 								</p>
@@ -409,7 +431,7 @@ function observation(numb){
 						<td>
 							<div class="checkupBox">
 								<p class="title">Blood Sugar:
-									<p class="value"><?php echo $bloodSugar; ?>
+									<p class="value" id="patientBloodSugar"><?php echo $bloodSugar; ?>
 										<p class="time"><?php echo $bloodSugarTime; ?> days ago</p>
 									</p>
 								</p>

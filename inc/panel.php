@@ -23,28 +23,142 @@
 <!-- Script for PDF conversion -->
 <script>
     function documentFromHTML() {
-        var doc = new jsPDF('p', 'in', 'letter');
-        var source = document.getElementById('details');
+        var pdf = new jsPDF('p', 'pt', 'letter');
+        /*var source = document.getElementById('details');
         var specialElementHandlers = {
             '#bypassme': function(element, renderer) {
                 return true;
             }
         };
 
-        doc.fromHTML(
+        pdf.fromHTML(
             source, // HTML string or DOM elem ref.
-            0.5,    // x coord
-            0.5,    // y coord
+            margins.top,    // x coord
+            margins.left,    // y coord
             {
-                'width': 7.5, // max width of content on PDF
+                'width': margins.width, // max width of content on PDF
                 'elementHandlers': specialElementHandlers
-            });
+            });*/
 
         // need to manually construct the PDF. put a bunch of id="__" on the fields you need between hospitals?
 
-        doc.output('dataurlnewwindow');
-        console.log(doc);
-    }
+        margins = {
+        	top: 50,
+        	bottom: 60,
+        	left: 40,
+        	width: 522
+        }
+
+        pdf.setFont("helvetica");
+        // Townsville Children's Hospital
+        pdf.setFontSize(24);
+        pdf.text(150, margins.top, 'Townsville Children\'s Hospital');
+
+        // Patient Info: PatientID, Name, DOB
+	        // Headings
+	        pdf.setFontSize(12);
+	        pdf.setFontType("bold")
+	        pdf.text(margins.left, 100, "ID Number:");
+	        pdf.text(margins.left, 120, "Full Name:");
+	        pdf.text(margins.left, 140, "Date of Birth:");
+
+	        // Information
+	        var ID = document.getElementById("patientID").innerHTML;
+	        var name = document.getElementById("patientName").innerHTML;
+	        var age = document.getElementById("patientAge").innerHTML;
+	        pdf.setFontType("normal")
+	        pdf.text(140, 100, ID);
+	        pdf.text(140, 120, name);
+	        pdf.text(140, 140, age);
+
+	    // Guardian Info: Name, Relation, Contact Number, Email, Address
+	    	// Headings
+	        pdf.setFontType("bold");
+	        pdf.text(margins.left, 180, "Guardian Name:");
+	        pdf.text(margins.left, 200, "Relation:");
+	        pdf.text(margins.left, 220, "Contact Number:");
+	        pdf.text(margins.left, 240, "Email:");
+	        pdf.text(margins.left, 260, "Address:");
+
+	        // Information (if exists)
+	        if (document.getElementById('guardianInfo') != null) {
+		        var name = document.getElementById("guardianName").innerHTML;
+		        var relation = document.getElementById("guardianRelation").innerHTML;
+		        var contact = document.getElementById("guardianContact").innerHTML;
+		        var email = document.getElementById("guardianEmail").innerHTML;
+		        var address = document.getElementById("guardianAddress").innerHTML;
+		        pdf.setFontType("normal")
+		        pdf.text(140, 180, name);
+		        pdf.text(140, 200, relation);
+		        pdf.text(140, 220, contact);
+		        pdf.text(140, 240, email);
+		        pdf.text(140, 260, address);
+	        }
+
+
+        // Most recent checkup information: height, weight, blood type, temperature, bloodpressure, pulse, eyesight left + right, blood sugar,
+	        // Headings
+	        pdf.setFontType("bold");
+	        pdf.text(350, 100, "Height:");
+	        pdf.text(350, 120, "Weight:");
+	        pdf.text(350, 140, "Blood Type:");
+	        pdf.text(350, 160, "Temperature:");
+	        pdf.text(350, 180, "Blood Pressure:");
+	        pdf.text(350, 200, "Eye Sight:");
+	        pdf.text(350, 220, "Blood Sugar:");
+
+	        // Information 
+	        var height = document.getElementById("patientHeight").innerHTML;
+	        var wieght = document.getElementById("patientWeight").innerHTML;
+	        var bloodType = document.getElementById("patientBloodType").innerHTML;
+	        var temperature = document.getElementById("patientTemperature").innerHTML;
+	        var bloodPressure = document.getElementById("patientBloodPressure").innerHTML;
+	        var pulse = document.getElementById("patientPulse").innerHTML;
+	        var eyeSightLeft = document.getElementById("patientEyeSightLeft").innerHTML;
+	        var eyeSightRight = document.getElementById("patientEyeSightRight").innerHTML;
+	        var bloodSugar = document.getElementById("patientBloodSugar").innerHTML;
+	        pdf.setFontType("normal")
+	        pdf.text(450, 100, height);
+	        pdf.text(450, 120, wieght);
+	        pdf.text(450, 140, bloodType);
+	        pdf.text(450, 160, temperature);
+	        pdf.text(450, 180, bloodPressure + " " + pulse);
+	        pdf.text(450, 200, eyeSightLeft + " " + eyeSightRight);
+	        pdf.text(450, 220, bloodSugar);
+
+	    // Conditions (import table?)
+	    	/*source = $('#patientConditions')[0];
+	    	var specialElementHandlers = {
+	            '#bypassme': function(element, renderer) {
+	                return true;
+	            }
+	        };
+	        pdf.fromHTML(
+            source, // HTML string or DOM elem ref.
+            margins.left,    // x coord
+            300,    // y coord
+            {
+                'width': margins.width, // max width of content on PDF
+                'elementHandlers': specialElementHandlers
+            });*/
+
+	    // Allergies (import table?)
+	    	/*source = $('#patientAllergies')[0];
+	    	pdf.fromHTML(
+            source, // HTML string or DOM elem ref.
+            margins.left,    // x coord
+            400,    // y coord
+            {
+                'width': margins.width, // max width of content on PDF
+                'elementHandlers': specialElementHandlers
+            });*/
+
+	    // Nurse Observations
+
+        pdf.output('dataurlnewwindow');
+        //pdf.save('Test.pdf');
+        console.log(pdf);
+	}
 </script>
 
 
