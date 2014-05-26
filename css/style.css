@@ -223,6 +223,9 @@ table th{
 }
 
 /* other */
+#records table {
+	margin-bottom: 20px;
+}
 #records th, #records td {
 	padding: 2px;
 }
