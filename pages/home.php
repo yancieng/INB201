@@ -51,7 +51,7 @@
 			} else if ($row['title'] == 4) { // Receptionist
 				echo "<li><a href='patientadd.php'>Add a Patient</a></li>";
 				echo "<li><a href='patients.php'>Update Patient Information</a></li>";
-				echo "<li><a href='#.html'>Assign Bed</a></li>";
+				echo "<li><a href='bedassign.php'>Assign Bed</a></li>";
 				echo "<li><a href='schedule.php'>Schedules</a></li>";
 				echo "<li><a href='#.html'>Export to PDF</a></li>";
 			} else if ($row['title'] == 5) { // Administrator

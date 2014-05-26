@@ -270,9 +270,9 @@
 				</section>
 				<section class='boxContent'>
 			";
-				$sql = "SELECT *
-						FROM patients
-						WHERE patientID = {$patient}";
+				$sql = "SELECT patients.patientID, firstName, lastName, DOB, bedNumber
+						FROM patients LEFT JOIN beds USING (patientID)
+						WHERE patients.patientID = {$patient}";
 				$result = mysql_query($sql);
 				$row = mysql_num_rows($result);
 
@@ -291,6 +291,23 @@
 							<div>
 								<label for='DOB'>DOB: </label>
 								<input type='text' class='textInput' name='DOB' value='{$row['DOB']}' required />
+							</div>
+							<div>
+								<label for='bedNumber'>Bed/Room Number: </label>
+								<select name='bedNumber'>
+									<option>{$row['bedNumber']}</option>";
+									// get all available beds
+									$sql = "SELECT bedNumber
+											FROM beds
+											WHERE patientID IS NULL
+											OR patientID = ''";
+									$result = mysql_query($sql);
+
+									while ($option = mysql_fetch_array($result)) {
+										echo "<option>{$option['bedNumber']}</option>";
+									}
+								echo "
+								</select>
 							</div>
 							<div>
 								<input type='hidden' name='patientID' value='{$row['patientID']}' />
