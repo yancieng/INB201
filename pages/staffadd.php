@@ -11,7 +11,7 @@
 	include '../inc/panel.php';
 ?>
 
-<script>activePanel("m3");</script>
+<script>activePanel("m2a");</script>
 <link type="text/css" rel="stylesheet" href="../css/patientupdate.css" media="screen" /> 
 
 <?php
@@ -29,7 +29,7 @@
 		</section>
 		<section class="boxContent">
 			<p>Fields marked with a * are required.</p>
-			<form action="staffaddprocess.php" method="post">
+			<form action="staffaddprocess.php" method="post" enctype="multipart/form-data">
 				<div>
 					<label for="firstName">*First Name: </label>
 					<input type="text" class="textInput" name="firstName" required />

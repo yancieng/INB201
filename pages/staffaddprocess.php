@@ -14,7 +14,7 @@
 	}
 
 	// if photo field is blank, set default photo path
-	if ((isset($_FILES['photo']['name'])) && ($_FILES['photo']['name'] != '')) {
+	if (isset($_FILES['photo']['name'])) {
 		$photo = $_FILES['photo']['name'];
 
 		// photo renaming and location
@@ -38,6 +38,8 @@
 		) {
 			$_SESSION['stafferror'] = "The file you uploaded is not valid. Photos must be in either .gif, .jpg, or .png format.";
 			header ("Location: staffadd.php");
+		} else {
+			move_uploaded_file($_FILES['photo']['tmp_name'], $target);
 		}
 	} else {
 		$photo = '<img src="../images/none.png" alt="Profile picture" />';
@@ -57,7 +59,7 @@
 		$password = hash('sha256', $password);	
 
 		$sql = "INSERT INTO staff (firstName, lastName, title, password, specialties, photo)
-				VALUES ('{$firstName}',	'{$lastName}', '{$title}', '{$password}', '{$specialties}', '{$photo}')";
+				VALUES ('{$firstName}',	'{$lastName}', '{$title}', '{$password}', " . ($specialties == NULL ? 'NULL' : "'{$specialties}'") . ", '{$photo}')";
 
 		if (mysql_query($sql)) {		
 			$sql = "SELECT *
