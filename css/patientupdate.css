@@ -21,3 +21,22 @@ select {
 input[type=file] {
 	margin-bottom: 20px;
 }
+
+/* Other */
+.CATable {
+	margin-bottom: 20px;
+}
+.CATable table {
+	width: 100%;
+	text-align: center;
+}
+.CATable th, td {
+	padding: 5px, 0;
+	width: 40%;
+}
+.CATable .dateColumn {
+	width: 10%;
+}
+.CATable .editdelete {
+	width: 10%;
+}

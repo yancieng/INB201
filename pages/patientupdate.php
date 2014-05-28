@@ -157,28 +157,86 @@
 
 			// Edit conditions: maybe an editable table?
 			echo "
-			<div class='box'>
+			<div class='box CATable'>
 				<section class='boxTitle'>
 					<p>Edit Conditions</p>
 				</section>
-				<section class='boxContent'>
-					<form action='conditioneditprocess.php' method='post'>
+				<section class='boxContent'>";
 
-					</form>
+				$sql = "SELECT conditionID, `condition`, conditionDate, medication
+						FROM conditions
+						WHERE `condition` IS NOT NULL
+						AND patientID = {$patient}
+						ORDER BY conditionID DESC";
+				$result = mysql_query($sql);
+
+				// display in table form
+				echo "
+				<table>
+					<tr>
+						<th>Condition</th>
+						<th class='dateColumn'>Date</th>
+						<th>Medication</th>
+
+						<th class='editdelete'></th>
+					</tr>
+				";
+				while ($row = mysql_fetch_array($result)) {
+					echo "
+					<tr>
+						<td>{$row['condition']}</td>
+						<td class='dateColumn'>{$row['conditionDate']}</td>
+						<td>{$row['medication']}</td>
+						<td><a href='caedit.php?table=Condition&ID={$row['conditionID']}'>Edit</td>
+					</tr>
+					";
+				}
+				echo "</table>";
+
+				echo "
 				</section>
 			</div>
 			";
 
 			// Edit allergies: similar to conditions?
 			echo "
-			<div class='box'>
+			<div class='box CATable'>
 				<section class='boxTitle'>
 					<p>Edit Allergies</p>
 				</section>
-				<section class='boxContent'>
-					<form action='allergyeditprocess.php' method='post'>
+				<section class='boxContent'>";
 
-					</form>
+				$sql = "SELECT conditionID, allergy, allergyDate, allergySeverity
+						FROM conditions
+						WHERE allergy IS NOT NULL
+						AND patientID = {$patient}
+						ORDER BY conditionID DESC";
+				$result = mysql_query($sql);
+
+				// display in table form
+				echo "
+				<table>
+					<tr>
+						<th>Allergy</th>
+						<th class='dateColumn'>Date</th>
+						<th>Severity</th>
+
+						<th class='editdelete'></th>
+					</tr>
+				";
+				while ($row = mysql_fetch_array($result)) {
+					echo "
+					<tr>
+						<td>{$row['allergy']}</td>
+						<td class='dateColumn'>{$row['allergyDate']}</td>
+						<td>{$row['allergySeverity']}</td>
+						<td><a href='caedit.php?table=Allergy&ID={$row['conditionID']}'>Edit</td>
+					</tr>
+					";
+				}
+				echo "</table>";
+
+				echo "
 				</section>
 			</div>
 			";
@@ -509,7 +567,7 @@
 
 			echo "</table></div>";*/
 			echo "
-			<p>Admins should go to <a href='recordsmenu.php'>Records</a> if they want to edit these records</p>
+			<p>Admins should go to <a href='recordsearch.php?search={$patient}'>Records Search</a> if they want to edit these records</p>
 			";
 			break;
 
