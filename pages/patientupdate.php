@@ -279,7 +279,7 @@
 				while ($row = mysql_fetch_assoc($result)) {
 					echo "
 					<div id='patient'>
-						<form action='patientupdateprocess.php' method='post'>
+						<form action='patientupdateprocess.php' method='post' enctype='multipart/form-data'>
 							<div>
 								<label for='firstName'>First Name: </label>
 								<input type='text' class='textInput' name='firstName' value='{$row['firstName']}' required />
@@ -291,6 +291,10 @@
 							<div>
 								<label for='DOB'>DOB: </label>
 								<input type='text' class='textInput' name='DOB' value='{$row['DOB']}' required />
+							</div>
+							<div>
+								<label for='photo'>Photo: </label>
+								<input type='file' name='photo' accept='image/*' />
 							</div>
 							<div>
 								<label for='bedNumber'>Bed/Room Number: </label>
@@ -342,7 +346,7 @@
 					$row = mysql_fetch_assoc($result);
 
 					echo "
-					<form action='guardianupdateprocess.php' method='post'>
+					<form action='guardianupdateprocess.php' method='post' enctype='multipart/form-data'>
 						<div>
 							<label for='firstName'>First Name: </label>
 							<input type='text' class='textInput' name='firstName' value='{$row['firstName']}' required />
@@ -396,7 +400,7 @@
 					$result = mysql_query($sql);
 
 					echo "
-					<form action='guardianaddprocess.php' method='post'>
+					<form action='guardianaddprocess.php' method='post' enctype='multipart/form-data'>
 						<h2>Use existing</h2>
 						<div>
 							<label for='existing'>Guardian: </label>

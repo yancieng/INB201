@@ -30,7 +30,7 @@
 		</section>
 		<section class="boxContent">
 			<!-- Patient Form -->
-			<form action="patientaddprocess.php" method="post">
+			<form action="patientaddprocess.php" method="post" enctype="multipart/form-data">
 				<div>
 					<label for="firstName">First Name: </label>
 					<input class="textInput" type="text" name="firstName" required />

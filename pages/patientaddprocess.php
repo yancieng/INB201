@@ -51,6 +51,11 @@
 		}
 
 		if (mysql_query($sql)) {
+			// move photo (if exists)
+			if (isset($_FILES['photo'])) {
+				move_uploaded_file($_FILES['photo']['tmp_name'], $target);
+			}
+			
 			// get patient's ID
 			$sql = "SELECT *
 					FROM patients

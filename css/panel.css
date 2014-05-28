@@ -354,6 +354,10 @@
 	padding: 0;
 }
 
-#staffEdit {
-	clear: both;
+#staffInfo {
+	margin-bottom: 20px;
+}
+
+#staffInfo .boxContent {
+	min-height: 110px;
 }
