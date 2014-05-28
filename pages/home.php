@@ -49,7 +49,9 @@
 				echo "<li><a href='#.html'>X-rays</a></li>";
 				echo "<li><a href='#.html'>Test Results</a></li>";
 			} else if ($row['title'] == 4) { // Receptionist
-				echo "<li><a href='patientadd.php'>Add a Patient</a></li>";
+				echo "<li><a href='patientadd.php'>Admit New Patient</a></li>";
+				echo "<li><a href='patientadmit.php'>Admit Existing Patient</a></li>";
+				echo "<li><a href='patientdischarge.php'>Discharge Patient</a></li>";
 				echo "<li><a href='patients.php'>Update Patient Information</a></li>";
 				echo "<li><a href='bedassign.php'>Assign Bed</a></li>";
 				echo "<li><a href='schedule.php'>Schedules</a></li>";

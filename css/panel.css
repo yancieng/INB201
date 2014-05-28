@@ -194,10 +194,14 @@
 }
 
 #m2a .mask {
-	background-color: #ccc313;
+	background-color: #ddc313;
 }
 
 #m2b .mask {
+	background-color: #bbc313;
+}
+
+#m2c .mask {
 	background-color: #99c313;
 }
 
