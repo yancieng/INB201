@@ -32,7 +32,7 @@
 					FROM payments
 					WHERE paymentID = {$paymentID}";
 			$result = mysql_query($sql);
-			$row = mysql_fetch_assoc($result)
+			$row = mysql_fetch_assoc($result);
 
 			// redirect to the patientview.php page with success message
 			$_SESSION['success'] = "Patient {$row['patientID']} was discharged successfully.";
