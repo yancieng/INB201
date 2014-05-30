@@ -517,48 +517,6 @@ function observation(numb){
 							}
 						}
 					?>
-					<!--<tr>
-						<td>18/2/2014</td>
-						<td>37°C</td>
-						<td>120/80, pluse 70</td>
-						<td>left: -1, right: -1.5</td>
-						<td>75</td>
-					</tr>
-					<tr>
-						<td>18/2/2014</td>
-						<td>37°C</td>
-						<td>120/80, pluse 70</td>
-						<td>left: -1, right: -1.5</td>
-						<td>75</td>
-					</tr>
-					<tr>
-						<td>18/2/2014</td>
-						<td>37°C</td>
-						<td>120/80, pluse 70</td>
-						<td>left: -1, right: -1.5</td>
-						<td>75</td>
-					</tr>
-					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>-->
 				</table>
 			</div>
 		</div>

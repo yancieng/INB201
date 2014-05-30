@@ -15,7 +15,7 @@ label {
 	margin-bottom: 20px;
 }
 select {
-	width: 168px;
+	width: 250px;
 	margin-bottom: 20px;
 }
 input[type=file] {
@@ -39,4 +39,15 @@ input[type=file] {
 }
 .CATable .editdelete {
 	width: 10%;
+}
+.schedule {
+	margin-bottom: 20px;
+}
+.schedule table {
+	width: 100%;
+	text-align: center;
+}
+.schedule th, td {
+	padding: 5px;
+	width: 20%;
 }

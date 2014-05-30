@@ -14,7 +14,16 @@
 
 <!-- Content goes below -->
 
-
+<div class="leftContent">
+	<div class="box">
+		<section class="boxTitle">
+			<p></p>
+		</section>
+		<section class="boxContent">
+			
+		</section>
+	</div>
+</div>
 
 <?php
 	include '../inc/footer.php';

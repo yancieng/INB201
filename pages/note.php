@@ -1,35 +1,71 @@
 <?php
 	include '../inc/dbconnect.php';
-	// if no user is logged in, or is not a doctor, redirect to login.php with error message
-	if (isset($_SESSION['user'])) {
-		$staffID = $_SESSION['user'];
-		$sql = "SELECT staffID, title
-				FROM staff
-				WHERE staffID = '$staffID'
-				AND title = 1";
-		$result = mysql_query($sql);
-		$count = mysql_num_rows($result);
+	// if no user is logged in, redirect to login.php with error message
+	include '../inc/loginCheck.php';
 
-		if ($count == 0) {
-			$_SESSION['roleerror'] = "You are not authorised to access this resource.";
-			header ("Location: home.php");
-		}
-	} else {
-		$_SESSION['loginerror'] = "You must be logged in to access this resource.";
-		header ("Location: login.php");
-	}
+	// get noteID from previous page
+	$noteID = mysql_escape_string($_GET['note']);
 
-	$pageTitle = "Note {$_GET['note']}";
+	// sql to customise the page title depending on role
+	$sql = "SELECT titles.title
+			FROM staff INNER JOIN titles ON staff.title = titles.titleID
+			WHERE staffID = {$_SESSION['user']}";
+	$result = mysql_query($sql);
+	$row = mysql_fetch_assoc($result);
+
+	$pageTitle = "Untitled Page";
+	$breadcrumb = "<a href='home.php'>Home</a> > <a href='notes.php'>{$row['title']}'s Notes</a> > " . $pageTitle;
 	include '../inc/panel.php';
 ?>
 
-<section>
-	<div class="container">
-		<div class="login">
-			<!-- stuff goes here -->
-			<h1>Under construction</h1>
+<!-- The coresponding active panal (the menu) of this page
+	 change this number for each different page -->
+<script>activePanel("m4");</script>
+
+<!-- Content goes below -->
+<!-- Note View Page: Shows the note in full -->
+
+<?php
+// get note details
+$sql = "SELECT noteID, datetimeWritten, note, image, staffID
+		FROM notes
+		WHERE noteID = '{$note}'";
+$result = mysql_query($sql);
+$count = mysql_num_rows($result);
+
+if ($count > 0) {
+	$row = mysql_fetch_assoc($result);
+	$note = nl2br($row['note']);
+
+	echo "
+	<div class='leftContent'>
+		<div class='box'>
+			<section class='boxTitle'>
+				<p>Note {$row['noteID']}</p>
+			</section>
+			<section class='boxContent'>
+				<h2>Text:</h2>
+				<p>{$note}</p>";
+				
+				if ($row['image'] != '' || $row['image'] != NULL) {
+					echo "
+					<h2>Image:</h2>
+					{$row['image']}
+					";
+				}
+
+			echo "
+			</section>
 		</div>
 	</div>
-</section>
+	";
 
- 
+} else {
+	echo "<p>No note with that ID was found.</p>";
+}
+?>
+
+
+<?php
+	include '../inc/footer.php';
+?> 

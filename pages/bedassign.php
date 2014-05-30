@@ -26,7 +26,7 @@
 <?php
 	// if success or error messages are set, display
 	if (isset($_SESSION['success'])) {
-		echo "<p id='error'>" . $_SESSION['success'] . "</p>";
+		echo "<p id='success'>" . $_SESSION['success'] . "</p>";
 		unset($_SESSION['success']);
 	}
 	if (isset($_SESSION['error'])) {

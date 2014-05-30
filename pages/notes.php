@@ -1,10 +1,7 @@
 <?php
 	include '../inc/dbconnect.php';
 	// if no user is logged in, redirect to login.php with error message
-	if (!isset($_SESSION['user'])) {
-		$_SESSION['loginerror'] = "You must be logged in to access this resource.";
-		header ("Location: login.php");
-	}
+	include '../inc/loginCheck.php';
 
 	// sql to customise the page title depending on role
 	$sql = "SELECT titles.title
@@ -18,44 +15,44 @@
 	include '../inc/panel.php';
 ?>
 
-<script type="text/javascript">
-	function active() {
+<!-- The coresponding active panal (the menu) of this page
+	 change this number for each different page -->
+<script>activePanel("m4");</script>
 
-		var no = "m4"; //The coresponding active panal (the menu) of this page
-		// change this number for each different page, or is there a better way?
-
-		document.getElementById(no).className = ' active';
-		document.getElementById(no).href = "#" ;
-		document.getElementById(no).style.cursor = "default";
-	}
-
-</script>
-
-<section>
-	<div class="container">
-		<h1>Notes</h1>
-		<!-- Link to add a new note -->
-		<h2><a href="#.html">Add a Note</a></h2>
+<div class="leftContent">
+	<div class="box">
+		<section class="boxTitle">
+			<p>View/Update</p>
+		</section>
 		<!-- List of existing notes, link to view/update -->
-		<h2>View/Update</h2>
-		<ul>
-		<?php
-			$staffID = $_SESSION['user'];
-			$sql = "SELECT noteID, datetimeWritten, patientID, staffID
-					FROM notes
-					WHERE staffID = '$staffID'";
-			$result = mysql_query($sql);
-			$row = mysql_num_rows($result);
+		<section class="boxContent">
+			<?php
+				$staffID = $_SESSION['user'];
+				$sql = "SELECT noteID, datetimeWritten, staffID
+						FROM notes
+						WHERE staffID = '$staffID'
+						ORDER BY datetimeWritten DESC";
+				$result = mysql_query($sql);
+				$count = mysql_num_rows($result);
 
-			while ($row = mysql_fetch_assoc($result)) {
-				// Link to notes.php with full note/edit
-				// ?? how should this be laid out
-				echo "<li><a href='note.php?note={$row['noteID']}'>Patient {$row['patientID']} - {$row['datetimeWritten']}</a></li>";
-			}
-		?>
-		</ul>
+				if ($count > 0) {
+					echo "<ul>";
+					while ($row = mysql_fetch_assoc($result)) {
+						// Link to notes.php with full note/edit
+						echo "<li><a href='note.php?note={$row['noteID']}'>Note {$row['noteID']} - {$row['datetimeWritten']}</a></li>";
+					}
+					echo "</ul>";
+				} else {
+					echo "<p>No Notes currently in database.</p>";
+				}
+			?>
+		</section>
 	</div>
-</section>
+
+	<!-- Link to add a new note -->
+	<br /><a href="noteadd.php"><button type="button" class="submit">Add a Note</button></a>
+</div>
+
 
 <?php
 	include '../inc/footer.php';

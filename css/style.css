@@ -233,3 +233,13 @@ table th{
 	max-width: 50px;
 	max-height: 50px;
 }
+
+#success {
+  color: #42a145;
+  margin-top: 0;
+}
+
+#error {
+  color: #ee6d6d;
+  margin-top: 0;
+}
