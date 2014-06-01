@@ -21,12 +21,12 @@
 			VALUES ('{$condition}', '{$date}', '{$medication}', '{$patientID}')";
 
 	if (mysql_query($sql)) {		
-			// redirect to the patientupdate.php page with success message
-			$_SESSION['patientsuccess'] = "Condition was added successfully.";
-			header ("Location: patientupdate.php?patient={$patientID}");
-		} else {
-			// kick back with error message: sql
-			$_SESSION['patienterror'] = "There was an error in adding the data.";
-			header ("Location: patientupdate.php?patient={$patientID}");
-		}
+		// redirect to the patientupdate.php page with success message
+		$_SESSION['patientsuccess'] = "Condition was added successfully.";
+		header ("Location: patientupdate.php?patient={$patientID}");
+	} else {
+		// kick back with error message: sql
+		$_SESSION['patienterror'] = "There was an error in adding the data.";
+		header ("Location: patientupdate.php?patient={$patientID}");
+	}
 ?>

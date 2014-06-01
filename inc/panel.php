@@ -36,6 +36,9 @@
         pdf.setFontSize(24);
         pdf.text(150, margins.top, 'Townsville Children\'s Hospital');
 
+        // Separating line after main heading
+        pdf.line(35, 80, 575, 80);
+
         // Patient Info: PatientID, Name, DOB
         pdf.setFontSize(16);
         pdf.text(margins.left, 100, "Patient Information");
@@ -55,6 +58,9 @@
 	        pdf.text(140, 120, ID);
 	        pdf.text(140, 140, name);
 	        pdf.text(140, 160, age);
+
+	    // Separating line after patient info
+	    pdf.line(35, 180, 340, 180);
 
 	    // Guardian Info: Name, Relation, Contact Number, Email, Address
         pdf.setFontSize(16);
@@ -84,6 +90,8 @@
 		        pdf.text(140, 300, address);
 	        }
 
+	    // Separating line after guardian info
+	    pdf.line(35, 320, 575, 320);
 
         // Most recent checkup information: height, weight, blood type, temperature, bloodpressure, pulse, eyesight left + right, blood sugar
         pdf.setFontSize(16);
@@ -119,6 +127,9 @@
 	        pdf.text(450, 220, eyeSightLeft + " " + eyeSightRight);
 	        pdf.text(450, 240, bloodSugar);
 
+	    // Separating line to the left of most recent checkup
+	    pdf.line(340, 80, 340, 320);
+
 	    // Conditions
         pdf.setFontSize(16);
         pdf.text(margins.left, 340, "Conditions");
@@ -144,6 +155,9 @@
 			}
 			// set end of table
 			var conditionEnd = (360 + 20 + (20 * i));
+
+		// Separating line after conditions
+		pdf.line(35, (conditionEnd - 20), 575, (conditionEnd - 20));
 
 	    // Allergies
         pdf.setFontSize(16);
@@ -171,6 +185,9 @@
 			// set end of table
 			var allergyEnd = (conditionEnd + 20 + 20 + (20 * i));
 
+		// Separating line after allergies
+		pdf.line(35, (allergyEnd - 20), 575, (allergyEnd - 20));
+
 	    // Nurse Observations
         pdf.setFontSize(16);
         pdf.text(margins.left, allergyEnd, "Nurse Observations");
@@ -188,6 +205,15 @@
 	       		pdf.setFontType("normal")
 	        	pdf.text(margins.left, (allergyEnd + 20 + (20 * i)), content);
 	    	}
+	    	// set end of observations
+	    	var observationEnd = (allergyEnd + 20 + (20 * i));
+
+	    // Separating line after observations
+	    pdf.line(35, observationEnd, 575, observationEnd);
+
+	    // Lines from top to bottom
+	    pdf.line(35, 80, 35, observationEnd);
+	    pdf.line(575, 80, 575, observationEnd);
 
         pdf.output('dataurlnewwindow');
         //pdf.save('Test.pdf');

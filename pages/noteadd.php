@@ -24,12 +24,23 @@
 <!-- Add Note Page: form allowing user to add a note to the database -->
 
 <div class="leftContent">
+	<?php
+		// success and error messages go here
+		if (isset($_SESSION['success'])) {
+			echo "<p id='success'>" . $_SESSION['success'] . "</p>";
+			unset($_SESSION['success']);
+		}
+		if (isset($_SESSION['error'])) {
+			echo "<p id='error'>" . $_SESSION['error'] . "</p>";
+			unset($_SESSION['error']);
+		}
+	?>
 	<div class="box">
 		<section class="boxTitle">
 			<p>Add Note</p>
 		</section>
 		<section class="boxContent">
-			<form action="addnoteprocess.php" method="post" enctype="multipart/form-data">
+			<form action="noteaddprocess.php" method="post" enctype="multipart/form-data">
 				<div>
 					<label for="image">Image: </label>
 					<input type="file" name="image" accept="image/*" />

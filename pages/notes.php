@@ -20,6 +20,17 @@
 <script>activePanel("m4");</script>
 
 <div class="leftContent">
+	<?php
+		// success and error messages go here
+		if (isset($_SESSION['success'])) {
+			echo "<p id='success'>" . $_SESSION['success'] . "</p>";
+			unset($_SESSION['success']);
+		}
+		if (isset($_SESSION['error'])) {
+			echo "<p id='error'>" . $_SESSION['error'] . "</p>";
+			unset($_SESSION['error']);
+		}
+	?>
 	<div class="box">
 		<section class="boxTitle">
 			<p>View/Update</p>

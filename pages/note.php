@@ -13,7 +13,7 @@
 	$result = mysql_query($sql);
 	$row = mysql_fetch_assoc($result);
 
-	$pageTitle = "Untitled Page";
+	$pageTitle = "Note {$noteID}";
 	$breadcrumb = "<a href='home.php'>Home</a> > <a href='notes.php'>{$row['title']}'s Notes</a> > " . $pageTitle;
 	include '../inc/panel.php';
 ?>
@@ -29,7 +29,7 @@
 // get note details
 $sql = "SELECT noteID, datetimeWritten, note, image, staffID
 		FROM notes
-		WHERE noteID = '{$note}'";
+		WHERE noteID = '{$noteID}'";
 $result = mysql_query($sql);
 $count = mysql_num_rows($result);
 
