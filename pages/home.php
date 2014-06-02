@@ -30,7 +30,6 @@
 			$row = mysql_fetch_assoc($result);
 
 			echo "<h1>Hello, {$row['firstName']}.</h1>";
-			echo "<p>Here's an example homepage until we've figured everything out.</p>";
 			echo "<ul id='dashboard'>";
 
 			if ($row['title'] == 1) { // Doctor

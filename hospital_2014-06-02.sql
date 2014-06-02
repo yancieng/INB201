@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 30, 2014 at 05:27 AM
+-- Generation Time: Jun 02, 2014 at 09:43 AM
 -- Server version: 5.6.16
 -- PHP Version: 5.5.9
 
@@ -242,7 +242,7 @@ INSERT INTO `guardians` (`guardianID`, `firstName`, `lastName`, `title`, `contac
 
 CREATE TABLE IF NOT EXISTS `notes` (
   `noteID` int(7) unsigned zerofill NOT NULL AUTO_INCREMENT,
-  `datetimeWritten` datetime NOT NULL,
+  `datetimeWritten` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `note` text NOT NULL,
   `image` varchar(255) DEFAULT NULL,
   `staffID` int(4) unsigned zerofill NOT NULL,

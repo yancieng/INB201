@@ -493,11 +493,13 @@
 	}
 
 	// schedules
-	$sql = "SELECT scheduleID, scheduledFor, scheduledTime, patientID
+	$sql = "SELECT scheduleID, details, room, startTime, endTime, patientID
 			FROM schedules
 			WHERE scheduleID LIKE '%{$search}%'
-			OR scheduledFor LIKE '%{$search}%'
-			OR scheduledTime LIKE '%{$search}%'
+			OR details LIKE '%{$search}%'
+			OR room LIKE '%{$search}%'
+			OR startTime LIKE '%{$search}%'
+			OR endTime LIKE '%{$search}%'
 			OR patientID LIKE '%{$search}%'";
 	$result = mysql_query($sql);
 	$count = mysql_num_rows($result);
@@ -514,8 +516,10 @@
 		<table>
 			<tr>
 				<th>scheduleID</th>
-				<th>scheduledFor</th>
-				<th>scheduledTime</th>
+				<th>details</th>
+				<th>room</th>
+				<th>startTime</th>
+				<th>endTime</th>
 				<th>patientID</th>
 
 				<th></th>
@@ -526,8 +530,10 @@
 			echo "
 			<tr>
 				<td>{$row['scheduleID']}</td>
-				<td>{$row['scheduledFor']}</td>
-				<td>{$row['scheduledTime']}</td>
+				<td>{$row['details']}</td>
+				<td>{$row['room']}</td>
+				<td>{$row['startTime']}</td>
+				<td>{$row['endTime']}</td>
 				<td>{$row['patientID']}</td>
 				<td><a href='recordedit.php?table=schedules&column=scheduleID&ID={$row['scheduleID']}'>Edit</td>
 				<td><a href='recorddelete.php?table=schedules&column=scheduleID&ID={$row['scheduleID']}'>Delete</td>
