@@ -14,7 +14,6 @@
 <script>activePanel("m2a");</script>
 <link type="text/css" rel="stylesheet" href="../css/patientupdate.css" media="screen" /> 
 
-<!-- Content goes below -->
 <!-- Staff Manager: Page has a search function (ID or Name or Title or All), as well as an Add New Staff Member link -->
 
 <!-- Search Form -->

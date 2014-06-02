@@ -8,17 +8,19 @@
 	<link type="text/css" rel="stylesheet" href="../css/panel.css" media="screen" /> 
 	<link type="text/css" rel="stylesheet" href="../css/style.css" media="screen" /> 
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<!-- Or if offline:
+	<script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script>
+	-->
 	<script src="../js/activePanel.js"></script>
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400,300' rel='stylesheet' type='text/css'>
 
-	<!-- Stuff for PDF conversion -->
-	<!--<script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script>-->
+	<!-- Scripts for PDF conversion -->
 	<script type="text/javascript" src="../js/jspdf.js"></script>
 	<script type="text/javascript" src="../js/jspdf.plugin.standard_fonts_metrics.js"></script> 
 	<script type="text/javascript" src="../js/jspdf.plugin.split_text_to_size.js"></script>               
 	<script type="text/javascript" src="../js/jspdf.plugin.from_html.js"></script>
 
-<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Javascrpit ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Javascript ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 <!-- Script for PDF conversion -->
 <script>
@@ -216,11 +218,9 @@
 	    pdf.line(575, 80, 575, observationEnd);
 
         pdf.output('dataurlnewwindow');
-        //pdf.save('Test.pdf');
-        console.log(pdf);
+        //console.log(pdf);
 	}
 </script>
-
 
 <script type="text/javascript">
 
@@ -256,19 +256,13 @@ function load() {
 
 </script>
 
-
-
-
-
 	<title> <?php echo $pageTitle; ?> - TCH  </title>
-
 
 </head>
 
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Content ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 <body onload="load()">
-
 
 <div class="header">
 	<div class="logo">
@@ -278,14 +272,14 @@ function load() {
 		<span id="clock"></span>
 	</div>
 	<div class="profile">
-		<!-- PHP needed for updated staff info/photo -->
 		<?php
-			$staffID = $_SESSION['user'];
-			$sql = "SELECT staffID, firstName, lastName, title, specialties, photo
-					FROM staff
-					WHERE staffID = '$staffID'";
-			$result = mysql_query($sql);
-			$row = mysql_fetch_assoc($result);
+		// PHP used for updated staff information
+		$staffID = $_SESSION['user'];
+		$sql = "SELECT staffID, firstName, lastName, title, specialties, photo
+				FROM staff
+				WHERE staffID = '$staffID'";
+		$result = mysql_query($sql);
+		$row = mysql_fetch_assoc($result);
 
 		echo "<div class='pic'>";
 			echo $row['photo'];
@@ -293,17 +287,6 @@ function load() {
 
 		echo "<div class='name'>";
 			echo "<span class='title'>";
-			/*if ($row['title'] == 1) { // Doctor
-				echo "Dr. ";
-			} else if ($row['title'] == 2) { // Nurse
-				echo "Nurse ";
-			} else if ($row['title'] == 3) { // Medical Technician
-				echo "Med Tech. ";// uhh
-			} else if ($row['title'] == 4) { // Receptionist
-				echo "Rec. ";// uhh
-			} else if ($row['title'] == 5) { // Administrator
-				echo "Admin ";
-			}*/
 			switch ($row['title']) {
 				case 1:	echo "Dr. ";
 					break;
@@ -353,124 +336,6 @@ function load() {
 
 <div class="extent"> </div>
 
-<?php
-// admin has more functions than the rest of the roles, so
-/*if ($_SESSION['title'] == 5) {
-	echo "
-	<a href='home.php' id='m1'>
-	<div class='layer effect'>
-		<div class='mask'></div>
-	 	<div class='icon'>
-	 		<img src='../images/i1s.png' alt='dashboardICON' />
-	 	</div>
-	 	<div class='lable'>
-	 		<span>Dashboard</span>
-	 	</div>
-	</div></a>
-
-	<a href='patientsfinder.php' id='m2'>
-	<div class='layer effect'>
-	 	<div class='mask'></div>
-	 	<div class='icon'>
-	 		<img src='../images/i2s.png' alt='patientsICON' />
-	 	</div>
-	 	<div class='lable'>
-	 		<span>Patients Finder</span>
-	 	</div>
-	</div></a>
-
-	<a href='staffmanager.php' id='m2a'>
-	<div class='layer effect'>
-	 	<div class='mask'></div>
-	 	<div class='icon'>
-	 		<img src='../images/i2s.png' alt='patientsICON' />
-	 	</div>
-	 	<div class='lable'>
-	 		<span>Staff Manager</span>
-	 	</div>
-	</div></a>
-
-	<a href='recordsmenu.php' id='m2b'>
-	<div class='layer effect'>
-	 	<div class='mask'></div>
-	 	<div class='icon'>
-	 		<img src='../images/i2s.png' alt='patientsICON' />
-	 	</div>
-	 	<div class='lable'>
-	 		<span>Records Menu</span>
-	 	</div>
-	</div></a>
-
-	<a href='schedule.php' id='m3'>
-	<div class='layer effect'>
-	 	<div class='mask'></div>
-	 	<div class='icon'>
-	 		<img src='../images/i3s.png' alt='scheduleICON' />
-	 	</div>
-	 	<div class='lable'>
-	 		<span>Schedule</span>
-	 	</div>
-	</div></a>
-
-	<a href='notes.php' id='m4'>
-	<div class='layer effect' id='m4'>
-		<div class='mask'></div>
-		<div class='icon'>
-			<img src='../images/i4s.png' alt='noteICON' />
-		</div>
-		<div class='lable'>
-			<span>Notes</span>
-		</div>
-	</div></a>
-	";
-} else {
-	echo "
-	<a href='home.php' id='m1'>
-	<div class='layer effect'>
-		<div class='mask'></div>
-	 	<div class='icon'>
-	 		<img src='../images/i1s.png' alt='dashboardICON' />
-	 	</div>
-	 	<div class='lable'>
-	 		<span>Dashboard</span>
-	 	</div>
-	</div></a>
-
-	<a href='patientsfinder.php' id='m2'>
-	<div class='layer effect'>
-	 	<div class='mask'></div>
-	 	<div class='icon'>
-	 		<img src='../images/i2s.png' alt='patientsICON' />
-	 	</div>
-	 	<div class='lable'>
-	 		<span>Patients Finder</span>
-	 	</div>
-	</div></a>
-
-	<a href='schedule.php' id='m3'>
-	<div class='layer effect'>
-	 	<div class='mask'></div>
-	 	<div class='icon'>
-	 		<img src='../images/i3s.png' alt='scheduleICON' />
-	 	</div>
-	 	<div class='lable'>
-	 		<span>Schedule</span>
-	 	</div>
-	</div></a>
-
-	<a href='notes.php' id='m4'>
-	<div class='layer effect' id='m4'>
-		<div class='mask'></div>
-		<div class='icon'>
-			<img src='../images/i4s.png' alt='noteICON' />
-		</div>
-		<div class='lable'>
-			<span>Notes</span>
-		</div>
-	</div></a>
-	";
-}*/
-?>
 <a href='home.php' id='m1'>
 <div class='layer effect'>
 	<div class='mask'></div>
@@ -495,11 +360,11 @@ function load() {
 
 <?php
 /* Different functions for different roles go here:
-	Doctor:
-	Nurse:
-	Medical Technician:
-	Receptionist:
-	Administrator:
+	Doctor: No additional functions
+	Nurse: Same as above
+	Medical Technician: Same as above
+	Receptionist: Patient Admission and Discharge
+	Administrator: Staff and Record Management
 	*/
 
 switch ($_SESSION['title']) {

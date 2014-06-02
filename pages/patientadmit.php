@@ -13,7 +13,6 @@
 <script>activePanel("m2b");</script>
 <link type="text/css" rel="stylesheet" href="../css/patientupdate.css" media="screen" /> 
 
-<!-- Content goes below -->
 <!-- Admit Existing Patient Page: form with just a dropdown box for existing patients that aren't already admitted? -->
 
 <div class="leftContent">

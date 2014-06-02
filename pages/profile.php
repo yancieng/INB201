@@ -13,10 +13,7 @@
 <script>activePanel("m1");</script>
 <link type="text/css" rel="stylesheet" href="../css/patientupdate.css" media="screen" /> 
 
-<!-- Content goes below -->
 <!-- Profile page. Used to change personal information, photo, password -->
-
-<!-- Layout
 	Photo to the left
 	StaffID
 	Name

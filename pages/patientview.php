@@ -192,12 +192,6 @@ function observation(numb){
 						<th class="second">Date</th>
 						<th class="third">Medications</th>
 					</tr>
-					<!-- while ($row = mysql_fetch_assoc($result)) { -->
-					<!-- echo " <tr>
-						<td>Something $row['condition'] </td>
-						<td>14/02/2014 the timestamp thing </td>
-						<td>Something, Something, Something  $row['medications'] </td>
-					</tr>-->
 					<?php
 						// get patient's current condition listings, else blank table?
 						$sql = "SELECT `condition`, conditionDate, medication
@@ -244,12 +238,6 @@ function observation(numb){
 						<th class="second">Date</th>
 						<th class="third">Severity</th>
 					</tr>
-					<!-- while ($row = mysql_fetch_array($result)) { -->
-					<!-- echo " <tr>
-						<td>Something $row['allergy'] </td>
-						<td>14/02/2014 the timestamp thing </td>
-						<td>Very serious  $row['midcations'] </td>
-					</tr> -->
 					<?php
 						// get patient's current condition listings, else blank table?
 						$sql = "SELECT allergy, allergyDate, allergySeverity
@@ -298,9 +286,6 @@ function observation(numb){
 			<section class="boxContent">
 				<?php
 					// sql for getting the last checkup details (similar to the one above for height, weight, etc.)
-					// temperature, bloodPressure, pulse, eyeSightLeft, eyeSightRight, bloodSugar
-					// $current should still work?
-					// need to check for no checkup data too
 
 					// Temperature
 					$sql = "SELECT temperature, timestamp
@@ -335,8 +320,6 @@ function observation(numb){
 					$row = mysql_fetch_assoc($result);
 					$pulse = $row['pulse'];
 					$timestamp = new DateTime($row['timestamp']);
-					//$pulseTime = $timestamp->diff($current);
-					//$pulseTime = $pulseTime->days;
 
 					// Eye Sight, Left
 					$sql = "SELECT eyeSightLeft, timestamp
@@ -359,8 +342,6 @@ function observation(numb){
 					$row = mysql_fetch_assoc($result);
 					$eyeSightRight = $row['eyeSightRight'];
 					$timestamp = new DateTime($row['timestamp']);
-					//$eyeSightRightTime = $timestamp->diff($current);
-					//$eyeSightRightTime = $eyeSightRightTime->days;
 
 					// Blood Sugar
 					$sql = "SELECT bloodSugar, timestamp
@@ -444,9 +425,6 @@ function observation(numb){
 	<div class="rightContent">
 
 		<!-- Check up history box -->
-		<!-- This box should show the 6 most recent check up history, if there isn't, leave it blank tables 
-		so maybe for(i=0;i<5;i++){if($xx != null){ echo "<tr><td>{$xx}</td><td>"....}else { echo "<tr><td></td>....."}}
-		yeah this is javascript like, sorry but you get the idea -->
 		<div class="box checkupHistory">
 			<div class="boxTitle">
 				<p>Check Up History</p>
@@ -579,7 +557,6 @@ function observation(numb){
 
 						// Observation Details
 
-						// re-do sql? otherwise fetch_assoc is all messed up
 						$sql = "SELECT timestamp, observationTitle, observation, firstName, lastName
 								FROM observations INNER JOIN staff USING (staffID)
 								WHERE patientID = {$patient}

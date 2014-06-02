@@ -11,7 +11,7 @@
 <section>
 	<div class="container">
 		<div class="login">
-			<!-- List of patients - integrate search function? sort by lastName -->
+			<!-- List of patients - sorted by lastName -->
 			<h1>Patient List</h1>
 			<p><ul>
 			<?php

@@ -13,7 +13,6 @@
 <script>activePanel("m2");</script>
 
 
-<!-- Content goes below -->
 <h1>Search Results</h1>
 <?php
 	// if no results, show message
@@ -37,12 +36,6 @@
 					FROM patients
 					WHERE patientID = 0";
 		}
-		/*else if (isset($_GET['phone'])) {
-			$sql = "SELECT patientID, firstName, lastName
-					FROM patients
-					WHERE contactNumber LIKE '%{$_GET['phone']}%'
-					ORDER BY lastName ASC";
-		}*/
 		$result = mysql_query($sql);
 		$count = mysql_num_rows($result);
 

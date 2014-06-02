@@ -14,14 +14,15 @@
 <script>activePanel("m2a");</script>
 <link type="text/css" rel="stylesheet" href="../css/patientupdate.css" media="screen" /> 
 
-<?php
+
+<div class="leftContent">
+	<?php
 	// if error in staffaddprocess, show message
 	if (isset($_SESSION['stafferror'])) {
 		echo "<p id='error'>" . $_SESSION['stafferror'] . "</p>";
 		unset($_SESSION['stafferror']);
 	}
-?>
-<div class="leftContent">
+	?>
 	<div class="box">
 		<!-- Staff Form -->
 		<section class="boxTitle">

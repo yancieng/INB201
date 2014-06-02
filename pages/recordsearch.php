@@ -14,7 +14,6 @@
 	 change this number for each different page -->
 <script>activePanel("m2b");</script>
 
-<!-- Content goes below -->
 <!-- Record Search: shows all matches in all columns of all tables for search term -->
 <div id="records">
 <?php

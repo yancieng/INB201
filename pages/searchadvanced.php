@@ -13,7 +13,6 @@
 <script>activePanel("m2");</script>
 
 
-<!-- Content goes below -->
 <h1>Search Results</h1>
 <?php
 	// get parameter and value from form

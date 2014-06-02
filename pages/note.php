@@ -22,7 +22,6 @@
 	 change this number for each different page -->
 <script>activePanel("m4");</script>
 
-<!-- Content goes below -->
 <!-- Note View Page: Shows the note in full -->
 
 <?php

@@ -51,10 +51,6 @@ function select(p){
 					<input type="text" class="lastNameInput textInput" value="Last Name" onfocus="if (this.value==this.defaultValue) this.value = ''" 
  onblur="if (this.value=='') this.value = this.defaultValue" name="lastName">
 				</div>
-				<!-- <p class="or">or</p>
-				<p>Phone: </p>
-				<input type="text" name="phone" value="Phone Number" onfocus="if (this.value==this.defaultValue) this.value = ''" 
- onblur="if (this.value=='') this.value = this.defaultValue" class="phoneInput textInput"> -->
 				<button type="submit" class="submit">Search</button>
 			</form>
 		</section>
@@ -108,15 +104,6 @@ function select(p){
 			<table>
 				<?php
 				// Top 10 Patients
-
-				// Normally, this would be the last 10 patients that have had a checkup?
-				// But for now, it'll just be the last 10 patients registered in the system
-
-				// Final sql to use: when enough checkups are in database
-				/*$sql = "SELECT patientID, firstName, lastName
-						FROM patients INNER JOIN checkups USING (patientID)
-						GROUP BY patientID
-						ORDER BY timestamp DESC";*/
 				
 				$sql = "SELECT patientID, firstName, lastName
 						FROM patients

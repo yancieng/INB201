@@ -18,8 +18,7 @@
 	 change this number for each different page -->
 <script>activePanel("m2b");</script>
 
-<!-- Content goes below -->
-<!-- Records: display all records from table in descending order, with delete (and edit?) links for each -->
+<!-- Records: display all records from table in descending order, with delete and edit links for each -->
 <div id="records">
 <?php
 	// if success or error messages are set, display

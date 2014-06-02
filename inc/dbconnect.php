@@ -1,4 +1,5 @@
 <?php
+	// DB (Database) Connect: Starts/keeps a session active and connects to the database.
 	session_start();
 
 	$link = mysql_connect('localhost', 'root', ''); //connect to the server

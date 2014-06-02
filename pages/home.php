@@ -35,16 +35,11 @@
 
 			if ($row['title'] == 1) { // Doctor
 				echo "<li><a href='notes.php'>Doctor's Notes</a></li>";
-				echo "<li><a href='patients.php'>Patient Histories</a></li>";
-				echo "<li><a href='#.html'>Nurses' Observations</a></li>";
-				echo "<li><a href='#.html'>Upcoming Surgeries</a></li>";
+				echo "<li><a href='patientsfinder.php'>Patient Histories</a></li>";
 				echo "<li><a href='schedule.php'>Schedules</a></li>";
-				echo "<li><a href='#.html'>Perscriptions</a></li>";
 			} else if ($row['title'] == 2) { // Nurse
-				echo "<li><a href='#.html'>Nurses' Observations</a></li>";
-				echo "<li><a href='patients.php'>Patient Histories</a></li>";
-				echo "<li><a href='#.html'>Upcoming Surgeries</a></li>";
-				echo "<li><a href='#.html'>Perscriptions</a></li>";
+				echo "<li><a href='patientsfinder.php'>Patient Histories</a></li>";
+				echo "<li><a href='schedules.php'>Schedules</a></li>";
 			} else if ($row['title'] == 3) { // Medical Technician
 				echo "<li><a href='#.html'>X-rays</a></li>";
 				echo "<li><a href='#.html'>Test Results</a></li>";
@@ -55,18 +50,14 @@
 				echo "<li><a href='patients.php'>Update Patient Information</a></li>";
 				echo "<li><a href='bedassign.php'>Assign Bed</a></li>";
 				echo "<li><a href='schedule.php'>Schedules</a></li>";
-				echo "<li><a href='#.html'>Export to PDF</a></li>";
 			} else if ($row['title'] == 5) { // Administrator
-				// should have a page for search/add staff member
-				// from search result (ID = 1, or name => selection), can edit or delete
 				echo "<li><a href='staffmanager.php'>Find a Staff Member</a></li>";
 				echo "<li><a href='staffadd.php'>Add a Staff Member</a></li>";
 				echo "<li><a href='staff.php'>Update Staff Information</a></li>";
 				echo "<li><a href='patients.php'>Update Patient Information</a></li>";
 				echo "<li><a href='schedule.php'>Schedules</a></li>";
 				echo "<li><a href='patientfinder.php'>Search</a></li>";
-				echo "<li><a href='#.html'>Delete a Record</a></li>";
-				echo "<li><a href='#.html'>Generate Report</a></li>";
+				echo "<li><a href='recordsmenu.html'>Edit/Delete a Record</a></li>";
 			}
 
 			echo "</ul>";
@@ -75,14 +66,5 @@
 </section>
 
 </div>
-
-
-
-
-
-
-
-
 </body>
-
 </html>

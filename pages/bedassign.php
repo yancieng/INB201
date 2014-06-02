@@ -13,30 +13,20 @@
 <script>activePanel("m1");</script>
 <link type="text/css" rel="stylesheet" href="../css/patientupdate.css" media="screen" /> 
 
-<!-- Content goes below -->
-<!-- Bed/Room Assign: this page is used to assign/unassign patient's room or bed number
-	Page requires:
-		Two forms:
-			One to assign unassigned beds to existing patients
-			One to unassign beds that patients don't need anymore
-
-	Also consider adding this functionality to the patientupdate.php page for receptionists
--->
-
-<?php
-	// if success or error messages are set, display
-	if (isset($_SESSION['success'])) {
-		echo "<p id='success'>" . $_SESSION['success'] . "</p>";
-		unset($_SESSION['success']);
-	}
-	if (isset($_SESSION['error'])) {
-		echo "<p id='error'>" . $_SESSION['error'] . "</p>";
-		unset($_SESSION['error']);
-	}
-?>
+<!-- Bed/Room Assign: this page is used to assign/unassign patient's room or bed number -->
 
 <div class="leftContent">
-	<!-- Assign to patient -->
+	<?php
+		// if success or error messages are set, display
+		if (isset($_SESSION['success'])) {
+			echo "<p id='success'>" . $_SESSION['success'] . "</p>";
+			unset($_SESSION['success']);
+		}
+		if (isset($_SESSION['error'])) {
+			echo "<p id='error'>" . $_SESSION['error'] . "</p>";
+			unset($_SESSION['error']);
+		}
+	?>
 	<div class="box">
 		<section class="boxTitle">
 			<p>Assign Bed/Room to Unassigned Patient</p>
@@ -85,7 +75,6 @@
 		</section>
 	</div>
 
-	<!-- Unassign bed -->
 	<div class="box">
 		<section class="boxTitle">
 			<p>Unassign Bed/Room</p>
@@ -117,7 +106,6 @@
 	</div>
 
 </div>
-
 
 <?php
 	include '../inc/footer.php';

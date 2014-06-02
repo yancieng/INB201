@@ -30,7 +30,6 @@
 					allergyDate = '{$allergyDate}',
 					allergySeverity = '{$allergySeverity}'
 				WHERE conditionID = {$conditionID}";
-
 	}
 	
 	if (mysql_query($sql)) {		

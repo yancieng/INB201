@@ -5,6 +5,7 @@
 
 	// get whether this is a condition or allergy update
 	$table = mysql_escape_string($_GET['table']);
+
 	// GET patient, via conditionID
 	$conditionID = mysql_escape_string($_GET['ID']);
 	$sql = "SELECT patientID
@@ -24,7 +25,7 @@
 <script>activePanel("m2");</script>
 <link type="text/css" rel="stylesheet" href="../css/patientupdate.css" media="screen" /> 
 
-<!-- Content goes below -->
+
 <!-- Condition Update Page: just a form like what admins can do with recordedit.php -->
 <div class="leftContent">
 	<?php
@@ -99,8 +100,6 @@
 		</section>
 	</div>
 </div>
-
-
 
 <?php
 	include '../inc/footer.php';

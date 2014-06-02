@@ -35,7 +35,7 @@
 <script type="text/javascript">
 	function active() {
 
-		// var no = "m#"; //The coresponding active panal (the menu) of this page
+		var no = "m2a"; //The coresponding active panal (the menu) of this page
 		// change this number for each different page, or is there a better way?
 
 		document.getElementById(no).className = ' active';
@@ -45,9 +45,7 @@
 
 </script>
 
-<!-- Content goes below -->
 <!-- Staff Search Results: Page displays links to staffview.php (for the moment) -->
-<!-- PHP for: showall, name, title -->
 <?php
 	// if no results for staffID, show message
 	if (isset($_SESSION['searcherror'])) {

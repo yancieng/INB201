@@ -5,12 +5,6 @@
 	$patientID = mysql_escape_string($_GET['patientID']);
 	$firstName = mysql_escape_string($_GET['firstName']);
 	$lastName = mysql_escape_string($_GET['lastName']);
-	// $phone = mysql_escape_string($_GET['phone']);
-
-	// check to see if any fields are filled, if not return to patientsfinder.php
-	// if (($patientID == "") && ($firstName == "") && ($lastName == "") && ($phone == "")) {
-	// 	header ("Location: patientsfinder.php");
-	// }
 
 	// separate sql queries for each field?
 	if ($patientID != "Patient ID") {
@@ -81,21 +75,4 @@
 		// No results
 		header ("Location: search.php");
 	}
-
-	/*else if ($phone != "") {
-		$sql = "SELECT patientID, contactNumber
-				FROM patients
-				WHERE contactNumber LIKE '%{$phone}%'";
-		$result = mysql_query($sql);
-		$count = mysql_num_rows($result);
-
-		// if there is only one result, redirect to that page
-		if ($count == 1) {
-			$row = mysql_fetch_assoc($result);
-			header ("Location: patientview.php?patient={$row['patientID']}"); // temporary link
-		} else {
-			// go to search.php with results (somehow)
-			header ("Location: search.php?phone={$phone}");
-		}
-	}*/
 ?>

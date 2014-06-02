@@ -155,7 +155,7 @@
 			</div>
 			";
 
-			// Edit conditions: maybe an editable table?
+			// Edit conditions
 			echo "
 			<div class='box CATable'>
 				<section class='boxTitle'>
@@ -198,7 +198,7 @@
 			</div>
 			";
 
-			// Edit allergies: similar to conditions?
+			// Edit allergies: similar to conditions
 			echo "
 			<div class='box CATable'>
 				<section class='boxTitle'>
@@ -270,10 +270,10 @@
 			</div>
 			";
 
-			// Edit observations (how?)
+			// Edit observations
 			echo "
 			";
-			// sql for getting all observations (by user), have an edit form for each? woah
+			// sql for getting all observations (by user), have an edit form for each
 			$sql = "SELECT observationID, observationTitle, observation
 					FROM observations
 					WHERE patientID = {$patient}
@@ -392,7 +392,7 @@
 				<section class='boxContent'>
 			";
 					
-				// sql for getting guardian info. if none found, have a form for using existing / adding a new one?
+				// sql for getting guardian info. if none found, have a form for using existing / adding a new one
 				$sql = "SELECT *
 						FROM guardians INNER JOIN patients_guardians USING (guardianID)
 						WHERE patientID = {$patient}";
@@ -529,43 +529,6 @@
 			break;
 
 		case 5: // Administrator
-
-			/* Ignore.
-
-			echo "<div id='record'><table>";
-			// sql to get all database rows that relate to patient
-
-			// beds
-			$sql = "SELECT bedNumber
-					FROM beds
-					WHERE patientID = {$patient}";
-			$result = mysql_query($sql);
-			$count = mysql_num_rows($result);
-
-			if ($count > 0) {
-				$row = mysql_fetch_assoc($result);
-				if ($row['bedNumber'] = '') {
-					$bed = "Not assigned";
-				} else {
-					$bed = $row['bedNumber'];
-				}
-			} else {
-				$bed = "Not assigned";
-			}
-			echo "
-				<tr>
-					<th>bedNumber</th>
-					<th></th>
-					<th></th>
-				</tr>
-				<tr>
-					<td>{$bed}</td>
-					<td>Edit</td>
-					<td>Delete</td>
-				</tr>
-			";
-
-			echo "</table></div>";*/
 			echo "
 			<p>Admins should go to <a href='recordsearch.php?search={$patient}'>Records Search</a> if they want to edit these records</p>
 			";

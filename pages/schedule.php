@@ -13,7 +13,6 @@
 <script>activePanel("m3");</script>
 <link type="text/css" rel="stylesheet" href="../css/patientupdate.css" media="screen" /> 
 
-<!-- Content goes below -->
 <!-- Schedule Page: shows a table of currently scheduled rooms (from now onwards), and has a form for adding a new event -->
 
 <?php

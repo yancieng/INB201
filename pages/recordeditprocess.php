@@ -12,10 +12,6 @@
 			// get the info from previous form: bedNumber, patientID
 			$bedNumber = mysql_escape_string($_POST['bedNumber']);
 			$patientID = mysql_escape_string($_POST['patientID']);
-			
-			// needs a required field check
-
-			// needs a set blank fields to NULL
 
 			// update sql
 			$sql = "UPDATE beds
@@ -41,10 +37,6 @@
 			$bloodType = mysql_escape_string($_POST['bloodType']);
 			$timestamp = mysql_escape_string($_POST['timestamp']);
 			$patientID = mysql_escape_string($_POST['patientID']);
-			
-			// needs a required field check
-
-			// needs a set blank fields to NULL
 
 			// update sql
 			$sql = "UPDATE checkups
@@ -77,10 +69,6 @@
 			$allergySeverity = mysql_escape_string($_POST['allergySeverity']);
 			$timestamp = mysql_escape_string($_POST['timestamp']);
 			$patientID = mysql_escape_string($_POST['patientID']);
-			
-			// needs a required field check
-
-			// needs a set blank fields to NULL
 
 			// update sql
 			$sql = "UPDATE conditions
@@ -109,10 +97,6 @@
 			$email = mysql_escape_string($_POST['email']);
 			$address = mysql_escape_string($_POST['address']);
 			$photo = mysql_escape_string($_POST['photo']);
-			
-			// needs a required field check
-
-			// needs a set blank fields to NULL
 
 			// update sql
 			$sql = "UPDATE guardians
@@ -137,10 +121,6 @@
 			$note = mysql_escape_string($_POST['note']);
 			$image = mysql_escape_string($_POST['image']);
 			$staffID = mysql_escape_string($_POST['staffID']);
-			
-			// needs a required field check
-
-			// needs a set blank fields to NULL
 
 			// update sql
 			$sql = "UPDATE notes
@@ -163,10 +143,6 @@
 			$observation = mysql_escape_string($_POST['observation']);
 			$patientID = mysql_escape_string($_POST['patientID']);
 			$staffID = mysql_escape_string($_POST['staffID']);
-			
-			// needs a required field check
-
-			// needs a set blank fields to NULL
 
 			// update sql
 			$sql = "UPDATE observations
@@ -189,10 +165,6 @@
 			$lastName = mysql_escape_string($_POST['lastName']);
 			$DOB = mysql_escape_string($_POST['DOB']);
 			$photo = mysql_escape_string($_POST['photo']);
-			
-			// needs a required field check
-
-			// needs a set blank fields to NULL
 
 			// update sql
 			$sql = "UPDATE patients
@@ -212,10 +184,6 @@
 			$patientID = mysql_escape_string($_POST['patientID']);
 			$guardianID = mysql_escape_string($_POST['guardianID']);
 			$relation = mysql_escape_string($_POST['relation']);
-			
-			// needs a required field check
-
-			// needs a set blank fields to NULL
 
 			// update sql
 			$sql = "UPDATE patients_guardians
@@ -238,10 +206,6 @@
 			$paymentMethod = mysql_escape_string($_POST['paymentMethod']);
 			$rebuff = mysql_escape_string($_POST['rebuff']);
 			$patientID = mysql_escape_string($_POST['patientID']);
-			
-			// needs a required field check
-
-			// needs a set blank fields to NULL
 
 			// update sql
 			$sql = "UPDATE payments
@@ -264,10 +228,6 @@
 			$scheduledFor = mysql_escape_string($_POST['scheduledFor']);
 			$scheduledTime = mysql_escape_string($_POST['scheduledTime']);
 			$patientID = mysql_escape_string($_POST['patientID']);
-			
-			// needs a required field check
-
-			// needs a set blank fields to NULL
 
 			// update sql
 			$sql = "UPDATE schedules
@@ -290,10 +250,6 @@
 			$password = mysql_escape_string($_POST['password']);
 			$specialties = mysql_escape_string($_POST['specialties']);
 			$photo = mysql_escape_string($_POST['photo']);
-			
-			// needs a required field check
-
-			// needs a set blank fields to NULL
 
 			// update sql
 			$sql = "UPDATE staff
@@ -314,10 +270,6 @@
 			// get the info from previous form: titleID, title
 			$titleID = mysql_escape_string($_POST['titleID']);
 			$title = mysql_escape_string($_POST['title']);
-			
-			// needs a required field check
-
-			// needs a set blank fields to NULL
 
 			// update sql
 			$sql = "UPDATE titles

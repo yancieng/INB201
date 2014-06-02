@@ -20,7 +20,6 @@
 <script>activePanel("m4");</script>
 <link type="text/css" rel="stylesheet" href="../css/patientupdate.css" media="screen" /> 
 
-<!-- Content goes below -->
 <!-- Add Note Page: form allowing user to add a note to the database -->
 
 <div class="leftContent">

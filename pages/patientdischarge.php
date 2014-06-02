@@ -13,7 +13,6 @@
 <script>activePanel("m2c");</script>
 <link type="text/css" rel="stylesheet" href="../css/patientupdate.css" media="screen" /> 
 
-<!-- Content goes below -->
 <!-- Patient Discharge Page: form with admitted patients, and rest of payments table fields (releaseDate, cost, paymentMethod, rebuff) -->
 
 <div class="leftContent">

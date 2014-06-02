@@ -21,7 +21,6 @@
 <script>activePanel("m2b");</script>
 <link type="text/css" rel="stylesheet" href="../css/patientupdate.css" media="screen" /> 
 
-<!-- Content goes below -->
 <!-- Record Edit: has a form for editing said record -->
 
 <div id="record">
@@ -41,10 +40,6 @@
 						FROM {$table}
 						WHERE {$column} = {$ID}
 						AND {$column2} = {$ID2}";
-			/*} else if ($column == "bedNumber") {
-				$sql = "SELECT *
-						FROM {$table}
-						WHERE {$column} = '{$ID}'";*/
 			} else {
 				$sql = "SELECT *
 						FROM {$table}

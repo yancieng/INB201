@@ -13,7 +13,6 @@
 <script>activePanel("m2a");</script>
 <link type="text/css" rel="stylesheet" href="../css/patientupdate.css" media="screen" /> 
 
-<!-- Content goes below -->
 <!-- Admit New Patient Page: adds a new patient to the database, and at the same time, adds admission date to payments -->
 
 <div class="leftContent">

@@ -15,9 +15,8 @@
 <script>activePanel("m2b");</script>
 <link type="text/css" rel="stylesheet" href="../css/patientupdate.css" media="screen" /> 
 
-<!-- Content goes below -->
 <!-- Records Menu: Page that has links to delete records from database tables (admin only) -->
-<!-- Page needs search functionality: does search for any column in any table that matches -->
+<!-- Page also has search functionality: does search for any column in any table that matches -->
 
 <div class="leftContent">
 	<!-- Record Search -->
