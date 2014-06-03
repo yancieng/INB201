@@ -4,6 +4,7 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+	<link rel="icon" type="image/png" href="../images/favico.gif" />
 
 	<link type="text/css" rel="stylesheet" href="../css/panel.css" media="screen" /> 
 	<link type="text/css" rel="stylesheet" href="../css/style.css" media="screen" /> 
@@ -211,11 +212,11 @@
 	    	var observationEnd = (allergyEnd + 20 + (20 * i));
 
 	    // Separating line after observations
-	    pdf.line(35, observationEnd, 575, observationEnd);
+	    pdf.line(35, 750, 575, 750);
 
 	    // Lines from top to bottom
-	    pdf.line(35, 80, 35, observationEnd);
-	    pdf.line(575, 80, 575, observationEnd);
+	    pdf.line(35, 80, 35, 750);
+	    pdf.line(575, 80, 575, 750);
 
         pdf.output('dataurlnewwindow');
         //console.log(pdf);

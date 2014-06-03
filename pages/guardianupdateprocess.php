@@ -22,7 +22,7 @@
 		|| ($email == '')
 		|| ($address == ''))
 	) {
-		$_SESSION['patienterror'] = "All required fields need to be filled.";
+		$_SESSION['guardianerror'] = "All required fields need to be filled.";
 		header ("Location: patientupdate.php?patient={$patientID}");
 	}
 
@@ -85,11 +85,11 @@
 		}
 
 		// redirect to the patientupdate.php page with success message
-		$_SESSION['patientsuccess'] = "Guardian {$lastName}, {$firstName} was updated successfully.";
+		$_SESSION['guardiansuccess'] = "Guardian {$lastName}, {$firstName} was updated successfully.";
 		header ("Location: patientupdate.php?patient={$patientID}");
 	} else {
 		// kick back with error message: sql
-		$_SESSION['patienterror'] = "There was an error in updating the data.";
+		$_SESSION['guardianerror'] = "There was an error in updating the data.";
 		header ("Location: patientupdate.php?patient={$patientID}");
 	}
 ?>

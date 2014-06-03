@@ -520,11 +520,12 @@ function observation(numb){
 			</div>
 			<div class="boxContent">
 				<?php
-					// sql to get all? nurse observations for the patient
+					// sql to get the latest 12 nurse observations for the patient
 					$sql = "SELECT timestamp, observationTitle, observation, firstName, lastName
 							FROM observations INNER JOIN staff USING (staffID)
 							WHERE patientID = {$patient}
-							ORDER BY timestamp DESC";
+							ORDER BY timestamp DESC
+							LIMIT 0, 12";
 					$result = mysql_query($sql);
 					$count = mysql_num_rows($result);
 

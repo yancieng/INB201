@@ -384,6 +384,16 @@
 			";
 
 			// Guardian Info
+			// if patient has just been added, show message
+			if (isset($_SESSION['guardiansuccess'])) {
+				echo "<p id='success'>" . $_SESSION['guardiansuccess'] . "</p>";
+				unset($_SESSION['guardiansuccess']);
+			}
+			// if editing fails, show message
+			if (isset($_SESSION['guardianerror'])) {
+				echo "<p id='error'>" . $_SESSION['guardianerror'] . "</p>";
+				unset($_SESSION['guardianerror']);
+			}
 			echo " 
 			<div class='box'>
 				<section class='boxTitle'>
