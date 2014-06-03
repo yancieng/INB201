@@ -315,8 +315,7 @@ function load() {
 	<div class="dropdownProfile">
 		<div class="triangle2"></div>
 		<ul>
-			<li> <a href="profile.php">Profile</a> </li>
-			<li class="set"> <a href="#">Settings</a> </li>
+			<li class="set"> <a href="profile.php">Profile</a> </li>
 			<li class="logout"> 
 				<?php
 					if (isset($_SESSION['user']))

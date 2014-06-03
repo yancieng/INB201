@@ -9,51 +9,51 @@
 	if ($note == '') {
 		$_SESSION['error'] = 'You need to fill out a note to add one.';
 		header ("Location: noteadd.php");
-	}
+	} else {
+		if ($_FILES['photo']['name'] != '') {
+			// photo checking
+			$photo = $_FILES['photo']['name'];
 
-	// photo checking
-	if (isset($_FILES['photo'])) {
-		$photo = $_FILES['photo']['name'];
+			// photo renaming and location
+			$randomDigit = rand(0000,9999);
+			$newPhotoName = ($randomDigit . "_" . $photo);
+			$target = "../images/" . $newPhotoName;
+			$allowedExts = array('jpg', 'jpeg', 'gif', 'png');
+			$tmp = explode('.', $_FILES['photo']['name']);
+			$extension = end($tmp);
 
-		// photo renaming and location
-		$randomDigit = rand(0000,9999);
-		$newPhotoName = ($randomDigit . "_" . $photo);
-		$target = "../images/" . $newPhotoName;
-		$allowedExts = array('jpg', 'jpeg', 'gif', 'png');
-		$tmp = explode('.', $_FILES['photo']['name']);
-		$extension = end($tmp);
+			$photo = '<img src="' . $target . '" alt="Image" />';
 
-		$photo = '<img src="' . $target . '" alt="Image" />';
-
-		// if photo is not an allowed extension, kickback with error
-		if (!
-			((($_FILES['photo']['type'] == 'image/gif')
-			|| ($_FILES['photo']['type'] == 'image/jpeg')
-			|| ($_FILES['photo']['type'] == 'image/jpg')
-			|| ($_FILES['photo']['type'] == 'image/png'))
-			&& 
-			in_array($extension, $allowedExts))
-		) {
-			$_SESSION['error'] = "The file you uploaded is not valid. Photos must be in either .gif, .jpg, or .png format.";
-			header ("Location: staffadd.php");
+			// if photo is not an allowed extension, kickback with error
+			if (!
+				((($_FILES['photo']['type'] == 'image/gif')
+				|| ($_FILES['photo']['type'] == 'image/jpeg')
+				|| ($_FILES['photo']['type'] == 'image/jpg')
+				|| ($_FILES['photo']['type'] == 'image/png'))
+				&& 
+				in_array($extension, $allowedExts))
+			) {
+				$_SESSION['error'] = "The file you uploaded is not valid. Photos must be in either .gif, .jpg, or .png format.";
+				header ("Location: staffadd.php");
+			} else {
+				// insert sql
+				$sql = "INSERT INTO notes (note, image, staffID)
+						VALUES ('{$note}', '{$photo}', '{$staffID}')";
+				move_uploaded_file($_FILES['photo']['tmp_name'], $target);
+			}
 		} else {
-			move_uploaded_file($_FILES['photo']['tmp_name'], $target);
+			$sql = "INSERT INTO notes (note, staffID)
+					VALUES ('{$note}', '{$staffID}')";
 		}
-	} else {
-		$photo = '<img src="../images/none.png" alt="Image" />';
-	}
 
-	// insert sql
-	$sql = "INSERT INTO notes (note, image, staffID)
-			VALUES ('{$note}', '{$image}', '{$staffID}')";
-
-	if (mysql_query($sql)) {		
-		// redirect to the notes.php page with success message
-		$_SESSION['success'] = "Note was added successfully.";
-		header ("Location: notes.php");
-	} else {
-		// kick back with error message: sql
-		$_SESSION['error'] = "There was an error in adding the data.";
-		header ("Location: noteadd.php");
+		if (mysql_query($sql)) {		
+			// redirect to the notes.php page with success message
+			$_SESSION['success'] = "Note was added successfully.";
+			header ("Location: notes.php");
+		} else {
+			// kick back with error message: sql
+			$_SESSION['error'] = "There was an error in adding the data.";
+			header ("Location: noteadd.php");
+		}
 	}
 ?>

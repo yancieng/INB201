@@ -38,7 +38,7 @@
 				echo "<li><a href='schedule.php'>Schedules</a></li>";
 			} else if ($row['title'] == 2) { // Nurse
 				echo "<li><a href='patientsfinder.php'>Patient Histories</a></li>";
-				echo "<li><a href='schedules.php'>Schedules</a></li>";
+				echo "<li><a href='schedule.php'>Schedules</a></li>";
 			} else if ($row['title'] == 3) { // Medical Technician
 				echo "<li><a href='#.html'>X-rays</a></li>";
 				echo "<li><a href='#.html'>Test Results</a></li>";

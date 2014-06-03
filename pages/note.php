@@ -48,8 +48,10 @@ if ($count > 0) {
 				
 				if ($row['image'] != '' || $row['image'] != NULL) {
 					echo "
-					<h2>Image:</h2>
-					{$row['image']}
+					<div id='noteimage'>
+						<h2>Image:</h2>
+						{$row['image']}
+					</div>
 					";
 				}
 

@@ -243,3 +243,7 @@ table th{
   color: #ee6d6d;
   margin-top: 0;
 }
+
+#noteimage img {
+	max-width: 800px;
+}

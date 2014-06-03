@@ -12,10 +12,17 @@
 	if (($details == '')
 		|| ($room == '')
 		|| ($startTime == '')
-		|| ($endTime == '')
-		|| ($patientID == '')) {
+		|| ($endTime == '')) {
 		$_SESSION['error'] = 'You need to fill out ALL required fields.';
 		header ("Location: schedule.php");
+	} else if ($patientID == 'Please Select:') {
+		// check for patient selected
+		$_SESSION['error'] = 'You need to select a patient.';
+		header ("Location: schedule.php");
+	} else if ($startTime > $endTime) {
+		// check for startTime being after endTime
+		$_SESSION['error'] = 'You cannot have the start time be AFTER the end time.';
+		header ("Location: schedule.php");		
 	} else {
 		// check for "already booked"
 		$sql = "SELECT *

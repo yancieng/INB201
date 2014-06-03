@@ -41,8 +41,8 @@
 		<section class="boxContent">
 			<form action="noteaddprocess.php" method="post" enctype="multipart/form-data">
 				<div>
-					<label for="image">Image: </label>
-					<input type="file" name="image" accept="image/*" />
+					<label for="photo">Image: </label>
+					<input type="file" name="photo" accept="image/*" />
 				</div>
 				<div>
 					<label for="note">Note Text: </label>

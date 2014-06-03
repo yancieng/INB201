@@ -43,7 +43,7 @@
 			header ("Location: patientupdate.php?patient={$patientID}");
 		}
 
-		if (isset($_FILES['photo'])) {
+		if ($_FILES['photo']['name'] != '') {
 			$photo = $_FILES['photo']['name'];
 
 			// photo renaming and location
@@ -79,7 +79,7 @@
 
 		if (mysql_query($sql)) {
 			// move photo (if exists)
-			if (isset($_FILES['photo'])) {
+			if ($_FILES['photo']['name'] != '') {
 				move_uploaded_file($_FILES['photo']['tmp_name'], $target);
 			}
 

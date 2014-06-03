@@ -73,7 +73,8 @@ function observation(numb){
 					$sql = "SELECT height, timestamp
 							FROM checkups
 							WHERE patientID = {$patient}
-							AND height IS NOT NULL";
+							AND height IS NOT NULL
+							ORDER BY timestamp DESC";
 					$result = mysql_query($sql);
 					$row = mysql_fetch_assoc($result);
 					$count = mysql_num_rows($result);
@@ -90,7 +91,8 @@ function observation(numb){
 					$sql = "SELECT weight, timestamp
 							FROM checkups
 							WHERE patientID = {$patient}
-							AND weight IS NOT NULL";
+							AND weight IS NOT NULL
+							ORDER BY timestamp DESC";
 					$result = mysql_query($sql);
 					$row = mysql_fetch_assoc($result);
 					$count = mysql_num_rows($result);
@@ -107,7 +109,8 @@ function observation(numb){
 					$sql = "SELECT bloodType, timestamp
 							FROM checkups
 							WHERE patientID = {$patient}
-							AND bloodType IS NOT NULL";
+							AND bloodType IS NOT NULL
+							ORDER BY timestamp DESC";
 					$result = mysql_query($sql);
 					$row = mysql_fetch_assoc($result);
 					$count = mysql_num_rows($result);
@@ -291,7 +294,8 @@ function observation(numb){
 					$sql = "SELECT temperature, timestamp
 							FROM checkups
 							WHERE patientID = {$patient}
-							AND temperature IS NOT NULL";
+							AND temperature IS NOT NULL
+							ORDER BY timestamp DESC";
 					$result = mysql_query($sql);
 					$row = mysql_fetch_assoc($result);
 					$temperature = $row['temperature'];
@@ -303,7 +307,8 @@ function observation(numb){
 					$sql = "SELECT bloodPressure, timestamp
 							FROM checkups
 							WHERE patientID = {$patient}
-							AND bloodPressure IS NOT NULL";
+							AND bloodPressure IS NOT NULL
+							ORDER BY timestamp DESC";
 					$result = mysql_query($sql);
 					$row = mysql_fetch_assoc($result);
 					$bloodPressure = $row['bloodPressure'];
@@ -315,7 +320,8 @@ function observation(numb){
 					$sql = "SELECT pulse, timestamp
 							FROM checkups
 							WHERE patientID = {$patient}
-							AND pulse IS NOT NULL";
+							AND pulse IS NOT NULL
+							ORDER BY timestamp DESC";
 					$result = mysql_query($sql);
 					$row = mysql_fetch_assoc($result);
 					$pulse = $row['pulse'];
@@ -325,7 +331,8 @@ function observation(numb){
 					$sql = "SELECT eyeSightLeft, timestamp
 							FROM checkups
 							WHERE patientID = {$patient}
-							AND eyeSightLeft IS NOT NULL";
+							AND eyeSightLeft IS NOT NULL
+							ORDER BY timestamp DESC";
 					$result = mysql_query($sql);
 					$row = mysql_fetch_assoc($result);
 					$eyeSightLeft = $row['eyeSightLeft'];
@@ -337,7 +344,8 @@ function observation(numb){
 					$sql = "SELECT eyeSightRight, timestamp
 							FROM checkups
 							WHERE patientID = {$patient}
-							AND eyeSightRight IS NOT NULL";
+							AND eyeSightRight IS NOT NULL
+							ORDER BY timestamp DESC";
 					$result = mysql_query($sql);
 					$row = mysql_fetch_assoc($result);
 					$eyeSightRight = $row['eyeSightRight'];
@@ -347,7 +355,8 @@ function observation(numb){
 					$sql = "SELECT bloodSugar, timestamp
 							FROM checkups
 							WHERE patientID = {$patient}
-							AND bloodSugar IS NOT NULL";
+							AND bloodSugar IS NOT NULL
+							ORDER BY timestamp DESC";
 					$result = mysql_query($sql);
 					$row = mysql_fetch_assoc($result);
 					$bloodSugar = $row['bloodSugar'];
@@ -528,12 +537,17 @@ function observation(numb){
 						$i = 1;
 						$row = mysql_fetch_assoc($result);
 						$timestamp = date("d/m/Y", strtotime($row['timestamp']));
+						// only return a short part of the title
+						$title = substr($row['observationTitle'], 0, 12);
+						if (strlen($title) >= 12) {
+							$title = $title . '...';
+						}
 
 						echo "
 						<div class='observationNavbar'>
 							<ul class='observationNumber'>
 								<li class='active' id='n{$i}' onclick='observation(\"{$i}\")'>
-										{$row['observationTitle']}
+										{$title}
 										<span class='observationTimeStamp'>{$timestamp}</span>
 								</li>
 						";
@@ -542,9 +556,15 @@ function observation(numb){
 						while ($row = mysql_fetch_assoc($result)) {
 							$i++;
 							$timestamp = date("d/m/Y", strtotime($row['timestamp']));
+							// only return a short part of the title
+							$title = substr($row['observationTitle'], 0, 12);
+							if (strlen($title) >= 12) {
+								$title = $title . '...';
+							}
+
 							echo "
 								<li id='n{$i}' onclick='observation(\"{$i}\")'>
-										{$row['observationTitle']}
+										{$title}
 										<span class='observationTimeStamp'>{$timestamp}</span>
 								</li>
 							";

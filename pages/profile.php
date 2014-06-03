@@ -70,11 +70,11 @@
 			<form action='profileupdateprocess.php' method='post' enctype='multipart/form-data'>
 				<div>
 					<label for='firstName'>First Name: </label>
-					<input class='textInput' type='text' name='firstName' value='{$row['firstName']}' />
+					<input class='textInput' type='text' name='firstName' value='{$row['firstName']}' required />
 				</div>
 				<div>
 					<label for='lastName'>Last Name: </label>
-					<input class='textInput' type='text' name='lastName' value='{$row['lastName']}' />
+					<input class='textInput' type='text' name='lastName' value='{$row['lastName']}' required />
 				</div>
 				<div>
 					<label for='specialties'>Specialties: </label>
