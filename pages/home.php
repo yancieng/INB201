@@ -53,10 +53,10 @@
 				echo "<li><a href='staffmanager.php'>Find a Staff Member</a></li>";
 				echo "<li><a href='staffadd.php'>Add a Staff Member</a></li>";
 				echo "<li><a href='staff.php'>Update Staff Information</a></li>";
+				echo "<li><a href='patientsfinder.php'>Search for Patient</a></li>";
 				echo "<li><a href='patients.php'>Update Patient Information</a></li>";
 				echo "<li><a href='schedule.php'>Schedules</a></li>";
-				echo "<li><a href='patientfinder.php'>Search</a></li>";
-				echo "<li><a href='recordsmenu.html'>Edit/Delete a Record</a></li>";
+				echo "<li><a href='recordsmenu.php'>Edit/Delete a Record</a></li>";
 			}
 
 			echo "</ul>";

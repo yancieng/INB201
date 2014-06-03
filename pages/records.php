@@ -23,7 +23,7 @@
 <?php
 	// if success or error messages are set, display
 	if (isset($_SESSION['success'])) {
-		echo "<p id='error'>" . $_SESSION['success'] . "</p>";
+		echo "<p id='success'>" . $_SESSION['success'] . "</p>";
 		unset($_SESSION['success']);
 	}
 	if (isset($_SESSION['error'])) {
@@ -393,7 +393,7 @@
 
 		case "schedules":
 			// sql for what table they chose
-			$sql = "SELECT scheduleID, scheduledFor, scheduledTime, patientID
+			$sql = "SELECT scheduleID, details, room, startTime, endTime, patientID
 					FROM schedules
 					ORDER BY scheduleID DESC";
 			$result = mysql_query($sql);
@@ -403,8 +403,10 @@
 			<table>
 				<tr>
 					<th>scheduleID</th>
-					<th>scheduledFor</th>
-					<th>scheduledTime</th>
+					<th>details</th>
+					<th>room</th>
+					<th>startTime</th>
+					<th>endTime</th>
 					<th>patientID</th>
 
 					<th></th>
@@ -415,8 +417,10 @@
 				echo "
 				<tr>
 					<td>{$row['scheduleID']}</td>
-					<td>{$row['scheduledFor']}</td>
-					<td>{$row['scheduledTime']}</td>
+					<td>{$row['details']}</td>
+					<td>{$row['room']}</td>
+					<td>{$row['startTime']}</td>
+					<td>{$row['endTime']}</td>
 					<td>{$row['patientID']}</td>
 					<td><a href='recordedit.php?table=schedules&column=scheduleID&ID={$row['scheduleID']}'>Edit</td>
 					<td><a href='recorddelete.php?table=schedules&column=scheduleID&ID={$row['scheduleID']}'>Delete</td>

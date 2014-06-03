@@ -14,8 +14,8 @@
 <section>
 	<div class="container">
 		<div class="login">
-			<!-- List of staff - integrate search function? sort by lastName -->
-			<h1>Patient List</h1>
+			<!-- List of staff -->
+			<h1>Staff List</h1>
 			<p><ul>
 			<?php
 				$sql = "SELECT staffID, firstName, lastName

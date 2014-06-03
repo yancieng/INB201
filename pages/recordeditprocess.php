@@ -223,17 +223,21 @@
 			break;
 
 		case "schedules":
-			// get the info from previous form: scheduleID, scheduledFor, scheduledTime, patientID
+			// get the info from previous form: scheduleID, details, room, startTime, endTime, patientID
 			$scheduleID = mysql_escape_string($_POST['scheduleID']);
-			$scheduledFor = mysql_escape_string($_POST['scheduledFor']);
-			$scheduledTime = mysql_escape_string($_POST['scheduledTime']);
+			$details = mysql_escape_string($_POST['details']);
+			$room = mysql_escape_string($_POST['room']);
+			$startTime = mysql_escape_string($_POST['startTime']);
+			$endTime = mysql_escape_string($_POST['endTime']);
 			$patientID = mysql_escape_string($_POST['patientID']);
 
 			// update sql
 			$sql = "UPDATE schedules
 					SET scheduleID = $scheduleID,
-						scheduledFor = '$scheduledFor',
-						scheduledTime = '$scheduledTime',
+						details = '$details',
+						room = '$room',
+						startTime = '$startTime',
+						endTime = '$endTime',
 						patientID = $patientID
 					WHERE scheduleID = $scheduleID";
 			
